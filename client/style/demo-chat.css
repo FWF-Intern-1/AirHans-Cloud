@@ -1,0 +1,40 @@
+body {
+    padding: 0;
+    margin: 0;
+}
+#chatBox {
+
+}
+#chatBox--output {
+    height: 400px;
+}
+#chatBox--input {
+    
+}
+#chatBox--input--menu--name {
+
+    border: solid red 2px;
+    outline: none;
+}
+#chatBox--input--typing {
+    resize: none;
+    height: 200px;
+}
+#chatBox--input--button__send {
+    position: relative;
+    top: -40px;
+    left: -30px;
+}
+.chatBox--output--bubble{
+
+}
+.chatBox--output--avator__small {
+    width: 20px;
+    height: 20px;
+    background-color: red;
+    border-radius: 75px;
+}
+.chatBox--output--message {
+
+    border-radius: 5px;
+}
