@@ -11,13 +11,13 @@
         <div id="chatBox" class="container">
             <div id="chatBox--output" class="container m-0 border border-dark overflow-auto flex-column rounded">
                 <div class="row justify-content-end m-1 w-100">
-                    <div class="col-2 chatBox--output--message text-left bg-success">这是发送的一则消息！</div>
+                    <div id="chatBox--output--message" class="col-2 chatBox--output--message text-left bg-success">这是发送的一则消息！</div>
                     <div class="chatBox--output--avator__small"></div>
                 </div>
                 <div class="row justify-content-start m-1 w-100">
                     <div class="chatBox--output--avator__small"></div>
 
-                    <div class="col-2 chatBox--output--message text-left bg-light">这是接收到的一则消息！</div>
+                    <div id="chatBox--output--message" class="col-2 chatBox--output--message text-left bg-light">这是接收到的一则消息！</div>
                 </div>
             </div>
             <div id="chatBox--input--menu" class="row m-0">
@@ -35,5 +35,6 @@
 
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.slim.min.js" integrity="sha512-6ORWJX/LrnSjBzwefdNUyLCMTIsGoNP6NftMy2UAm1JBm6PRZCO1d7OHBStWpVFZLO+RerTvqX/Z9mBFfCJZ4A==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
+        <script type="module" src="../src/demo-chat.js"></script>
     </body>
 </html>
