@@ -14,11 +14,10 @@ const TemplateThere= () => {
         </div>`);
 }
 const bubble = (text,id,isThere) => {
-    let bubbuleTemp = null;
     if (isThere) {
-        bubbleTemp = TemplateThere();
+        var bubbleTemp = TemplateThere();
     } else {
-        bubbleTemp = TemplateHere();
+        var bubbleTemp = TemplateHere();
     }
     console.log(bubbleTemp.children("#chatBox--output--message").text());
     bubbleTemp.children("#chatBox--output--message").text(text);
