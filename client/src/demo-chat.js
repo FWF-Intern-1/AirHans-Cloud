@@ -1,6 +1,6 @@
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
-
+import { isRecent } from './time.js'
 var ws = new WebSocket("ws://tomzhang.com.cn:9999");
 ws.onopen=()=>{
     console.log("connected")
@@ -31,3 +31,4 @@ $("#chatBox--input--button__send").on("click",() => {
     console.log("点击！");
     ws.send(getDOM("typing"));
 })
+isRecent();
