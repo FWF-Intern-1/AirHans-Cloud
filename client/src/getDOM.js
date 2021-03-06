@@ -1,3 +1,9 @@
+/**
+ * 简化获取对象的操作
+ * @param {string} target 
+ * @returns 标准的DOM对象
+ * @author Hans
+ */
 const getDOM = (target) => {
     switch (target) {
         case 'typing':

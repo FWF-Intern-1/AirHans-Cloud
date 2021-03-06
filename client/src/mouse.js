@@ -1,6 +1,10 @@
 import { getDOM } from "./getDOM.js";
 import { ws } from './websocket.js';
 
+/**
+ * 对鼠标输入事件的响应
+ * @author Hans
+ */
 const initKeyboard = ()=> {
     $(document).on("click", (e) => {
         if (e.target == getDOM("send")) {

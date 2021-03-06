@@ -1,4 +1,9 @@
 import { getDOM } from './getDOM.js'
+/**
+ * 返回新的消息气泡对象
+ * @returns jQuery对象
+ * @author Hans
+ */
 const TemplateHere = () => {
     return $(`<div class="row mt-1">
                     <div class="chatBox--space">
@@ -42,7 +47,13 @@ const TemplateThere= () => {
 }
 
 
-
+/**
+ * 在聊天界面输出框中添加消息气泡
+ * @param {string} text 
+ * @param {string} id 
+ * @param {boolean} isThere 
+ * @author Hans
+ */
 const bubble = (text,id,isThere) => {
     if (isThere) {
         var bubbleTemp = TemplateThere();

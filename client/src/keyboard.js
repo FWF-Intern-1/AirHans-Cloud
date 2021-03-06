@@ -1,7 +1,10 @@
 import { sendMsg } from './demo-chat.js'
 import { getDOM } from './getDOM.js'
 
-
+/**
+ * 对键盘输入事件的响应
+ * @author Hans
+ */
 const initKeyboard = ()=> {
     $(document).keydown((event) => {
         //console.log(event.keyCode);
