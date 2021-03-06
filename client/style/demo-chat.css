@@ -45,6 +45,7 @@ body {
     border-radius: 5px;
 }
 .panel {
+    display: flex;
     position: absolute;
     top: 0;
     left: 0;
