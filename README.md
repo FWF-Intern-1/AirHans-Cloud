@@ -11,5 +11,5 @@ cnpm install nodejs-websocket --save
 0.0.2  
 可以自己和自己聊天了  
   
-0.0.3  
-加入消息时间和昵称
+0.1.0  
+合到一起了
