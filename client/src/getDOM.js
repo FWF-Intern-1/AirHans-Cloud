@@ -9,6 +9,9 @@ const getDOM = (target) => {
         case 'id' :
             return $("#chatBox--input--menu--name")[0];
             break;
+        case 'userid' :
+            return $("#user_id")[0];
+            break;
         case 'send':
             return $("#chatBox--input--button__send")[0]
             break;

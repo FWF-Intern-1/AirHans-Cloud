@@ -12,7 +12,7 @@ const initKeyboard = ()=> {
             event.preventDefault();
             //console.log("enter");
             if (getDOM("typing").value !== "") {
-                sendMsg(getDOM("typing").value);
+                sendMsg(getDOM("id").value,getDOM("typing").value);
             }
         }
     
