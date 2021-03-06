@@ -31,3 +31,4 @@ ws.onclose = () => {
 };
 
 console.log(getDOM("typing"));
+
