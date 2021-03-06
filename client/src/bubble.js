@@ -49,8 +49,9 @@ const bubble = (text,id,isThere) => {
     } else {
         var bubbleTemp = TemplateHere();
     }
-    bubbleTemp.children("#chatBox--output--message").text(text);
-    console.log(bubbleTemp.children("#chatBox--output--message").text());
+    //console.log(bubbleTemp.find("#chatBox--output--message"));
+    bubbleTemp.find("#chatBox--output--message").text(text);
+
     bubbleTemp.appendTo("#chatBox--output");
 
     $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
