@@ -1,4 +1,4 @@
-import { bubble } from './bubble.js'
+import { sendMsg } from './demo-chat.js'
 import { getDOM } from './getDOM.js'
 
 
@@ -12,8 +12,7 @@ const initKeyboard = ()=> {
             event.preventDefault();
             //console.log("enter");
             if (getDOM("typing").value !== "") {
-                bubble(getDOM("typing").value,1,0)
-                getDOM("typing").value = "";
+                sendMsg(getDOM("typing").value);
             }
         }
     
