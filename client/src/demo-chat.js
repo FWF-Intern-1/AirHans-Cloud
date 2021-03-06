@@ -2,6 +2,9 @@ import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { isRecent } from './time.js'
 import { panel } from './panel.js'
+import { initKeyboard } from './keyboard.js'
+
+initKeyboard();
 
 var ws = new WebSocket("ws://tomzhang.com.cn:9999");
 ws.onopen=()=>{
@@ -35,3 +38,5 @@ $("#chatBox--input--button__send").on("click",() => {
     console.log("点击！");
     ws.send(getDOM("typing"));
 })
+
+
