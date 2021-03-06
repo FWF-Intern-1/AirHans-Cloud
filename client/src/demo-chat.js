@@ -14,10 +14,10 @@ ws.onopen=()=>{
 }
 
 $("#chatBox--input--button__send").on("click",() => {
-    console.log("点击！");
+
     ws.send(getDOM("typing").value);
-    bubble(getDOM("typing").value,1,false)
-    getDOM("typing").value=""
+    bubble(getDOM("typing").value,1,false);
+    getDOM("typing").value="";
 })
 
 ws.onmessage = (evt) => {

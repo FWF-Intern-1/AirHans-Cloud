@@ -1,4 +1,4 @@
-
+import { getDOM } from './getDOM.js'
 const TemplateHere = () => {
     return $(`<div class="row mt-1">
                     <div class="chatBox--space">
@@ -52,7 +52,9 @@ const bubble = (text,id,isThere) => {
     bubbleTemp.children("#chatBox--output--message").text(text);
     console.log(bubbleTemp.children("#chatBox--output--message").text());
     bubbleTemp.appendTo("#chatBox--output");
-    console.log("bubble()执行完毕");
+
+    $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
+    //console.log("bubble()执行完毕");
     
 }
 
