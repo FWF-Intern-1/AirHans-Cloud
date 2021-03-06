@@ -1,10 +1,16 @@
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
+import { isRecent } from './time.js'
+import { panel } from './panel.js'
+import { initKeyboard } from './keyboard.js'
+
+initKeyboard();
 
 var ws = new WebSocket("ws://127.0.0.1:9999");
 
 ws.onopen=()=>{
-    console.log("connected")
+    console.log("connected");
+    panel();
 }
 
 $("#chatBox--input--button__send").on("click",() => {
@@ -21,5 +27,7 @@ ws.onmessage = (evt) => {
 
 ws.onclose = () => { 
     alert("连接已关闭..."); 
+    panel();
 };
+
 console.log(getDOM("typing"));
