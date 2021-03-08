@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous" />
+        <link rel="stylesheet" href="../style/demo-chat.css">
+        <title>demo-chat</title>
+    </head>
+	<body>
+        <div id="chatBox" class="container">
+            <div id="chatBox--output" class="container m-0 border border-dark overflow-auto flex-column rounded">
+                <div class="row mt-1">
+                    <div class="chatBox--output--avator__normal">
+                        left
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header container">
+                                <div class="chatBox--output--arrow__left border-top-0 border-right-0"></div>
+                                <span>id</span>
+                                <span>time</span>
+                            </div>
+                            <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
+                        </div>
+                    </div>
+                    <div class="chatBox--space">
+                        
+                    </div>
+                </div>
+
+                <div class="row mt-1">
+                    <div class="chatBox--space">
+
+                    </div>
+                    <div class="col">
+                        <div class="card">
+                            <div class="card-header container text-right">
+                                <span>id</span>
+                                <span>time</span>
+                                <div class="chatBox--output--arrow__right border-bottom-0 border-left-0"></div>
+                            </div>
+                            <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
+                        </div>
+                    </div>
+                    <div class="chatBox--output--avator__normal">
+                        right
+                    </div>
+                </div>
+
+            </div>
+            <div id="chatBox--input--menu" class="row m-0">
+                <input type="text" id="chatBox--input--menu--name" class="col-1 p-1"></input>
+
+            </div>
+
+            <textarea id="chatBox--input--typing" class="row m-0 w-100"></textarea>
+            <div class="row justify-content-end">
+                <button type="button" id="chatBox--input--button__send" class="col-2 btn btn-primary btn-sm">Send</button>
+            </div>
+        </div>
+        <div id="panel" class="panel flex-column align-items-center justify-content-center">
+            <div class="panel--information text-center" style="height:100px">等待与服务器的连接</div>
+            <button id="button--reconnect"type="button" class="btn btn-dark">重新连接</button>
+        </div>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
+        <script type="module" src="../src/demo-chat.js"></script>
+    </body>
+</html>
