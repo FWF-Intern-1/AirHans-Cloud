@@ -1,3 +1,6 @@
+/**
+ * @author 
+ */
 function startTime(){
     var time =new Date();
     var h=time.getHours();
@@ -14,7 +17,6 @@ function checktime(i){
     }
     return i;
 }
-
 
 const checkDate = (date)=> {
     //获取timeNow

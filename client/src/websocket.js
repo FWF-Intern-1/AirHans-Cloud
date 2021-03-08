@@ -1,10 +1,9 @@
-import { bubble } from './bubble.js'
-import { getDOM } from './getDOM.js'
-import { isRecent } from './time.js'
-import { panel } from './panel.js'
-import { initKeyboard } from './keyboard.js'
-import { initMouse } from './mouse.js'
-import { toast } from './toast.js'
+import { panel } from "./panel.js";
+
+
+/**
+ * @author Air
+ */
 
 
 //建立连接
@@ -16,12 +15,11 @@ ws.onopen=()=>{
     console.log("connected");
     panel();
 }
-//console.log( getDOM("id").value );
-//点击发送按钮
-// $("#chatBox--input--button__send").on("click",() => {
-//     console.log("点击send一次");
-//     sendMsg(getDOM("id").value,getDOM("typing").value);
-// })
+
+点击发送按钮
+$("#chatBox--input--button__send").on("click",() => {
+
+})
 // 发送消息
 function sendMsg(id,text){
     var msg = {
@@ -46,7 +44,5 @@ ws.onclose = () => {
     alert("连接已关闭..."); 
     panel();
 };
-
-
 
 export { sendMsg }

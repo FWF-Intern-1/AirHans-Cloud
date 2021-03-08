@@ -4,6 +4,8 @@
  * @returns 标准的DOM对象
  * @author Hans
  */
+
+
 const getDOM = (target) => {
     switch (target) {
         case 'typing':
@@ -12,11 +14,11 @@ const getDOM = (target) => {
         case 'output':
             return $("#chatBox--output")[0];
             break;
-        case 'id' :
-            return $("#chatBox--input--menu--name")[0];
+        case 'button--idConfirm' :
+            return $("#button--idConfirm")[0];
             break;
         case 'userid' :
-            return $("#user_id")[0];
+            return $("#panel--id")[0];
             break;
         case 'send':
             return $("#chatBox--input--button__send")[0]
