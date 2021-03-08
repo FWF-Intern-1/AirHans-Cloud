@@ -1,4 +1,4 @@
-import { sendMsg } from './demo-chat.js'
+import { sendMsg } from './websocket.js'
 import { getDOM } from './getDOM.js'
 
 /**

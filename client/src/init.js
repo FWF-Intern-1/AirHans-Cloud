@@ -1,3 +1,6 @@
+import { initKeyboard } from "./keyboard.js";
+import { initMouse } from "./mouse.js";
+
 /**
  * 界面的初始化
  * @author Hans
@@ -23,6 +26,5 @@ window.onresize = () => {
 resizeHeight();
 
 
-resize();
-initKeyboard();
+initKeyboard()
 initMouse();

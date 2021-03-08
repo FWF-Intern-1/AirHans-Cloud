@@ -16,10 +16,6 @@ ws.onopen=()=>{
     panel();
 }
 
-点击发送按钮
-$("#chatBox--input--button__send").on("click",() => {
-
-})
 // 发送消息
 function sendMsg(id,text){
     var msg = {
