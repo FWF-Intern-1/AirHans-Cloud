@@ -1,6 +1,6 @@
-import { sendMsg } from './websocket.js'
+import { sendMsg, newWs } from './websocket.js'
 import { getDOM } from './getDOM.js'
-import { getId } from './save.js';
+import { getId, isPanel, isPanelChange, saveId } from './save.js';
 
 /**
  * 对键盘输入事件的响应
@@ -9,6 +9,13 @@ import { getId } from './save.js';
 const initKeyboard = ()=> {
     $(document).keydown((event) => {
         //console.log(event.keyCode);
+        if ((event.keyCode == 13) && (getDOM("button--idConfirm") !== undefined) && isPanel) {
+            isPanelChange();
+            let id = getDOM("userid").value;
+            saveId(id);
+            newWs();
+            //console.log(getId());
+        } else 
         if (event.keyCode == 13 && event.shiftKey) {
            // console.log("shift+enter");
         } else

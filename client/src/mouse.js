@@ -1,5 +1,5 @@
 import { getDOM } from "./getDOM.js";
-import { saveId, getId } from "./save.js";
+import { saveId, getId, isPanel, isPanelChange } from "./save.js";
 import { sendMsg, newWs } from "./websocket.js";
 //import { save } from "./save.js"
 
@@ -21,10 +21,12 @@ const initMouse = ()=> {
 
 
         } else 
-        if (e.target == getDOM("button--idConfirm")) {
+        if (e.target == getDOM("button--idConfirm") && isPanel) {
+            isPanelChange();
             let id = getDOM("userid").value;
             saveId(id);
             newWs();
+            //console.log(getId());
         }
     });
 }

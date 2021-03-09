@@ -2,6 +2,7 @@ import { panel } from "./panel.js";
 import { getId } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
+import { toast } from "./toast.js";
 
 let ws = null;
 
@@ -24,6 +25,7 @@ let newWs= (id) => {
     ws.onopen=()=>{
         console.log("connected");
         panel();
+        toast("系统","连接成功！");
     }
 
 
@@ -31,7 +33,9 @@ let newWs= (id) => {
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
         if( recmsg.id != getId() ) {
-            bubble("id："+recmsg.id+" text:"+recmsg.text,recmsg.id,true)
+            console.log(recmsg.id);
+            //bubble("id："+recmsg.id+" text:"+recmsg.text,recmsg.id,true);
+            bubble(recmsg.text,recmsg.id,true);
         }
     }
 
@@ -56,8 +60,8 @@ function sendMsg(id,text){
     }
     //转化为字符串发送
     ws.send(JSON.stringify(msg));
-    bubble(text,1,0)
-    getDOM("typing").value=""
+    bubble(text,id,0);
+    getDOM("typing").value="";
 }
 
 

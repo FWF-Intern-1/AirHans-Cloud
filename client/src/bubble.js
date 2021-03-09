@@ -12,7 +12,7 @@ const TemplateHere = () => {
                     <div class="col">
                         <div class="card">
                             <div class="card-header container text-right">
-                                <span>id</span>
+                                <span id="chatBox--output--id"></span>
                                 <span>time</span>
                                 <div class="chatBox--output--arrow__right border-bottom-0 border-left-0"></div>
                             </div>
@@ -34,7 +34,7 @@ const TemplateThere= () => {
                         <div class="card">
                             <div class="card-header container">
                                 <div class="chatBox--output--arrow__left border-top-0 border-right-0"></div>
-                                <span>id</span>
+                                <span id="chatBox--output--id"></span>
                                 <span>time</span>
                             </div>
                             <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
@@ -62,11 +62,12 @@ const bubble = (text,id,isThere) => {
     }
     //console.log(bubbleTemp.find("#chatBox--output--message"));
     bubbleTemp.find("#chatBox--output--message").text(text);
+    bubbleTemp.find("#chatBox--output--id").text(id);
 
     bubbleTemp.appendTo("#chatBox--output");
 
     $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
-    //console.log("bubble()执行完毕");
+    console.log("bubble()执行完毕");
     
 }
 
