@@ -1,15 +1,15 @@
-body {
-    padding: 0;
-    margin: 0;
-}
 #chatBox {
-
+    min-height: 300px;
 }
 #chatBox--output {
-    height: 400px;
+    height: 60%;
+    min-height:270px;
 }
 #chatBox--input {
     
+}
+#chatBox--input--menu {
+    height:30px;
 }
 #chatBox--input--menu--name {
 
@@ -18,7 +18,8 @@ body {
 }
 #chatBox--input--typing {
     resize: none;
-    height: 200px;
+    min-height:100px;
+
 }
 #chatBox--input--button__send {
     position: relative;
@@ -45,13 +46,12 @@ body {
     border-radius: 5px;
 }
 .panel {
-    display: flex;
     position: absolute;
     top: 0;
     left: 0;
     width: 100%;
     height: 100%;
-    z-index: 999;
+    z-index: 990;
     background-color: rgba(	105,105,105,0.9);
 
 }
@@ -78,4 +78,20 @@ body {
 .chatBox--space {
     width: 50px;
     height: 50px;
+}
+.panel--input {
+    width:300px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+}
+#container--toast {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    min-width: 250px;
+    margin-top: 10px;
 }
