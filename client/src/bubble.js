@@ -11,12 +11,13 @@ const TemplateHere = () => {
                     </div>
                     <div class="col">
                         <div class="card">
-                            <div class="card-header container text-right">
+                            <div class="card-header container p-0 text-right" style="height:1.5rem">
+
                                 <span id="chatBox--output--id"></span>
                                 <span>time</span>
                                 <div class="chatBox--output--arrow__right border-bottom-0 border-left-0"></div>
                             </div>
-                            <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
+                            <div id="chatBox--output--message" class="card-body"></div>
                         </div>
                     </div>
                     <div class="chatBox--output--avator__normal">
@@ -32,12 +33,12 @@ const TemplateThere= () => {
                     </div>
                     <div class="col">
                         <div class="card">
-                            <div class="card-header container">
+                            <div class="card-header container p-0" style="height:1.5rem">
                                 <div class="chatBox--output--arrow__left border-top-0 border-right-0"></div>
                                 <span id="chatBox--output--id"></span>
                                 <span>time</span>
                             </div>
-                            <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
+                            <div id="chatBox--output--message" class="card-body"></div>
                         </div>
                     </div>
                     <div class="chatBox--space">
