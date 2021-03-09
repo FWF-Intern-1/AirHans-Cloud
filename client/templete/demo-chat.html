@@ -10,6 +10,7 @@
 	<body>
         <div id="chatBox" class="container">
             <div id="chatBox--output" class="container m-0 border border-dark overflow-auto flex-column rounded">
+                
                 <div class="row mt-1">
                     <div class="chatBox--output--avator__normal">
                         left
@@ -49,8 +50,8 @@
                 </div>
 
             </div>
-            <div id="chatBox--input--menu" class="row m-0">
-                <input type="text" id="chatBox--input--menu--name" class="col-1 p-1"></input>
+            <div id="chatBox--input--menu" class="row m-0 border border-dark mt-1 mb-1 rounded ">
+                
 
             </div>
 
@@ -59,13 +60,23 @@
                 <button type="button" id="chatBox--input--button__send" class="col-2 btn btn-primary btn-sm">Send</button>
             </div>
         </div>
-        <div id="panel" class="panel flex-column align-items-center justify-content-center">
-            <div class="panel--information text-center" style="height:100px">等待与服务器的连接</div>
-            <button id="button--reconnect"type="button" class="btn btn-dark">重新连接</button>
+        <div id="panel" class="panel">
+            
+            <h1 class="display-2 text-center">AirHans-Cloud</h1>
+            <div class="input-group panel--input">
+                <input type="text" id="panel--id" class="form-control" placeholder="请输入你的ID"></input>
+                <div class="input-group-append">
+                    <button id="button--idConfirm" type="button" class="btn btn-primary">开始聊天</button>
+                </div>
+            </div>
+
         </div>
+        <div id="container--toast" aria-live="polite" aria-atomic="true">
         
+        </div>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/js/bootstrap.bundle.min.js" integrity="sha512-wV7Yj1alIZDqZFCUQJy85VN+qvEIly93fIQAN7iqDFCPEucLCeNFz4r35FCo9s6WrpdDQPi80xbljXB8Bjtvcg==" crossorigin="anonymous"></script>
-        <script type="module" src="../src/demo-chat.js"></script>
+        <script type="module" src="../src/init.js"></script>
+
     </body>
 </html>
