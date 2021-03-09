@@ -1,5 +1,6 @@
 import { sendMsg } from './websocket.js'
 import { getDOM } from './getDOM.js'
+import { getId } from './save.js';
 
 /**
  * 对键盘输入事件的响应
@@ -15,7 +16,7 @@ const initKeyboard = ()=> {
             event.preventDefault();
             //console.log("enter");
             if (getDOM("typing").value !== "") {
-                sendMsg(getDOM("id").value,getDOM("typing").value);
+                sendMsg(getId(),getDOM("typing").value);
             }
         }
     
