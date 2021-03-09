@@ -17,12 +17,19 @@ let newWs= (id) => {
 /**
  * @author Air
  */
-    //建立连接
-    // var ws = new WebSocket("ws://127.0.0.1:9999");
-    ws = new WebSocket("ws://tomzhang.com.cn:9999");
+    //建立转移到了mouse.js后，点击后再连接
+        ws = new WebSocket("ws://127.0.0.1:9999");
+        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
+        //向服务器发送上线id
+        var onlineid = {
+            "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
+            "text" : getId()
+        }
+        ws.send(JSON.stringify(onlineid));
+        //connection information
         console.log("connected");
         panel();
         toast("系统","连接成功！");
@@ -32,16 +39,19 @@ let newWs= (id) => {
     // 收到消息
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
-        if( recmsg.id != getId() ) {
-            console.log(recmsg.id);
-            //bubble("id："+recmsg.id+" text:"+recmsg.text,recmsg.id,true);
+        if (recmsg.id === "system_information_online_id"){
+            toast("在线信息",recmsg.text+" 已上线");
+        }
+        else if( recmsg.id != getId() ) {
             bubble(recmsg.text,recmsg.id,true);
+            console.log("id="+getId());
+            console.log("recid="+recmsg.id);
         }
     }
 
     // 连接关闭
     ws.onclose = () => { 
-        alert("连接已关闭..."); 
+        toast("系统","链接已经断开")
         panel();
     };
 
@@ -55,12 +65,12 @@ let newWs= (id) => {
  */
 function sendMsg(id,text){
     var msg = {
-        "id":getId,
-        "text":text
+        "id" : id,
+        "text" : text
     }
     //转化为字符串发送
     ws.send(JSON.stringify(msg));
-    bubble(text,id,0);
+    bubble(text,getId(),0);
     getDOM("typing").value="";
 }
 
