@@ -23,6 +23,7 @@ const initKeyboard = ()=> {
             event.preventDefault();
             //console.log("enter");
             if (getDOM("typing").value !== "") {
+                
                 sendMsg(getId(),getDOM("typing").value);
             }
         }

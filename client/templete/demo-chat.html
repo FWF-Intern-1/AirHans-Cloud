@@ -9,45 +9,27 @@
     </head>
 	<body>
         <div id="chatBox" class="container">
-            <div id="chatBox--output" class="container m-0 border border-dark overflow-auto flex-column rounded">
+            <div id="chatBox--output" class="container m-0 border border-dark overflow-auto flex-column rounded p-1">
                 
-                <div class="row mt-1">
+                <div class="row m-0 mb-1 align-items-center invisible" style="height:0">
                     <div class="chatBox--output--avator__normal">
                         left
                     </div>
-                    <div class="col">
+                    <div id="chatBox--output--template" class="col">
                         <div class="card">
                             <div class="card-header container p-0" style="height:1.5rem">
                                 <div class="chatBox--output--arrow__left border-top-0 border-right-0"></div>
-                                <span id="chatBox--output--id">id</span>
-                                <span>time</span>
+                                <span id="chatBox--output--id"></span>
+                                <span id="chatBOx--output--time"></span>
                             </div>
-                            <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
+                            <div class="card-body p-1">
+                                <div id="chatBox--output--message" class="m-0 d-inline">
+
+                                </div>
+                            </div>
                         </div>
                     </div>
-                    <div class="chatBox--space">
-                        
-                    </div>
-                </div>
-
-                <div class="row mt-1">
-                    <div class="chatBox--space">
-
-                    </div>
-                    <div class="col">
-                        <div class="card">
-                            <div class="card-header container p-0 text-right" style="height:1.5rem">
-
-                                <span>id</span>
-                                <span>time</span>
-                                <div class="chatBox--output--arrow__right border-bottom-0 border-left-0"></div>
-                            </div>
-                            <div id="chatBox--output--message" class="card-body">some tex <br> t</div>
-                        </div>
-                    </div>
-                    <div class="chatBox--output--avator__normal">
-                        right
-                    </div>
+                    
                 </div>
 
             </div>
@@ -65,7 +47,7 @@
             
             <h1 class="display-2 text-center">AirHans-Cloud</h1>
             <div class="input-group panel--input">
-                <input type="text" id="panel--id" class="form-control" placeholder="请输入你的ID"></input>
+                <input type="text" id="panel--id" class="form-control" placeholder="请输入你的ID" autofocus></input>
                 <div class="input-group-append">
                     <button id="button--idConfirm" type="button" class="btn btn-primary">开始聊天</button>
                 </div>

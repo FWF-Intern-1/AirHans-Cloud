@@ -28,14 +28,14 @@
     left: -30px;
 }
 .chatBox--output--bubble{
-
+    padding: 0 15px;
+  
 }
 .chatBox--output--avator__normal {
     width: 50px;
     height: 50px;
     background-color: red;
     border-radius: 75px;
-    margin: 0 5px;
 
 }
 .chatBox--output--avator__small {
@@ -45,7 +45,7 @@
     border-radius: 75px;
 }
 .chatBox--output--message {
-
+    white-space: pre-wrap;
     border-radius: 5px;
 }
 .panel {
@@ -79,8 +79,8 @@
     border:rgb(223,223,223) solid 1px;
 }
 .chatBox--space {
-    width: 60px;
-    height: 60px;
+    width: 50px;
+    height: 50px;
 }
 .panel--input {
     width:300px;
