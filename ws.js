@@ -1,7 +1,7 @@
 const ws = require('nodejs-websocket');
 
-var connectionsnumber = 0;
-var connectionslist=new Array();
+var connectionsnumber = 1;
+var connectionslist = ["connectionslist_msg"];
 
 
 const server = ws.createServer(connection => {
@@ -17,16 +17,13 @@ const server = ws.createServer(connection => {
       if(msg.id === "system_information_online_id"){
         connectionslist[connectionsnumber]=msg.text;
         connectionsnumber++;
-        var connectionslist_msg = {
-            "id" : "connectionslist_msg",
-            "text" : 0
-        }
-        for(let i=0 ;i<connectionsnumber ;i++ ){
-            connectionslist_msg.text = (String(connectionslist[i]));
-            server.connections.forEach(connection => {
-                connection.sendText(JSON.stringify(connectionslist_msg))
-          })
-        }
+
+        var connectionslist_msg =  JSON.stringify(connectionslist);
+        server.connections.forEach(connection => {
+            connection.sendText(connectionslist_msg)
+      })
+        console.log(connectionslist_msg);
+
         console.log("connectionsnumber:"+connectionsnumber+"\n"+connectionslist);
       }
       else if(msg.id === "system_information_offline_id"){
