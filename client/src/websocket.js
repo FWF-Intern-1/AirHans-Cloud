@@ -34,7 +34,9 @@ let newWs= (id) => {
         console.log("connected");
         panel();
         toast("系统","连接成功！");
-        online(String(getId()));
+        // online(String());
+        console.log(getId());
+        online(getId())
     }
 
 var timestorecvicetheconnectionslist = 0;
@@ -49,10 +51,12 @@ var timestorecvicetheconnectionslist = 0;
             toast("在线信息",recmsg.text+" 已下线");
             offline(recmsg.text);
         }
-        else if(recmsg.id === "connectionslist_msg"){
+        else if(recmsg[0] === "connectionslist_msg"){
+            console.log(recmsg);
             if (timestorecvicetheconnectionslist === 0){
-                online(recmsg.text);
+                var connectionslist_msg = JSON.parse(recmsg)
                 timestorecvicetheconnectionslist++;
+                console.log(connectionslist_msg);
             }
         }
         else if( recmsg.id != getId() ) {
