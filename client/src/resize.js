@@ -5,12 +5,13 @@
 const resizeHeight = () => {
 
     $("#chatBox").height(document.documentElement.clientHeight);  
-
     $("#chatBox--input--typing").height(
         
         document.documentElement.clientHeight - $("#chatBox--output").height() - $("#chatBox--input--menu").height() -50
                 
     );
+    
+    
 }
 /**
  * 响应式消息气泡宽度

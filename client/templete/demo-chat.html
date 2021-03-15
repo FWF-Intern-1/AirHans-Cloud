@@ -8,41 +8,67 @@
         <title>demo-chat</title>
     </head>
 	<body>
-        <div id="chatBox" class="container">
-            <div id="chatBox--output" class="container m-0 border border-dark overflow-auto flex-column rounded p-1">
-                
-                <div class="row m-0 mb-1 align-items-center invisible" style="height:0">
-                    <div class="chatBox--output--avator__normal">
-                        left
-                    </div>
-                    <div id="chatBox--output--template" class="col">
-                        <div class="card">
-                            <div class="card-header container p-0" style="height:1.5rem">
-                                <div class="chatBox--output--arrow__left border-top-0 border-right-0"></div>
-                                <span id="chatBox--output--id"></span>
-                                <span id="chatBOx--output--time"></span>
-                            </div>
-                            <div class="card-body p-1">
-                                <div id="chatBox--output--message" class="m-0 d-inline">
+        <div id="mainBox" class="container-fluid row">
 
-                                </div>
-                            </div>
+            <div class="border border-dark p-0 onlineList">
+                <!-- TODO添加在线列表 -->
+                    <div id="onlineList--me" class="d-flex align-items-center border-bottom border-dark">
+                        <div id="onlineList--me--avator" class="onlineList--me--avator">头像</div>
+                        <div class="d-flex flex-column">
+                            <div id="onlineList--me--id" class="onlineList--me--id">id</div>
+                            <div id="onlineList--me--intro" class="onlineList--me--intro">这个人很懒惰</div>
                         </div>
                     </div>
+                    <div class="text-center border-bottom border-dark">在线成员</div>
+                    <div id="onlineList--they" class="d-flex align-items-center border-bottom border-dark">
+                        <div id="onlineList--they--avator" class="onlineList--they--avator">头像</div>
+                        <div class="d-flex flex-column">
+                            <div id="onlineList--they--id" class="onlineList--they--id">id</div>
+                        </div>
+                    </div>
+                        
+            </div>
                     
-                </div>
-
-            </div>
-            <div id="chatBox--input--menu" class="row m-0 border border-dark mt-1 mb-1 rounded ">
                 
-
+                <div id="chatBox" class="col">
+                    <div id="chatBox--output" class="row m-0 border border-dark overflow-auto flex-column rounded p-1">
+                        
+                        <div class="row m-0 mb-1 align-items-center invisible" style="height:0">
+                            <div class="chatBox--output--avator__normal">
+                                left
+                            </div>
+                            <div id="chatBox--output--template" class="col">
+                                <div class="card">
+                                    <div class="card-header container p-0" style="height:1.5rem">
+                                        <div class="chatBox--output--arrow__left border-top-0 border-right-0"></div>
+                                        <span id="chatBox--output--id"></span>
+                                        <span id="chatBOx--output--time"></span>
+                                    </div>
+                                    <div class="card-body p-1">
+                                        <div id="chatBox--output--message" class="m-0 d-inline">
+        
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                        </div>
+        
+                    </div>
+                    <div id="chatBox--input--menu" class="row m-0 border border-dark mt-1 mb-1 rounded ">
+                        
+        
+                    </div>
+        
+                    <textarea id="chatBox--input--typing" class="row m-0 w-100"></textarea>
+                    <div class="row justify-content-end">
+                        <button type="button" id="chatBox--input--button__send" class="col-2 btn btn-primary btn-sm">Send</button>
+                    </div>
+                </div>
             </div>
 
-            <textarea id="chatBox--input--typing" class="row m-0 w-100"></textarea>
-            <div class="row justify-content-end">
-                <button type="button" id="chatBox--input--button__send" class="col-2 btn btn-primary btn-sm">Send</button>
-            </div>
         </div>
+        
         <div id="panel" class="panel">
             
             <h1 class="display-2 text-center">AirHans-Cloud</h1>
