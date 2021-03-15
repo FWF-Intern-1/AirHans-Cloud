@@ -1,6 +1,6 @@
 import { initKeyboard } from "./keyboard.js";
 import { initMouse } from "./mouse.js";
-import { offline, online } from "./onlineList.js";
+import { online } from "./onlineList.js";
 import { panel } from "./panel.js";
 import { resizeHeight } from "./resize.js";
 

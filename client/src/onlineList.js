@@ -5,7 +5,7 @@ import { getId } from "./save.js";
  * @author Hans
  */
 const TemplatePiece = () => {
-    return $(`<div id="onlineList--they" class="d-flex align-items-center border-bottom border-dark">
+    return $(`<div id="onlineList--they" class="d-flex align-items-center border-bottom border-dark onlineList--they">
                         <div id="onlineList--they--avator" class="onlineList--they--avator">头像</div>
                         <div class="d-flex flex-column">
                             <div id="onlineList--they--id" class="onlineList--they--id"></div>
@@ -26,12 +26,10 @@ const online = (id) => {
     
 }
 
-const offline = (id) => {
-    for (const element of $(".onlineList").find(".onlineList--they--id")) {
-        if ($(element).text() == id) {
-            $(element).parent().parent().remove();
-        }
-    };
+const onlineClear = (id) => {
+    for (const element of $(".onlineList--they")) {
+        $(element).remove();
+    }
 }
 let isOnlineList = false;
 
@@ -62,4 +60,4 @@ const listCheck = () => {
         listClose();
     }
 }
-export { online, onlineMy, offline, listTurn, listCheck }
+export { online, onlineMy, onlineClear, listTurn, listCheck }

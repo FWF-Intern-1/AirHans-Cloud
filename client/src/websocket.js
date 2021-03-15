@@ -3,7 +3,7 @@ import { getId } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
-import { offline, online, onlineMy } from "./onlineList.js";
+import { online, onlineClear, onlineMy } from "./onlineList.js";
 
 let ws = null;
 
@@ -19,8 +19,8 @@ let newWs= (id) => {
  * @author Air
  */
     //建立转移到了mouse.js后，点击后再连接
-        ws = new WebSocket("ws://127.0.0.1:9999");
-        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        //ws = new WebSocket("ws://127.0.0.1:9999");
+        ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
@@ -41,10 +41,9 @@ var timestorecvicetheconnectionslist = 0;
     // 收到消息
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
-        console.log(recmsg);//测试
         if (recmsg.id === "system_information_online_id"){
             toast("在线信息",recmsg.text+" 已上线");
-            online(recmsg.text);
+            //online(recmsg.text);
         }
         else if(recmsg.id === "system_information_offline_id"){
             toast("在线信息",recmsg.text+" 已下线");
@@ -52,10 +51,10 @@ var timestorecvicetheconnectionslist = 0;
         }
         else if(recmsg[0] === "connectionslist_msg"){
             console.log(recmsg);
-            if (timestorecvicetheconnectionslist === 0){
-                var connectionslist_msg = JSON.parse(recmsg)
-                timestorecvicetheconnectionslist++;
-                console.log(connectionslist_msg);
+            onlineClear();
+            for (let i = 1;i < recmsg.length;i++ ) {
+                //console.log(recmsg[i]);
+                online(recmsg[i]);
             }
         }
         else if( recmsg.id != getId() ) {
