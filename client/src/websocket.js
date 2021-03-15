@@ -3,6 +3,7 @@ import { getId } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
+import { online } from "./onlineList.js";
 
 let ws = null;
 
@@ -33,6 +34,7 @@ let newWs= (id) => {
         console.log("connected");
         panel();
         toast("系统","连接成功！");
+        online(getId());
     }
 
 

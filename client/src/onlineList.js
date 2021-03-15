@@ -1,3 +1,5 @@
+import { getId } from "./save.js";
+
 /**
  * 在线成员列表管理
  * @author Hans
@@ -12,8 +14,14 @@ const TemplatePiece = () => {
 };
 
 const online = (id) => {
-    let tempPiece = TemplatePiece();
-    tempPiece.appendTo(".onlineList").find("#onlineList--they--id").text(id);
+    if (id == getId()) {
+        $("#onlineList--me--id").text(id);
+        
+    } else {
+        let tempPiece = TemplatePiece();
+        tempPiece.appendTo(".onlineList").find("#onlineList--they--id").text(id);
+
+    }
 }
 
 const offline = (id) => {

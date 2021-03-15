@@ -16,7 +16,7 @@ ws.onopen=()=>{
     console.log("connected");
     panel();
 }
-//console.log( getDOM("id").value );
+
 //点击发送按钮
 // $("#chatBox--input--button__send").on("click",() => {
 //     console.log("点击send一次");
