@@ -1,14 +1,15 @@
-
+body {
+    overflow: hidden;
+}
+#mainBox {
+    height: 100%;
+    margin: 0;
+}
 #chatBox {
-    min-height: 300px;
-    min-width: 400px;
+    height: 100%;
 }
 #chatBox--output {
     height: 60%;
-    min-height:270px;
-}
-#chatBox--input {
-    
 }
 #chatBox--input--menu {
     height:30px;
@@ -20,7 +21,6 @@
 }
 #chatBox--input--typing {
     resize: none;
-    min-height:100px;
 
 }
 #chatBox--input--button__send {
@@ -103,6 +103,8 @@
     height:80px;
 }
 .onlineList {
+    height: 95%;
+    min-height: 300px;
     width: 300px;
 }
 
@@ -126,4 +128,38 @@
     font-size: 1em;
     height: 1.5em;
     overflow: hidden;
+}
+.button__onlineList {
+    display: none;
+    z-index: 980;
+}
+
+
+@media only screen and (max-width: 576px) {
+    .onlineList {
+        display: none;
+        width: 100%;
+        min-width: 300px;
+        background-color: white;
+        z-index: 970;
+
+    }
+    .onlineListShow {
+        display: block;
+    }
+    .button__onlineList {
+        display: inline-block;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border-radius: 75px;
+        right: 5px;
+        top: 5px;
+        
+    }
+    #chatBox {
+        height: 100%;
+        width: 100%;
+
+    }
 }

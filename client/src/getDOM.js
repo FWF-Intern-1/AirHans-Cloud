@@ -23,6 +23,10 @@ const getDOM = (target) => {
         case 'send':
             return $("#chatBox--input--button__send")[0]
             break;
+        case 'button--list':
+            return $(".button__onlineList")[0]
+            break;
+
     }
 }
 

@@ -31,5 +31,33 @@ const offline = (id) => {
         }
     };
 }
+let isOnlineList = false;
 
-export { online, offline }
+const listShow = () => {
+    $(".onlineList").addClass("onlineListShow");
+    $("#chatBox").addClass("invisible");
+    isOnlineList = true;
+}
+
+const listClose = () => {
+    $(".onlineList").removeClass("onlineListShow");
+    $("#chatBox").removeClass("invisible");
+    isOnlineList = false;
+}
+
+const listTurn = () => {
+    if (!isOnlineList) {
+        listShow();
+        
+    } else  {
+        listClose();
+
+    }
+}
+
+const listCheck = () => {
+    if (isOnlineList) {
+        listClose();
+    }
+}
+export { online, offline, listTurn, listCheck }
