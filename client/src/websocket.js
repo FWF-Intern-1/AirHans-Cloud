@@ -3,7 +3,7 @@ import { getId } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
-import { online } from "./onlineList.js";
+import { offline, online } from "./onlineList.js";
 
 let ws = null;
 
@@ -19,8 +19,8 @@ let newWs= (id) => {
  * @author Air
  */
     //建立转移到了mouse.js后，点击后再连接
-        //ws = new WebSocket("ws://127.0.0.1:9999");
-        ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        ws = new WebSocket("ws://127.0.0.1:9999");
+        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
@@ -34,15 +34,26 @@ let newWs= (id) => {
         console.log("connected");
         panel();
         toast("系统","连接成功！");
-        online(getId());
+        online(String(getId()));
     }
 
-
+var timestorecvicetheconnectionslist = 0;
     // 收到消息
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
         if (recmsg.id === "system_information_online_id"){
             toast("在线信息",recmsg.text+" 已上线");
+            online(recmsg.text);
+        }
+        else if(recmsg.id === "system_information_offline_id"){
+            toast("在线信息",recmsg.text+" 已下线");
+            offline(recmsg.text);
+        }
+        else if(recmsg.id === "connectionslist_msg"){
+            if (timestorecvicetheconnectionslist === 0){
+                online(recmsg.text);
+                timestorecvicetheconnectionslist++;
+            }
         }
         else if( recmsg.id != getId() ) {
             bubble(recmsg.text,recmsg.id,true);
@@ -52,6 +63,15 @@ let newWs= (id) => {
     }
 
     // 连接关闭
+    window.onbeforeunload = function () {
+        var offlineid = {
+            "id" : "system_information_offline_id",     //这么长的名字应该不会真的有人会用这个id吧
+            "text" : getId()
+        }
+        ws.send(JSON.stringify(offlineid));
+        ws.close();
+    }
+
     ws.onclose = () => { 
         toast("系统","链接已经断开")
         panel();

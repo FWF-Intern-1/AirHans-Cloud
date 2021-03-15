@@ -1,25 +1,42 @@
 const ws = require('nodejs-websocket');
 
+var connectionsnumber = 0;
+var connectionslist=new Array();
 
-const server = ws.createServer(socket => {
 
-    socket.on('text',conn=>{
+const server = ws.createServer(connection => {
+
+    connection.on('text',conn=>{
         var msg =JSON.parse(conn);
         console.log("id:"+msg.id)
         console.log("text:"+msg.text)
-        server.connections.forEach(socket => {
-            socket.sendText(conn)
+        server.connections.forEach(connection => {
+            connection.sendText(conn)
       })
+
+      if(msg.id === "system_information_online_id"){
+        connectionslist[connectionsnumber]=msg.text;
+        connectionsnumber++;
+        var connectionslist_msg = {
+            "id" : "connectionslist_msg",
+            "text" : 0
+        }
+        for(let i=0 ;i<connectionsnumber ;i++ ){
+            connectionslist_msg.text = (String(connectionslist[i]));
+            server.connections.forEach(connection => {
+                connection.sendText(JSON.stringify(connectionslist_msg))
+          })
+        }
+        console.log("connectionsnumber:"+connectionsnumber+"\n"+connectionslist);
+      }
+      else if(msg.id === "system_information_offline_id"){
+          connectionsnumber--;
+      }
     })
-    // socket.on('close',(code,err)=>{
-    //     console.log(code,err)
-    //     var unonlineid = {
-    //         "id" : "system_information_unonline_id",     //这么长的名字应该不会真的有人会用这个id吧
-    //         "text" : 123
-    //     }
-    // })
 
 }).listen(9999,()=>{
     console.log('server on port 9999');
 });
+
+
     
