@@ -13,15 +13,17 @@ const TemplatePiece = () => {
                     </div>`)
 };
 
-const online = (id) => {
-    if (id == getId()) {
-        $("#onlineList--me--id").text(id);
-        
-    } else {
-        let tempPiece = TemplatePiece();
-        tempPiece.appendTo(".onlineList").find("#onlineList--they--id").text(id);
+const onlineMy = () => {
+    $("#onlineList--me--id").text(getId());
 
-    }
+}
+
+const online = (id) => {
+
+    let tempPiece = TemplatePiece();
+    tempPiece.appendTo(".onlineList").find("#onlineList--they--id").text(id);
+
+    
 }
 
 const offline = (id) => {
@@ -60,4 +62,4 @@ const listCheck = () => {
         listClose();
     }
 }
-export { online, offline, listTurn, listCheck }
+export { online, onlineMy, offline, listTurn, listCheck }

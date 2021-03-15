@@ -3,7 +3,7 @@ import { getId } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
-import { offline, online } from "./onlineList.js";
+import { offline, online, onlineMy } from "./onlineList.js";
 
 let ws = null;
 
@@ -34,13 +34,14 @@ let newWs= (id) => {
         console.log("connected");
         panel();
         toast("系统","连接成功！");
-        online(String(getId()));
+        onlineMy();
     }
 
 var timestorecvicetheconnectionslist = 0;
     // 收到消息
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
+        console.log(recmsg);//测试
         if (recmsg.id === "system_information_online_id"){
             toast("在线信息",recmsg.text+" 已上线");
             online(recmsg.text);
