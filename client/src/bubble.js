@@ -1,5 +1,6 @@
 import { getDOM } from './getDOM.js'
 import { resizeBubble } from './resize.js';
+import { startTime } from './time.js';
 /**
  * 返回新的消息气泡对象
  * @returns jQuery对象
@@ -65,6 +66,7 @@ const bubble = (text,id,isThere) => {
 
     bubbleTemp.find(".chatBox--output--message").text(text);
     bubbleTemp.find("#chatBox--output--id").text(id);
+    bubbleTemp.find("#chatBOx--output--time").text(startTime());
     
     
     //TODO使用?():()
@@ -75,7 +77,9 @@ const bubble = (text,id,isThere) => {
     resizeBubble();
     //TODO动画返回output底部
     $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
-    console.log("bubble()执行完毕");
+    
+
+    //console.log("bubble()执行完毕");
     
 }
 
