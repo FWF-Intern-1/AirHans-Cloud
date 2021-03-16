@@ -27,13 +27,22 @@ const server = ws.createServer(connection => {
         console.log("connectionsnumber:"+connectionsnumber+"\n"+connectionslist);
       }
       else if(msg.id === "system_information_offline_id"){
-          connectionsnumber--;
+        connectionsnumber--;
+        for(var n=1 ;n<connectionsnumber ;n++){
+            if(connectionslist[n] === msg.text){
+                connectionslist.splice(n,1);
+            }
+        }
+        var connectionslist_msg =  JSON.stringify(connectionslist);
+        server.connections.forEach(connection => {
+            connection.sendText(connectionslist_msg)
+        })
+        console.log(connectionslist_msg);
+
+        console.log("connectionsnumber:"+connectionsnumber+"\n"+connectionslist);  
       }
     })
 
 }).listen(9999,()=>{
     console.log('server on port 9999');
 });
-
-
-    

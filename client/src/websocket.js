@@ -19,8 +19,8 @@ let newWs= (id) => {
  * @author Air
  */
     //建立转移到了mouse.js后，点击后再连接
-        //ws = new WebSocket("ws://127.0.0.1:9999");
-        ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        ws = new WebSocket("ws://127.0.0.1:9999");
+        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
@@ -37,13 +37,11 @@ let newWs= (id) => {
         onlineMy();
     }
 
-var timestorecvicetheconnectionslist = 0;
     // 收到消息
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
         if (recmsg.id === "system_information_online_id"){
             toast("在线信息",recmsg.text+" 已上线");
-            //online(recmsg.text);
         }
         else if(recmsg.id === "system_information_offline_id"){
             toast("在线信息",recmsg.text+" 已下线");
@@ -53,7 +51,6 @@ var timestorecvicetheconnectionslist = 0;
             console.log(recmsg);
             onlineClear();
             for (let i = 1;i < recmsg.length;i++ ) {
-                //console.log(recmsg[i]);
                 online(recmsg[i]);
             }
         }
