@@ -47,7 +47,7 @@ var timestorecvicetheconnectionslist = 0;
         }
         else if(recmsg.id === "system_information_offline_id"){
             toast("在线信息",recmsg.text+" 已下线");
-            offline(recmsg.text);
+            //offline(recmsg.text);
         }
         else if(recmsg[0] === "connectionslist_msg"){
             console.log(recmsg);
