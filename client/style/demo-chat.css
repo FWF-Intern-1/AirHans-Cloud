@@ -1,13 +1,15 @@
+body {
+    overflow: hidden;
+}
+#mainBox {
+    height: 100%;
+    margin: 0;
+}
 #chatBox {
-    min-height: 300px;
-    min-width: 400px;
+    height: 100%;
 }
 #chatBox--output {
     height: 60%;
-    min-height:270px;
-}
-#chatBox--input {
-    
 }
 #chatBox--input--menu {
     height:30px;
@@ -19,7 +21,6 @@
 }
 #chatBox--input--typing {
     resize: none;
-    min-height:100px;
 
 }
 #chatBox--input--button__send {
@@ -28,13 +29,15 @@
     left: -30px;
 }
 .chatBox--output--bubble{
-
+    padding: 0 15px;
+  
 }
 .chatBox--output--avator__normal {
     width: 50px;
     height: 50px;
     background-color: red;
     border-radius: 75px;
+
 }
 .chatBox--output--avator__small {
     width: 20px;
@@ -43,7 +46,7 @@
     border-radius: 75px;
 }
 .chatBox--output--message {
-
+    white-space: pre-wrap;
     border-radius: 5px;
 }
 .panel {
@@ -60,9 +63,9 @@
     /* transform: translate(-25px,0) rotate(30deg);
     color: rgb(247,247,247); */
     display: inline-block;
-    width: 10px;
-    height: 10px;
-    transform: translate(-25.6px,0px) rotate(45deg);
+    width: 8px;
+    height: 8px;
+    transform: translate(-4.8px,-2px) rotate(45deg);
     background-color: rgb(247,247,247);
     border:rgb(223,223,223) solid 1px;
 
@@ -72,7 +75,7 @@
     display: inline-block;
     width: 10px;
     height: 10px;
-    transform: translate(25.6px,0px) rotate(45deg);
+    transform: translate(5.7px,-2px) rotate(45deg);
     background-color: rgb(247,247,247);
     border:rgb(223,223,223) solid 1px;
 }
@@ -95,4 +98,68 @@
     transform: translate(-50%,0);
     min-width: 250px;
     margin-top: 10px;
+}
+#onlineList--me {
+    height:80px;
+}
+.onlineList {
+    height: 95%;
+    min-height: 300px;
+    width: 300px;
+}
+
+.onlineList--me--avator {
+    width: 60px;
+    height: 60px;
+    background-color: red;
+    border-radius: 75px;
+    margin: 10px;
+}
+.onlineList--they--avator {
+    width: 50px;
+    height: 50px;
+    background-color: red;
+    border-radius: 75px;
+    margin: 5px 20px;
+}
+.onlineList--me--intro, .onlineList--me--id, .onlineList--they--id {
+    width: 180px;
+    line-height: 1em;
+    font-size: 1em;
+    height: 1.5em;
+    overflow: hidden;
+}
+.button__onlineList {
+    display: none;
+    z-index: 980;
+}
+
+
+@media only screen and (max-width: 576px) {
+    .onlineList {
+        display: none;
+        width: 100%;
+        min-width: 300px;
+        background-color: white;
+        z-index: 970;
+
+    }
+    .onlineListShow {
+        display: block;
+    }
+    .button__onlineList {
+        display: inline-block;
+        position: fixed;
+        width: 40px;
+        height: 40px;
+        border-radius: 75px;
+        right: 5px;
+        top: 5px;
+        
+    }
+    #chatBox {
+        height: 100%;
+        width: 100%;
+
+    }
 }

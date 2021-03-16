@@ -1,15 +1,14 @@
 /**
- * @author 
+ * @author Yun
  */
 function startTime(){
     var time =new Date();
     var h=time.getHours();
     var m=time.getMinutes();
-    //var s=time.getSeconds();
+    var s=time.getSeconds();
     m=checktime(m);
-    //s=checktime(s);
-    //document.getElementById("aa").innerHTML=h+":"+m+":"+s;
-    document.getElementById("aa").innerHTML=h+":"+m;
+    s=checktime(s);
+    return h+":"+m+":"+s;
  }
 function checktime(i){
     if (i<=9){
@@ -55,4 +54,4 @@ const isRecent = (timeLast) => {
     console.log(timeLast);
 }
 
-export { isRecent }
+export { startTime, isRecent }

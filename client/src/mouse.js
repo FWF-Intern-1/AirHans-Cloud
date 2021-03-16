@@ -1,4 +1,5 @@
 import { getDOM } from "./getDOM.js";
+import { listTurn } from "./onlineList.js";
 import { saveId, getId, isPanel, isPanelChange } from "./save.js";
 import { sendMsg, newWs} from "./websocket.js";
 //import { save } from "./save.js"
@@ -11,7 +12,6 @@ import { sendMsg, newWs} from "./websocket.js";
 
 
 const initMouse = ()=> {
-
     $(document).on("click", (e) => {
 
         if (e.target == getDOM("send")) {
@@ -30,9 +30,10 @@ const initMouse = ()=> {
                  location.reload();
             }
             newWs();
-
         }
     });
 }
-
+$(getDOM("button--list")).on("click", () => {
+    listTurn();
+});
 export { initMouse }
