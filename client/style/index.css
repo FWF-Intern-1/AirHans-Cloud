@@ -1,0 +1,161 @@
+
+html {
+    height: 100%;
+    min-height: 500px;
+    min-width: 800px;
+
+}
+body {
+    background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
+    height: 100%;
+    width: 100%;
+    min-height: 500px;
+    background-repeat: no-repeat;
+
+}
+.indexBox {
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    
+}
+.formBox {
+    align-items: flex-start;
+    transform: translate(10px,10px);
+}
+.formBox__phone {
+    display: none !important;
+}
+.loginBox__basis {
+    width: 400px;
+    background-color: rgb(255,255,255);
+    /* transform: translate(-50%,-50%); */
+    transition: all 0.5s;
+
+}
+.loginBox {
+
+}
+.loginBox__hidden {
+    visibility: hidden;
+    opacity: 0;
+
+}
+.signUpBox {
+    visibility: hidden;
+    opacity: 0;
+    transform: translate(5%,0);
+
+}
+.signUpBox__show {
+    visibility: visible;
+    opacity: 1;
+    transform: translate(0,0);
+
+}
+
+.bar--y {
+    width: 10px;
+    background-color: #131124;
+    height: 100px;
+    border-radius: 75px;
+}
+.bar--x {
+    width: 100px;
+    height: 10px;
+    background-color: #131124;
+    border-radius: 75px;
+    transform: translate(-10px,0);
+}
+a:hover {
+    text-decoration: none;
+}
+
+.in {
+    animation: circleIn 0.5s;
+}
+.spinner--inButton{
+    display: none;
+    color: rgb(255,255,255);
+    height: 1rem;
+    width: 1rem;
+    border-width: 0.15rem;
+
+}
+
+.spinner--inButton__show {
+    display: inline-block;    
+}
+.cursor__flash{
+    margin-bottom: 0;
+    display: inline-block;
+    background-color: black;
+    width: 0.1rem;
+    height: 2rem;             /* 2.5rem 这个是h1的font-size */
+    animation: flash 0.5s infinite alternate;
+}
+@keyframes flash {
+    0% {
+        opacity: 0;
+    }
+    100% {
+        opacity: 1;
+    }
+}
+@keyframes circleIn {
+    0% {
+        clip-path: circle(0 at 50% 0);
+    }
+    100% {
+        clip-path: circle(100% at 50% 0)
+    }
+}
+
+@media only screen and (max-width: 576px) {
+    html{
+        overflow-x: hidden;
+        min-height: 100%;
+        min-width: 100%;
+    }
+    .indexBox {
+        display: none !important;
+    }
+    .formBox {
+        display: flex !important;
+        position: absolute;
+        width: 100%;
+
+        transform: translate(0,0);
+    }
+    .loginBox__basis {
+        width: 100%;
+    }
+    .signUpBox {
+        right: 0;
+        transform: translate(100%,0);
+    }
+    
+    .signUpBox__show {
+        right: 100%;
+        /* transform: translate(-50%,-50%); */
+    }
+    /* .back {
+        animation-name: back;
+        animation-duration: 1s;
+        animation-fill-mode: forwards;
+    }
+    @keyframes back {
+        from {}
+        to {
+            left: 0;
+            transform: translate(-100%,-50%);
+        }
+    } */
+    /* .loginBox:focus-within {
+        top: 0;
+        left: 0;
+        transform: translate(0,0);
+        border-radius: 0ch;
+    } */
+}
+
