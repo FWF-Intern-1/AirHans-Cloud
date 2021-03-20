@@ -45,15 +45,15 @@ $(".button--captcha").on("click",(e) => {
     //     console.log(res);
     //     //TODO对res判断验证码是否发送成功
     //     // console.log("验证码发送成功");
+    // }).catch((e) => {
+    //     console.log(e);
     // });
-    let sendmail = {
+    let sendMsg = JSON.stringify({
         "email": tempForm.get("email")
-    }
-    sendmail=JSON.stringify(sendmail);
-    
-    $.post("http://tomzhang.com.cn:7777", sendmail,
+    });
+    $.post("http://tomzhang.com.cn:7777", sendMsg,
         function (data, textStatus, jqXHR) {
-            console.log("success!");
+            console.log(data);
         }
     );
 })
