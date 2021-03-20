@@ -1,2 +1,4 @@
+/server/node_modules/*
+/login/node_modules/*
 
 /server/node_modules/*
