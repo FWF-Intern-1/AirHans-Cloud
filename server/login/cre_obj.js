@@ -1,13 +1,13 @@
 const { DataTypes, Sequelize } = require("sequelize");
-const db = new Sequelize("User", "root", "mysql123", {
+const db = new Sequelize("test", "root", "ZHANGbo020329", {
   host: "localhost",
   dialect: "mysql",
 });
 const user = require("./User.js");
 console.log(user.User);
 //插入数据
-function createpeople(name, ac, pwd, email) {
-  name = user.User.create({
+function createpeople(ac, pwd, email) {
+  user.User.create({
     account: ac,
     password: pwd,
     email: email,

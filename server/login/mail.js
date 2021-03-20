@@ -26,7 +26,6 @@ const regEmail=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*
 function sendmail(mail){
     if (regEmail.test(mail)){  //邮箱验证通过
         var code=randomFns()
-    
         transport.sendMail({
           from: 'airhans_cloud@163.com', // 发件邮箱
           to: mail, // 收件列表
@@ -52,22 +51,29 @@ function sendmail(mail){
 
 }
 
-http.createServer((req,res)=>{
-    let data = '';
-    req.on('data', chunk => {
-        data += chunk;
+function sharecode(){
+
+}
+
+
+    http.createServer((req,res)=>{
+        let data = '';
+        req.on('data', chunk => {
+            data += chunk;
+        })
+        req.on('end', () => {
+            data=JSON.parse(data)
+            console.log(data)
+            sendmail(data.email)
+            res.writeHead(200, {'Content-Type': 'text/html; charset=utf8',"Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "POST"});
+            res.end(`${data.email} 邮件已发送`)
+            console.log(`${data.email} 邮件已发送`)
+            
+        })
+    }).listen(7777,()=>{
+        console.log('listing 7777')
     })
-    req.on('end', () => {
-        data=JSON.parse(data)
-        console.log(data)
-        sendmail(data.email)
-        res.writeHead(200, {'Content-Type': 'text/html; charset=utf8',"Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "POST",});
-        res.end(`${data.email} 已发送`)
-        console.log(`${data.email} 已发送`)
-        
-    })
-    // creat.creatpeople(data.email,data.account,data.password)
-    
-}).listen(7777,()=>{
-    console.log('listing 7777')
-})
+
+module.exports = {
+    sharecode
+}
