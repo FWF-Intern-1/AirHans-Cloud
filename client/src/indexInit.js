@@ -34,17 +34,28 @@ $(".signUpForm").on("submit",(e) => {
 $(".button--captcha").on("click",(e) => {
     let tempForm = new FormData($(".signUpForm")[0]);
     e.preventDefault();
-    axios({
-        method:'post',
-        url: 'localhost:7777',
-        data: {
-            email: tempForm.get("email")
+    //TODO发送验证码冷却1min
+    // axios({
+    //     method:'post',
+    //     url: 'http://tomzhang.com.cn:7777',
+    //     data: {
+    //         email: tempForm.get("email")
+    //     }
+    // }).then((res) => {
+    //     console.log(res);
+    //     //TODO对res判断验证码是否发送成功
+    //     // console.log("验证码发送成功");
+    // });
+    let sendmail = {
+        "email": tempForm.get("email")
+    }
+    sendmail=JSON.stringify(sendmail);
+    
+    $.post("http://tomzhang.com.cn:7777", sendmail,
+        function (data, textStatus, jqXHR) {
+            console.log("success!");
         }
-    }).then((res) => {
-        console.log(res);
-        //TODO对res判断验证码是否发送成功
-        // console.log("验证码发送成功");
-    })
+    );
 })
 $(".link--signUp").on("click",(e) => {
     e.preventDefault();
@@ -103,7 +114,6 @@ const selectWord = () => {
     let i = 0;
 
     setInterval(() => {
-        console.log(i);
 
         keyInWord(arrayWords[i++]); 
         if (i >= arrayWords.length) {
