@@ -6,7 +6,7 @@ import { listCheck } from "./onlineList.js";
  */
 const resizeHeight = () => {
     let heightAll = document.documentElement.clientHeight;
-    if (heightAll >= 300) {
+    if (heightAll >= 400) {
         $("body").height(heightAll);
         let heightCal = 0.4 * heightAll -  100;
         $("#chatBox--input--typing").height(

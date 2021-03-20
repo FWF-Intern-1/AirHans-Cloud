@@ -14,17 +14,14 @@ const initKeyboard = ()=> {
             let id = getDOM("userid").value;
             saveId(id);
             newWs();
-            //console.log(getId());
-        } else 
-        if (event.keyCode == 13 && event.shiftKey) {
-           // console.log("shift+enter");
-        } else
-        if (event.keyCode == 13) {
+        // } else if (event.keyCode == 13 && event.shiftKey) {
+        //     console.log("shift+enter");
+        } else if (event.keyCode == 13) {
             event.preventDefault();
-            //console.log("enter");
             if (getDOM("typing").value !== "") {
                 
                 sendMsg(getId(),getDOM("typing").value);
+                
             }
         }
     

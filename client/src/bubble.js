@@ -69,7 +69,6 @@ const bubble = (text,id,isThere) => {
     bubbleTemp.find("#chatBOx--output--time").text(startTime());
     
     
-    //TODO使用?():()
     let tempWidth = bubbleTemp.find("#chatBox--outptu--bubble").width();
 
     
