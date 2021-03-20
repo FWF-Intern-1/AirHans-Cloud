@@ -61,7 +61,7 @@ http.createServer((req,res)=>{
         data=JSON.parse(data)
         console.log(data)
         sendmail(data.email)
-        res.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
+        res.writeHead(200, {'Content-Type': 'text/html; charset=utf8',"Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "POST",});
         res.end(`${data.email} 已发送`)
         console.log(`${data.email} 已发送`)
         
