@@ -23,7 +23,7 @@ async function users(){
   return await user.User.findAll();
 }
 async function sayUsers(){
-  console.log(JSON.stringify(await users()))
+  // console.log(JSON.stringify(await users()))
 }
 sayUsers();
 //console.log(users.every(user => user instanceof User)); // true

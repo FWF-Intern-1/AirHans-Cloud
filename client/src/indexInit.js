@@ -9,7 +9,7 @@ $(".loginForm").on("submit",(e) => {
 
     });
     console.log(sendMsg);
-    $.post("http://tomzhang.com.cn:7777", sendMsg,
+    $.post("http://tomzhang.com.cn:8888", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log(data);
         }
@@ -32,7 +32,7 @@ $(".signUpForm").on("submit",(e) => {
             "password": tempForm.get("password")
         });
         console.log(sendMsg);
-        $.post("http://tomzhang.com.cn:7777", sendMsg,
+        $.post("http://127.0.0.1:5555", sendMsg,
             function (data, textStatus, jqXHR) {
                 console.log(data);
             }

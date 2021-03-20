@@ -22,10 +22,16 @@ const randomFns=()=> { // 生成6位随机数
     return code 
 }
 const regEmail=/^([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+@([a-zA-Z0-9]+[_|\_|\.]?)*[a-zA-Z0-9]+\.[a-zA-Z]{2,3}$/ //验证邮箱正则
-
+var yanzhen ={
+    email : "",
+    yzcode : ""
+}
 function sendmail(mail){
     if (regEmail.test(mail)){  //邮箱验证通过
-        var code=randomFns()
+        yanzhen ={
+            email : mail,
+            yzcode : code=randomFns()
+        }
         transport.sendMail({
           from: 'airhans_cloud@163.com', // 发件邮箱
           to: mail, // 收件列表
@@ -34,7 +40,7 @@ function sendmail(mail){
           html: `
           <p>你好！</p>
           <p>我们是 AirHans-Cloud，您正在注册AirHans-Cloud聊天室</p>
-          <p>你的验证码是：<strong style="color: #ff4e2a;">${code}</strong></p>
+          <p>你的验证码是：<strong style="color: #ff4e2a;">${yanzhen.yzcode}</strong></p>
           <p>***该验证码5分钟内有效***</p>` // html 内容
         }, 
         function(error, data) {
@@ -52,7 +58,7 @@ function sendmail(mail){
 }
 
 function sharecode(){
-
+    return yanzhen
 }
 
 
