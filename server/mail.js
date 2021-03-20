@@ -1,4 +1,5 @@
 const nodemailer = require('nodemailer')
+const http = require('http')
 
 //设置邮箱配置
 let transport = nodemailer.createTransport({
@@ -10,7 +11,7 @@ let transport = nodemailer.createTransport({
     //用户信息
     auth:{
       user:'airhans_cloud@163.com',
-      pass:'xxxxxxxxx'
+      pass:'YJDLZXHEHLGNBOCF'
     }
   });
 const randomFns=()=> { // 生成6位随机数
@@ -50,6 +51,23 @@ function sendmail(mail){
       }
 
 }
-module.exports = {
-    sendmail
-}
+
+http.createServer((req,res)=>{
+    let data = '';
+    req.on('data', chunk => {
+        data += chunk;
+    })
+    req.on('end', () => {
+        data=JSON.parse(data)
+        console.log(data)
+        sendmail(data.email)
+        res.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
+        res.end(`${data.email} 已发送`)
+        console.log(`${data.email} 已发送`)
+        
+    })
+    // creat.creatpeople(data.email,data.account,data.password)
+    
+}).listen(7777,()=>{
+    console.log('listing 7777')
+})

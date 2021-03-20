@@ -1,5 +1,4 @@
 const http = require('http')
-const sm  = require('./mail')
 
 http.createServer((req,res)=>{
     let data = '';
@@ -9,12 +8,12 @@ http.createServer((req,res)=>{
     req.on('end', () => {
         data=JSON.parse(data)
         console.log(data)
-        sm.sendmail(data.mail)
         res.writeHead(200, {'Content-Type': 'text/html; charset=utf8'});
-        res.end(`${data.mail} 已发送`)
-        console.log(`${data.mail} 已发送`)
+        res.end(`${data.email} 已发送`)
+        
     })
+    // creat.creatpeople(data.email,data.account,data.password)
     
-}).listen(7777,()=>{
-    console.log('listing 7777')
+}).listen(7788,()=>{
+    console.log('listing 7788')
 })
