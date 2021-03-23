@@ -16,8 +16,11 @@ const initMouse = ()=> {
 
         if (e.target == getDOM("send")) {
             
-            sendMsg(getId(),getDOM("typing").value);
-            getDOM("typing").value="";
+            if (getDOM("typing").value !== "") {
+                sendMsg(getId(),getDOM("typing").value);
+                getDOM("typing").value="";
+                
+            }
 
         } 
         else if (e.target == getDOM("button--idConfirm") && isPanel) {
