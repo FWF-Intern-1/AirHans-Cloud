@@ -1,15 +1,15 @@
 body {
-    overflow: hidden;
+
+    overflow-y: auto;
+    min-height: 400px;
 }
+
 #mainBox {
     height: 100%;
-    margin: 0;
 }
-#chatBox {
-    height: 100%;
-}
+
 #chatBox--output {
-    height: 60%;
+    height: calc(100% - 60px)
 }
 #chatBox--input--menu {
     height:30px;
@@ -24,17 +24,14 @@ body {
 
 }
 #chatBox--input--button__send {
-    position: relative;
-    top: -40px;
-    left: -30px;
 }
 .chatBox--output--bubble{
     padding: 0 15px;
   
 }
 .chatBox--output--avator__normal {
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     background-color: red;
     border-radius: 75px;
 
@@ -103,21 +100,19 @@ body {
     height:80px;
 }
 .onlineList {
-    height: 95%;
-    min-height: 300px;
-    width: 300px;
+    max-width: 400px;
 }
 
 .onlineList--me--avator {
-    width: 60px;
-    height: 60px;
+    min-width: 60px;
+    min-height: 60px;
     background-color: red;
     border-radius: 75px;
     margin: 10px;
 }
 .onlineList--they--avator {
-    width: 50px;
-    height: 50px;
+    min-width: 50px;
+    min-height: 50px;
     background-color: red;
     border-radius: 75px;
     margin: 5px 20px;
@@ -129,12 +124,33 @@ body {
     height: 1.5em;
     overflow: hidden;
 }
+.onlineList--they {
+    border-color:#c4cbcf;
+    transition: all 0.1s;
+    cursor: default;
+
+}
+.onlineList--they:hover {
+    transform: translate(5%,0);
+}
+.onlineList--they__highLight {
+    background-color: antiquewhite;
+    border-bottom: 0 !important;
+    transform: scale(1.05);
+    border-radius: 5px;
+}
 .button__onlineList {
     display: none;
     z-index: 980;
 }
-
-
+.chatBox--bottom {
+    height: 60px;
+}
+.text--numbers {
+    text-align: center;
+    margin-bottom: 1rem;
+    text-decoration: underline #1677b3 0.2rem;
+}
 @media only screen and (max-width: 576px) {
     .onlineList {
         display: none;

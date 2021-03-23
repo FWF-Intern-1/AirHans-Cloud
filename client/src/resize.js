@@ -5,16 +5,16 @@ import { listCheck } from "./onlineList.js";
  * @author Hans
  */
 const resizeHeight = () => {
-    let heightAll = document.documentElement.clientHeight;
-    if (heightAll >= 300) {
-        $("body").height(heightAll);
-        let heightCal = 0.4 * heightAll -  100;
-        $("#chatBox--input--typing").height(
+    // let heightAll = document.documentElement.clientHeight;
+    // if (heightAll >= 400) {
+    //     $("body").height(heightAll);
+    //     let heightCal = 0.4 * heightAll -  100;
+    //     $("#chatBox--input--typing").height(
             
-            heightCal
+    //         heightCal
         
-        );        
-    }
+    //     );        
+    // }
     
 }
 
