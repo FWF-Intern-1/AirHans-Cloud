@@ -14,9 +14,9 @@ $(".loginForm").on("submit",(e) => {
     })
 });
 
-
-$(".button--captcha").on("click",(e) => {
+$(".signUpForm").on("submit",(e) => {
     e.preventDefault();
+    TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
     axios({
         method:'post',
         url: requestUrl,
@@ -25,6 +25,25 @@ $(".button--captcha").on("click",(e) => {
         }
     }).then((res) => {
         console.log(res);
+        TemplateSpinner.removeClass("spinner--inButton__show").remove();
+
+    })
+});
+
+
+$(".button--captcha").on("click",(e) => {
+    let tempForm = new FormData($(".signUpForm")[0]);
+    e.preventDefault();
+    axios({
+        method:'post',
+        url: 'localhost:7777',
+        data: {
+            email: tempForm.get("email")
+        }
+    }).then((res) => {
+        console.log(res);
+        //TODO对res判断验证码是否发送成功
+        // console.log("验证码发送成功");
     })
 })
 $(".link--signUp").on("click",(e) => {
