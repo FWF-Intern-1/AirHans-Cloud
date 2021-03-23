@@ -23,5 +23,5 @@ http.createServer((req,res)=>{
     })
     
 }).listen(5555,()=>{
-    console.log('listing 5555')
+    console.log('register.js listing 5555')
 })
