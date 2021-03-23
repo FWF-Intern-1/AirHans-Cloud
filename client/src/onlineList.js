@@ -10,11 +10,11 @@ const TemplatePiece = () => {
                         <div class="d-flex flex-column">
                             <div id="onlineList--they--id" class="onlineList--they--id"></div>
                         </div>
-                    </div>`).on("click", (e) => {
+                    </div>                   
+                `).on("click", (e) => {
                         e.stopPropagation();
                         $(".onlineList--they__highLight").removeClass("onlineList--they__highLight shadow");
                         $(e.currentTarget).addClass("onlineList--they__highLight shadow");
-                        isPiece = true;
                     });
 };
 
@@ -65,4 +65,4 @@ const listCheck = () => {
         listClose();
     }
 }
-export { online, onlineMy, onlineClear, listTurn, listCheck,isPiece }
+export { online, onlineMy, onlineClear, listTurn, listCheck }
