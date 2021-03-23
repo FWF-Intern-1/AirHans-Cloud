@@ -1,31 +1,64 @@
 $(".loginForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
-    axios({
-        method:'post',
-        url: requestUrl,
-        data: {
-            id:requestUrl
-        }
-    }).then((res) => {
-        console.log(res);
-        TemplateSpinner.removeClass("spinner--inButton__show").remove();
+    let tempForm = new FormData($(".signUpForm")[0]);
 
-    })
+    let sendMsg = JSON.stringify({
+        "email": tempForm.get("email"),
+        "password": tempForm.get("password"),
+
+    });
+    console.log(sendMsg);
+    $.post("http://tomzhang.com.cn:8888", sendMsg,
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+        }
+    );
+});
+
+$(".signUpForm").on("submit",(e) => {
+    e.preventDefault();
+    TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
+    let tempForm = new FormData($(".signUpForm")[0]);
+
+    if ( tempForm.get("password") !== tempForm.get("passwordAgain") ) {
+        alert("密码不一致！");
+        return;
+    } else {
+        let sendMsg = JSON.stringify({
+            "email": tempForm.get("email"),
+            "captcha": tempForm.get("captcha"),
+            "account": tempForm.get("account"),
+            "password": tempForm.get("password")
+        });
+        console.log(sendMsg);
+        $.post("http://127.0.0.1:5555", sendMsg,
+            function (data, textStatus, jqXHR) {
+                console.log(data);
+            }
+        );
+    }
+    
 });
 
 
 $(".button--captcha").on("click",(e) => {
+    let tempForm = new FormData($(".signUpForm")[0]);
     e.preventDefault();
-    axios({
-        method:'post',
-        url: requestUrl,
-        data: {
-            id:requestUrl
+    
+    
+    //TODO发送验证码冷却1min
+
+
+
+    let sendMsg = JSON.stringify({
+        "email": tempForm.get("email")
+    });
+    $.post("http://127.0.0.1:7777", sendMsg,
+        function (data, textStatus, jqXHR) {
+            console.log(data);
         }
-    }).then((res) => {
-        console.log(res);
-    })
+    );
 })
 $(".link--signUp").on("click",(e) => {
     e.preventDefault();
@@ -79,12 +112,10 @@ const keyInWord = (word) => {
     }, 100);
 }
 
-
 const selectWord = () => {
     let i = 0;
 
     setInterval(() => {
-        console.log(i);
 
         keyInWord(arrayWords[i++]); 
         if (i >= arrayWords.length) {
