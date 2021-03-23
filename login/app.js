@@ -5,6 +5,7 @@ const server = http.createServer((req, res) => {
     var post = ""
     req.on('data', chunk => {
         post+=chunk;
+        
     })
     req.on('end', () => {
       //数据结束
