@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html>
+<html class="h-100">
 	<head>
 		<meta charset="utf-8">
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -7,10 +7,10 @@
         <link rel="stylesheet" href="../style/demo-chat.css">
         <title>demo-chat</title>
     </head>
-	<body>
-        <div id="mainBox" class="container-fluid row p-0">
+	<body class="h-100">
+        <div id="mainBox" class="p-2 d-flex h-100">
             
-            <div class="border border-dark p-0 onlineList">
+            <div class="border border-dark p-0 onlineList h-100">
                 
                     <div id="onlineList--me" class="d-flex align-items-center border-bottom border-dark">
                         <div id="onlineList--me--avator" class="onlineList--me--avator">头像</div>
@@ -19,22 +19,17 @@
                             <div id="onlineList--me--intro" class="onlineList--me--intro">这个人很懒惰</div>
                         </div>
                     </div>
-                    <div class="text-center border-bottom border-dark">在线成员</div>
-                    <!-- <div id="onlineList--they" class="d-flex align-items-center border-bottom border-dark onlineList--they">
-                        <div id="onlineList--they--avator" class="onlineList--they--avator">头像</div>
-                        <div class="d-flex flex-column">
-                            <div id="onlineList--they--id" class="onlineList--they--id">id</div>
-                        </div>
-                    </div> -->
+                    <div class="text--numbers">在线成员</div>
+                    
                         
             </div>
                     
                 
-                <div id="chatBox" class="col">
+                <div id="chatBox" class="w-100 h-100">
                     
                     
                     
-                    <div id="chatBox--output" class="m-0 border border-dark overflow-auto flex-column rounded p-1">
+                    <div id="chatBox--output" class="m-0 border border-dark overflow-auto flex-column p-1">
                         
                         <div class="row m-0 mb-1 align-items-center invisible" style="height:0">
                             <div class="chatBox--output--avator__normal">
@@ -58,15 +53,16 @@
                         </div>
         
                     </div>
-                    <div id="chatBox--input--menu" class="row m-0 border border-dark mt-1 mb-1 rounded ">
-                        
-        
+                    <div class="row m-0 chatBox--bottom">
+                        <div id="chatBox--input--menu" class="border">        
+                            菜单
+                        </div>
+                        <textarea id="chatBox--input--typing" class="col"></textarea>
+
+                        <button type="button" id="chatBox--input--button__send" class="btn btn-primary">Send</button>
+
                     </div>
-        
-                    <textarea id="chatBox--input--typing" class="row m-0 w-100"></textarea>
-                    <div class="row justify-content-end">
-                        <button type="button" id="chatBox--input--button__send" class="col-2 btn btn-primary btn-sm">Send</button>
-                    </div>
+                    
                 </div>
             </div>
 

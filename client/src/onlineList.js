@@ -5,12 +5,17 @@ import { getId } from "./save.js";
  * @author Hans
  */
 const TemplatePiece = () => {
-    return $(`<div id="onlineList--they" class="d-flex align-items-center border-bottom border-dark onlineList--they">
+    return $(`<div id="onlineList--they" class="d-flex align-items-center border-bottom onlineList--they">
                         <div id="onlineList--they--avator" class="onlineList--they--avator">头像</div>
                         <div class="d-flex flex-column">
                             <div id="onlineList--they--id" class="onlineList--they--id"></div>
                         </div>
-                    </div>`)
+                    </div>`).on("click", (e) => {
+                        e.stopPropagation();
+                        $(".onlineList--they__highLight").removeClass("onlineList--they__highLight shadow");
+                        $(e.currentTarget).addClass("onlineList--they__highLight shadow");
+                        isPiece = true;
+                    });
 };
 
 const onlineMy = () => {
@@ -60,4 +65,4 @@ const listCheck = () => {
         listClose();
     }
 }
-export { online, onlineMy, onlineClear, listTurn, listCheck }
+export { online, onlineMy, onlineClear, listTurn, listCheck,isPiece }

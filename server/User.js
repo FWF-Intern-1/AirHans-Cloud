@@ -1,5 +1,5 @@
 const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("User", "root", "mysql123", {
+const sequelize = new Sequelize("test", "root", "ZHANGbo020329", {
   host: "localhost",
   dialect: "mysql",
 });
