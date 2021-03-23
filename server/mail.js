@@ -10,7 +10,7 @@ let transport = nodemailer.createTransport({
     //用户信息
     auth:{
       user:'airhans_cloud@163.com',
-      pass:'xxxxxxxxx'
+      pass:'YJDLZXHEHLGNBOCF'
     }
   });
 const randomFns=()=> { // 生成6位随机数

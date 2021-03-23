@@ -3,9 +3,10 @@ $(".loginForm").on("submit",(e) => {
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
     axios({
         method:'post',
-        url: requestUrl,
+        url: "127.0.0.1:8081",
         data: {
-            id:requestUrl
+            "email": tempForm.get("email"),
+            "password": tempForm.get("password")
         }
     }).then((res) => {
         console.log(res);
@@ -19,9 +20,12 @@ $(".signUpForm").on("submit",(e) => {
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
     axios({
         method:'post',
-        url: requestUrl,
+        url: "127.0.0.1:8082",
         data: {
-            id:requestUrl
+            "email": tempForm.get("email"),
+            "captcha": tempForm.get("captcha"),
+            "account": tempForm.get("account"),
+            "password": tempForm.get("password")
         }
     }).then((res) => {
         console.log(res);
@@ -36,7 +40,7 @@ $(".button--captcha").on("click",(e) => {
     e.preventDefault();
     axios({
         method:'post',
-        url: 'localhost:7777',
+        url: 'http://localhost:5555',
         data: {
             email: tempForm.get("email")
         }
