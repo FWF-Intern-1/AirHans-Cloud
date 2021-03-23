@@ -43,6 +43,6 @@ const User = sequelize.define(
   }
 );
 module.exports.User = User;
-
-User.sync();
+module.exports.sequelize = sequelize;
+User.sync({alter : true});
 console.log("created!");

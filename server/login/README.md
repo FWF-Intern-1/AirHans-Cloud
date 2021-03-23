@@ -1,2 +1,0 @@
-npm包：Sequelize
-
