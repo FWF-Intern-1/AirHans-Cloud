@@ -2,15 +2,14 @@
 $(".loginForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
-    let tempForm = new FormData($(".signUpForm")[0]);
+    let tempForm = new FormData($(".loginForm")[0]);
 
-    let sendMsg = JSON.stringify({
+    let sendMsg = {
         "email": tempForm.get("email"),
-        "password": tempForm.get("password"),
-
-    });
+        "password": tempForm.get("password")
+    };
     console.log(sendMsg);
-    $.post("127.0.0.1:8081", sendMsg,
+    $.post("http://127.0.0.1:8081", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log(data);
         }

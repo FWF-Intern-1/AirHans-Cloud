@@ -19,8 +19,8 @@ let newWs= (id) => {
  * @author Air
  */
     //建立转移到了mouse.js后，点击后再连接
-        ws = new WebSocket("ws://127.0.0.1:9999");
-        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        // ws = new WebSocket("ws://127.0.0.1:9999");
+        ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
