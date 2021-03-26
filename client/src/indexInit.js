@@ -1,21 +1,22 @@
+//登录部分开始
 $(".loginForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
-    let tempForm = new FormData($(".signUpForm")[0]);
+    let tempForm = new FormData($(".loginForm")[0]);
 
-    let sendMsg = JSON.stringify({
+    let sendMsg = {
         "email": tempForm.get("email"),
-        "password": tempForm.get("password"),
-
-    });
+        "password": tempForm.get("password")
+    };
     console.log(sendMsg);
-    $.post("http://tomzhang.com.cn:8888", sendMsg,
+    $.post("http://127.0.0.1:8081", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log(data);
         }
     );
 });
-
+//登录部分结束
+//注册部分开始
 $(".signUpForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
@@ -40,8 +41,9 @@ $(".signUpForm").on("submit",(e) => {
     }
     
 });
+//注册部分结束
 
-
+//邮箱验证部分
 $(".button--captcha").on("click",(e) => {
     let tempForm = new FormData($(".signUpForm")[0]);
     e.preventDefault();
