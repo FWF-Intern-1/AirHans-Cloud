@@ -11,7 +11,14 @@ $(".loginForm").on("submit",(e) => {
     console.log(sendMsg);
     $.post("http://127.0.0.1:8081", sendMsg,
         function (data, textStatus, jqXHR) {
-            console.log(data);
+            console.log('service return :',data);
+            if(data.status === 1){
+                let url = "./demo-chat.html"
+                window.location.replace(url)
+            }
+            else{
+                location.reload();
+            }
         }
     );
 });

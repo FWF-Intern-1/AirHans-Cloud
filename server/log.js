@@ -3,7 +3,9 @@ const express = require("express");
 const bodyParser = require("body-parser");
 const app = express();
 const jwt = require("jsonwebtoken");
+var cookieParser = require('cookie-parser');  
 
+app.use(cookieParser());  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extened: false }));
 
@@ -17,7 +19,6 @@ app.post("/",async (req, res) => {
     "X-Requested-With,content-type, Authorization"
   );
   res.setHeader("Content-Type", "application/json;charset=utf-8");
- // const email_sw = json.stringify("email");
   const token = jwt.sign({ email }, "uukn");
   const model = await user.User.findOne({ where: { email } });
   if (!model) {
@@ -27,28 +28,35 @@ app.post("/",async (req, res) => {
   if (password == passwordValid) {
     console.log("登陆成功");
     //TODO 执行登录成功后的操作，跳转页面，返回token
-    return res.send({ token });
+    res.cookie("token",token,{maxAge: 900000, secure: false,path:'./'});
+    res.send({
+      status : 1,
+      des : "登陆succeed",
+      token : token
+    })
   } else {
-    console.log("登陆失败");
     //TODO 返回登录失败的愿意，前端提示
-    return res.send({ msg: "密码错误" });
-  }
-});
+    res.send({status : 0 , des : "登陆失败"});
+}})
 
-// app.post("/auth", async (req, res) => {
-//   const token = req.headers.authorization.split(" ").pop();
-//   console.log(token);
-//   // if (!token) {
-//   //   return res.send({ msg: "无token" });
-//   // }
-//   // const { email } = jwt.verify(token, "uukn");
-//   // const model = await user.User.findOne({ where: { email } });
-//   // if (!model) {
-//   //   return res.send({ msg: "请注册" });
-//   // }
-//   // return res.send({msg:'权限校验成功'})
-// });
+  app.post("/",async (req, res) => {
+    const token = req.headers.authorization.split(" ").pop();
+    console.log(token);
+    if (!token) {
+      res.send({ status : 0,msg: "无token" });
+    }
+    const { email } = jwt.verify(token, "uukn");
+    const model = await user.User.findOne({ where: { email } });
+    if (!model) {
+      res.send({ 
+        status : 1,
+        msg: "请注册" });
+    }
+    res.send({
+      status : 2,
+      msg:'权限校验成功'})
+  })
 
-var server = app.listen(8081, function () {
-  console.log("loginjs server on 8081");
-});
+  var server = app.listen(8081, function () {
+    console.log("loginjs server on 8081");
+  });
