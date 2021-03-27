@@ -1,0 +1,65 @@
+html {
+    cursor: default;
+}
+.board {
+    background-color: white;
+    width: 20rem;
+    z-index: 300;
+    visibility: hidden;
+    opacity: 0;
+    transition: all 0.2s;
+}
+.board__show {
+    
+    visibility: visible !important;
+    opacity: 1 !important;
+    
+}
+
+.board--output {
+    height: 300px;
+}
+.board--output--piece {
+    width: 100%;
+    
+}
+.board--output--avator {
+    width: 2.5rem;
+    height: 2.5rem;
+    background: red;
+    border-radius: 75px;
+}
+.board--output--piece > .card-header > span {
+    display: inline-block;
+    height: 100%;
+
+}
+.card-body > div {
+    white-space: pre-line;
+}
+.board--input {
+    width: 90%;
+    margin: 0 5% 0 5%;
+
+}
+.button--boardSend {
+    width: 3rem;
+    height: 3rem;
+    border-radius: 75px !important;
+    
+}
+.board--input > div {
+    width: calc(100% - 3rem);
+    height: 5rem;
+    overflow-y: auto;
+    padding: 0.1rem;
+}
+
+.board--information--avator {
+    background-color: red;
+    height: calc(0.8 * 20rem);
+    width: 20rem;
+}
+.signature {
+    cursor: text;
+}

@@ -117,6 +117,8 @@ body {
     background-color: red;
     border-radius: 75px;
     margin: 10px;
+    cursor: pointer;
+
 }
 .onlineList--they--avator {
     min-width: 50px;
@@ -124,6 +126,7 @@ body {
     background-color: red;
     border-radius: 75px;
     margin: 5px 20px;
+    cursor: pointer;
 }
 .onlineList--me--intro, .onlineList--me--id, .onlineList--they--id {
     width: 180px;
