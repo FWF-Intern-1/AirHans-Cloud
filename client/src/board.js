@@ -1,4 +1,4 @@
-const templateBoard = (user,comments) => {
+const templateBoard = (user, comments) => {
     return $(`<div class="board shadow position-absolute rounded overflow-auto">
         <div class="board--information">
             <div class="row m-0">
@@ -34,19 +34,19 @@ const templateBoard = (user,comments) => {
             </div>
         </div>
         <div class="board--input d-flex justify-content-between align-items-center mt-2">            
-            <div contenteditable="true" style="cursor: text;" class="border">输入点什么吧！</div>
+            <div contenteditable="true" style="cursor: text;" class="border">签名</div>
             <button class="btn btn-primary button--boardSend d-flex align-items-center justify-content-center p-0 ml-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-cursor" viewBox="0 0 16 16" >
                     <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z"/>
                 </svg>
             </button>
         </div>`).on("click", (e) => {
-            e.stopPropagation();
-        })
+        e.stopPropagation();
+    })
 }
 
 
-const boardShow = (e,tempBoard) => {
+const boardShow = (e, tempBoard) => {
     let judgement = judgeHeight(e, tempBoard);
     if (!judgement.value) {
         tempBoard.css({
@@ -61,7 +61,11 @@ const boardShow = (e,tempBoard) => {
     }
     console.log(tempBoard);
 
-    tempBoard.appendTo("body").addClass("board__show").prev().remove();
+    tempBoard.appendTo("body");
+    tempBoard.addClass("board__show").prev().removeClass("board__show");
+    setTimeout(() => {
+        tempBoard.prev().remove();
+    }, 1000);
 
 }
 
@@ -77,18 +81,28 @@ const judgeHeight = (e, tempBoard) => {
             y: e.clientY,
             value: false
         };
-    } 
+    }
 }
 
 
 const setInfo = (e) => {
     // 发送id，请求图片url和username
-    
-    
+
+
     //console.log(e);
     let tempBoard = templateBoard();
 
-    boardShow(e,tempBoard);//测试用
+
+    // TODO处理 是不是当前用户
+
+    if (true) {
+        // 设置那个可编辑的属性
+        tempBoard.on("blur", function () {
+            // TODO 保存用户编辑的文件
+            tempBoard.find(".signature").text();
+        });
+    }
+    boardShow(e, tempBoard); //测试用
 
 
     $(content).removeClass();
@@ -96,10 +110,10 @@ const setInfo = (e) => {
         $(content).remove();
     }, 1000);
     axios({
-        method:'post',
+        method: 'post',
         url: requestUrl,
         data: {
-            id:requestUrl
+            id: requestUrl
         }
     }).then((res) => {
         console.log(res);
@@ -112,12 +126,12 @@ const setInfo = (e) => {
 }
 
 const setComments = (id) => {
-// 发送id，请求该账户下对应的所有留言
+    // 发送id，请求该账户下对应的所有留言
     axios({
-        method:'post',
+        method: 'post',
         url: requestUrl,
         data: {
-            id:requestUrl
+            id: requestUrl
         }
     }).then((res) => {
         console.log(res);
@@ -153,4 +167,6 @@ const addMeg = (data) => {
 }
 
 
-export { setInfo as loadBoard}
+export {
+    setInfo as loadBoard
+}

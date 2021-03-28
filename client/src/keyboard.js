@@ -8,7 +8,7 @@ import { getId, isPanel, isPanelChange, saveId } from './save.js';
  */
 const initKeyboard = ()=> {
     $(document).keydown((e) => {
-        console.log(e.target);
+        
         if (e.target == $("#panel--id")[0]) {
             if ((e.keyCode == 13) && ($("#panel--id")[0] !== undefined) && isPanel) {
                 isPanelChange();
