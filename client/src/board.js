@@ -1,3 +1,6 @@
+import { dataMy } from "./save.js";
+import { toast } from "./toast.js";
+
 const templateBoard = (user, comments) => {
     return $(`<div class="board shadow position-absolute rounded overflow-auto">
         <div class="board--information">
@@ -7,7 +10,7 @@ const templateBoard = (user, comments) => {
                     <div class="board--information--id">
                         ID
                     </div>
-                    <div class="row m-0 w-100 signature" contenteditable="true">11</div>
+                    <div class="m-0 w-100 signature" >这里是签名哦</div>
 
                 </div>
                 
@@ -23,10 +26,10 @@ const templateBoard = (user, comments) => {
                     <div class="card-header d-flex align-items-center">
                         <div class="board--output--avator d-inline-block">
                         </div>
-                        <span>Hans</span>
+                        <div>模板</div>
                     </div>
                     <div class="card-body">
-                        <div>
+                        <div>模板
                         </div>
 
                     </div>
@@ -34,15 +37,13 @@ const templateBoard = (user, comments) => {
             </div>
         </div>
         <div class="board--input d-flex justify-content-between align-items-center mt-2">            
-            <div contenteditable="true" style="cursor: text;" class="border">签名</div>
+            <div contenteditable="true" style="cursor: text;" class="border">这里是留言哦</div>
             <button class="btn btn-primary button--boardSend d-flex align-items-center justify-content-center p-0 ml-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-cursor" viewBox="0 0 16 16" >
                     <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z"/>
                 </svg>
             </button>
-        </div>`).on("click", (e) => {
-        e.stopPropagation();
-    })
+        </div>`);
 }
 
 
@@ -90,16 +91,36 @@ const setInfo = (e) => {
 
 
     //console.log(e);
-    let tempBoard = templateBoard();
+    let tempBoard = templateBoard().on("click", (e) => {
+        e.stopPropagation();
+    });
+    if (e.target == $(".onlineList--me--avator")[0]) {
 
+        // 设置元素可编辑
+        tempBoard.find(".signature").attr({
+            
+            contenteditable: "true"
+            
+        });
+        tempBoard.on("focusout", function (e) {
+            // 保存用户编辑的签名
+            console.log("hi!");
+            let sig = tempBoard.find(".signature").text();
 
-    // TODO处理 是不是当前用户
-
-    if (true) {
-        // 设置那个可编辑的属性
-        tempBoard.on("blur", function () {
-            // TODO 保存用户编辑的文件
-            tempBoard.find(".signature").text();
+            if (sig.length > 50) {
+                tempBoard.find(".signature").focus();
+                toast("不可用","签名长度超出50个字符");
+            } else {
+                //TODO POST请求
+                // axios({
+                //     method:'post',
+                //     url: requestUrl,
+                //     data: {
+                //          text: sig
+                //     }
+                // })
+            }
+            
         });
     }
     boardShow(e, tempBoard); //测试用
@@ -151,11 +172,10 @@ const templatePiece = () => {
                         <div class="board--output--avator d-inline-block">
                             头像
                         </div>
-                        <span>Hans</span>
+                        <span class="board--output--piece--id"></span>
                     </div>
                     <div class="card-body">
-                        <div>你好
-                            我爱你
+                        <div class="board--output--piece--text">
                         </div>
 
                     </div>`);
@@ -163,6 +183,11 @@ const templatePiece = () => {
 
 const addMeg = (data) => {
     let tempPiece = templatePiece();
+
+    tempPiece.$(".board--output--piece--text").text(data.text);
+    tempPiece.$(".board--output--piece--name").text(data.name);
+
+
     // TODO 对data进行操作
 }
 

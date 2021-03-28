@@ -33,7 +33,7 @@ $(getDOM("button--list")).on("click", () => {
     listTurn();
 });
 
-$(".onlineList--me--avator").on("keyup", (e) => {
+$(".onlineList--me--avator").on("click", (e) => {
     e.stopPropagation();
     loadBoard(e);
 });

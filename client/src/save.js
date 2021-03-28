@@ -1,4 +1,4 @@
-import { bubble } from "./bubble";
+import { bubble } from "./bubble.js";
 
 //临时解决id的存储
 let id = null;
