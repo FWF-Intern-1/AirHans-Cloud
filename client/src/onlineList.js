@@ -1,3 +1,4 @@
+import { loadBoard } from "./board.js";
 import { getId } from "./save.js";
 
 /**
@@ -10,12 +11,19 @@ const TemplatePiece = () => {
                         <div class="d-flex flex-column">
                             <div id="onlineList--they--id" class="onlineList--they--id"></div>
                         </div>
-                    </div>`).on("click", (e) => {
+                    </div>                   
+                `).find(".onlineList--they--avator").on("click", (e) => {
+                    e.stopPropagation();
+
+                    $(".board__show").removeClass("board__show");
+                    loadBoard(e);
+                }).parent().on("click", (e) => {
                         e.stopPropagation();
+
                         $(".onlineList--they__highLight").removeClass("onlineList--they__highLight shadow");
                         $(e.currentTarget).addClass("onlineList--they__highLight shadow");
-                        isPiece = true;
-                    });
+                    })
+                    ;
 };
 
 const onlineMy = () => {
@@ -65,4 +73,13 @@ const listCheck = () => {
         listClose();
     }
 }
-export { online, onlineMy, onlineClear, listTurn, listCheck,isPiece }
+
+// TODO打开新的会话框
+const newSession = (data) => {
+    let backup = $(".chatBox--output--template");
+    $(".chatBox--output:first-child").empty().append(backup);
+    // TODO对data进行操作
+    
+    
+}
+export { online, onlineMy, onlineClear, listTurn, listCheck }

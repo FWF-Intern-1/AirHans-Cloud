@@ -14,13 +14,18 @@ import { sendMsg, newWs} from "./websocket.js";
 const initMouse = ()=> {
     $(document).on("click", (e) => {
 
+        $(".board__show").removeClass("board__show");
+        
+
         if (e.target == getDOM("send")) {
             
-            sendMsg(getId(),getDOM("typing").value);
-            getDOM("typing").value="";
+            if (getDOM("typing").value !== "") {
+                sendMsg(getId(),getDOM("typing").value);
+                getDOM("typing").value="";
+                
+            }
 
-        } 
-        else if (e.target == getDOM("button--idConfirm") && isPanel) {
+        } else if (e.target == getDOM("button--idConfirm") && isPanel) {
             isPanelChange();
 
             let id = getDOM("userid").value;
@@ -36,4 +41,6 @@ const initMouse = ()=> {
 $(getDOM("button--list")).on("click", () => {
     listTurn();
 });
+
+
 export { initMouse }
