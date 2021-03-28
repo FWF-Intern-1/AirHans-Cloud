@@ -2,8 +2,7 @@
 $(".loginForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
-    let tempForm = new FormData($(".signUpForm")[0]);
-
+    let tempForm = new FormData($(".loginForm")[0]);
     let sendMsg = JSON.stringify({
         "email": tempForm.get("email"),
         "password": tempForm.get("password"),
@@ -11,6 +10,7 @@ $(".loginForm").on("submit",(e) => {
     });
     console.log(sendMsg);
     $.post("127.0.0.1:8081", sendMsg,
+    // $.post("tomzhang.com.cn:8081", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log(data);
         }
@@ -35,6 +35,9 @@ $(".signUpForm").on("submit",(e) => {
         });
         console.log(sendMsg);
         $.post("http://127.0.0.1:5555", sendMsg,
+        // $.post("tomzhang.com.cn:8081:5555", sendMsg,
+
+        
             function (data, textStatus, jqXHR) {
                 console.log(data);
             }
@@ -50,14 +53,15 @@ $(".button--captcha").on("click",(e) => {
     e.preventDefault();
     
     
-    //TODO发送验证码冷却1min
-
-
-
     let sendMsg = JSON.stringify({
         "email": tempForm.get("email")
     });
-    $.post("http://127.0.0.1:7777", sendMsg,
+    banCaptcha();
+
+    console.log(sendMsg);
+    // $.post("http://127.0.0.1:7777", sendMsg,
+    $.post("http://tomzhang.com.cn:7777", sendMsg,
+
         function (data, textStatus, jqXHR) {
             console.log(data);
         }
@@ -126,7 +130,23 @@ const selectWord = () => {
         }
     }, 2000);
 }
+
+
+const banCaptcha = () => {
+    let i = 60;
+    $(".button--captcha").val(`${i--}稍后再试`);
+    let tempInterval = setInterval(() => {
+        $(".button--captcha").val(`${i--}稍后再试`);
+        if (i < 0) {
+            clearInterval(tempInterval);
+            $(".button--captcha").val(`发送验证码`);
+
+        }
+    }, 1000);
+}
 selectWord();
+
+
 //TODO转场动画
 /* 
     屏幕正上方
