@@ -5,7 +5,7 @@
 
 
 /**
- * 生成新的弹窗对象
+ * 生成新的弹窗对象，使用bootstrap现成的toast
  * @returns 新的弹窗对象
  * @author Hans
  */

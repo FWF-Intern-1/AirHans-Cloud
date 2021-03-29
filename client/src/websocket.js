@@ -27,12 +27,12 @@ let newWs= (id) => {
         //向服务器发送上线id
         var onlineid = {
             "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : getId()
+            "text" : dataMy.id
         }
         ws.send(JSON.stringify(onlineid));
         //connection information
         console.log("connected");
-        panel();
+        panel();//TODO 删除
         toast("系统","连接成功！");
         onlineMy();
     }
@@ -43,6 +43,7 @@ let newWs= (id) => {
         if (recmsg.id === "system_information_online_id"){
             toast("在线信息",recmsg.text+" 已上线");
         }
+        //TODO 删除
         else if(recmsg.id === "system_information_offline_id"){
             toast("在线信息",recmsg.text+" 已下线");
             //offline(recmsg.text);
@@ -54,11 +55,11 @@ let newWs= (id) => {
                 online(recmsg[i]);
             }
         }
-        else if( recmsg.id != getId() ) {
+        else if( recmsg.id != dataMy.id ) {
             bubble({
                 text: recmsg.text,
-                name: recmsg.id
-                //TODO email: resmsg.email 以后用email作为唯一标识符
+                id: recmsg.id
+                //TODO email: resmsg.email 以后应用email作为唯一标识符
             });
             console.log("id="+getId());
             console.log("recid="+recmsg.id);
@@ -69,7 +70,7 @@ let newWs= (id) => {
     window.onbeforeunload = function () {
         var offlineid = {
             "id" : "system_information_offline_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : getId()
+            "text" : dataMy.id
         }
         ws.send(JSON.stringify(offlineid));
         ws.close();
@@ -77,7 +78,7 @@ let newWs= (id) => {
 
     ws.onclose = () => { 
         toast("系统","链接已经断开")
-        panel();
+        panel();//TODO 删除
     };
 
 }
@@ -97,10 +98,9 @@ function sendMsg(id,text){
     ws.send(JSON.stringify(msg));
     bubble({
         text: text,
-        name: dataMy.name
+        id: dataMy.id
     });
-    // TODO 删上面的代码，bubble应当在接收到服务器消息时调用
-    getDOM("typing").value="";
+    // TODO bubble应当在接收到服务器消息时调用
 }
 
 

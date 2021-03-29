@@ -1,13 +1,8 @@
 import { bubble } from "./bubble.js";
 
-//临时解决id的存储
-let id = null;
-const saveId = (iid) => {
-    id = iid;
-}
-const getId = () => {
-    return id;
-}
+
+
+
 
 //临时解决状态存储
 let isPanel = true;
@@ -20,7 +15,11 @@ const isPanelChange = () => {
  * @author Hans
  */
 let arrOnline = null;
+//TODO 接收后端传来的在线成员后，进行保存
+
 let dataMy = null;
+//dataMy作为全局变量保存当前用户的信息
+
 
 const storage = (data) => {
     let id = data.id.toString();
@@ -125,6 +124,7 @@ function dbRead() {
 
             }
             bubble(data);
+            //TODO bubble()不应该出现在save.js里
             cursor.continue();
         } else {
             console.log('没有更多数据了！');

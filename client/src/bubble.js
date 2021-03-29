@@ -59,10 +59,9 @@ const TemplateThere= () => {
  */
 const bubble = (data) => {
     let text = data.text;
-    let time = data.time;
-    // let name = getStorage(data.email).name;
+    // let time = data.time;
 
-    if (isThere(data.email)) {
+    if (isThere(data.id)) {
         var bubbleTemp = TemplateThere();
     } else {
         var bubbleTemp = TemplateHere();
@@ -82,7 +81,7 @@ const bubble = (data) => {
     //TODO动画返回output底部
     $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
     
-
+    //TODO 存储当前bubble
     //console.log("bubble()执行完毕");
     
 }
@@ -92,8 +91,8 @@ const clearBuble = () => {
     $("#chatBox--output").empty().append(backup);
 }
 
-const isThere = (email) => {
-    if (email == dataMy.email) {
+const isThere = (id) => {
+    if (id == dataMy.id) {
         return false;
     } else {
         return true;

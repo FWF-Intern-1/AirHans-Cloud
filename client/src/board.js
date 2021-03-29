@@ -1,7 +1,7 @@
 import { dataMy } from "./save.js";
 import { toast } from "./toast.js";
 
-const templateBoard = (user, comments) => {
+const templateBoard = () => {
     return $(`<div class="board shadow position-absolute rounded overflow-auto">
         <div class="board--information">
             <div class="row m-0">
@@ -48,6 +48,7 @@ const templateBoard = (user, comments) => {
 
 
 const boardShow = (e, tempBoard) => {
+    tempBoard.appendTo("body");
     let judgement = judgeHeight(e, tempBoard);
     if (!judgement.value) {
         tempBoard.css({
@@ -60,9 +61,7 @@ const boardShow = (e, tempBoard) => {
             "left": judgement.x
         })
     }
-    console.log(tempBoard);
 
-    tempBoard.appendTo("body");
     tempBoard.addClass("board__show").prev().removeClass("board__show");
     setTimeout(() => {
         tempBoard.prev().remove();

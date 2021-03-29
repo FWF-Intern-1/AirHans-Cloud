@@ -120,6 +120,7 @@ const keyInWord = (word) => {
 }
 
 const selectWord = () => {
+    //标题键入动效
     let i = 0;
 
     setInterval(() => {
@@ -131,19 +132,22 @@ const selectWord = () => {
     }, 2000);
 }
 
-
+/**
+ * 验证码冷却1min
+ */
 const banCaptcha = () => {
     let i = 60;
-    $(".button--captcha").val(`${i--}稍后再试`);
+    $(".button--captcha").val(`${i--}稍后再试`).attr("disabled","true");
     let tempInterval = setInterval(() => {
         $(".button--captcha").val(`${i--}稍后再试`);
         if (i < 0) {
             clearInterval(tempInterval);
-            $(".button--captcha").val(`发送验证码`);
+            $(".button--captcha").val(`发送验证码`).removeAttr("disabled");
 
         }
     }, 1000);
 }
+
 selectWord();
 
 
