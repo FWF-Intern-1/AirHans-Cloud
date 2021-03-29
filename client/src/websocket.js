@@ -1,5 +1,5 @@
 import { panel } from "./panel.js";
-import { dataMy, getId } from "./save.js";
+import { dataMy } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
@@ -61,8 +61,7 @@ let newWs= (id) => {
                 id: recmsg.id
                 //TODO email: resmsg.email 以后应用email作为唯一标识符
             });
-            console.log("id="+getId());
-            console.log("recid="+recmsg.id);
+
         }
     }
 

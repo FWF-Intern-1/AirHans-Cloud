@@ -1,7 +1,7 @@
 import { loadBoard } from "./board.js";
 import { getDOM } from "./getDOM.js";
 import { listTurn } from "./onlineList.js";
-import { saveId, getId, isPanel, isPanelChange } from "./save.js";
+import { dataMy } from "./save.js"
 import { sendMsg, newWs} from "./websocket.js";
 
 /**
@@ -25,7 +25,7 @@ const initMouse = ()=> {
 
             if (getDOM("typing").value !== "") {
 
-                sendMsg(getId(),getDOM("typing").value);
+                sendMsg(dataMy.id,getDOM("typing").value);
                 getDOM("typing").value="";
                 
             }
@@ -49,25 +49,6 @@ $(".onlineList--me--avator").on("click", (e) => {
     
 });
 
-//TODO 删除
-$(".button--idConfirm").on("click", (e) => {
-
-    e.stopPropagation();
-    if (isPanel) {
-        let id = getDOM("userid").value;
-        
-        if (id) {
-            saveId(id);
-            newWs();
-            isPanelChange();
-        } else {
-            console.log("未输入id");
-        }
-
-    } 
-
-
-})
 
 
 export { initMouse }

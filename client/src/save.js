@@ -131,4 +131,4 @@ function dbRead() {
         }
     };
   }
-export { saveId, getId, isPanel, isPanelChange,storage, getStorage, dataMy }
+export { saveId, isPanel, isPanelChange,storage, getStorage, dataMy }
