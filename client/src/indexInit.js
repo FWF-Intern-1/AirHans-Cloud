@@ -5,14 +5,20 @@ $(".loginForm").on("submit",(e) => {
     let tempForm = new FormData($(".loginForm")[0]);
     let sendMsg = JSON.stringify({
         "email": tempForm.get("email"),
-        "password": tempForm.get("password"),
-
+        "password": tempForm.get("password")
     });
     console.log(sendMsg);
     $.post("127.0.0.1:8081", sendMsg,
     // $.post("tomzhang.com.cn:8081", sendMsg,
         function (data, textStatus, jqXHR) {
-            console.log(data);
+            console.log('service return :',data);
+            if(data.status === 1){
+                let url = "./demo-chat.html"
+                window.location.replace(url)
+            }
+            else{
+                location.reload();
+            }
         }
     );
 });

@@ -1,8 +1,20 @@
 const ws = require('nodejs-websocket');
+const jwt = require('jsonwebtoken');
+var cookieParser = require('cookie-parser');  
+const express = require("express");
+const app = express();
+
+app.use(cookieParser());  
+
+app.post("/",async (req, res) => {
+    let token = req.cookies.token;
+    console.log('shoudaopost')
+    console.log("email in token :",jwt.verify(token, "uukn")) 
+})
+
 
 var connectionsnumber = 1;
 var connectionslist = ["connectionslist_msg"];
-
 
 const server = ws.createServer(connection => {
 
@@ -44,5 +56,10 @@ const server = ws.createServer(connection => {
     })
 
 }).listen(9999,()=>{
-    console.log('server on port 9999');
+    console.log('ws server on port 9999');
 });
+
+
+var server_chat = app.listen(8082, function () {
+    console.log("chat server on 8082");
+  });
