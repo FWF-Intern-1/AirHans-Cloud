@@ -6,8 +6,8 @@ const jwt = require("jsonwebtoken");
 var cookieParser = require('cookie-parser');  
 
 app.use(cookieParser());  
+app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extened: false }));
 
 app.post("/",async (req, res) => {
   console.log(req.body);
@@ -28,7 +28,7 @@ app.post("/",async (req, res) => {
   if (password == passwordValid) {
     console.log("登陆成功");
     //TODO 执行登录成功后的操作，跳转页面，返回token
-    res.cookie("token",token,{maxAge: 900000, secure: false,path:'./'});
+    // res.cookie("token",token,{maxAge: 900000, secure: false,path:'./'});
     res.send({
       status : 1,
       des : "登陆succeed",
@@ -39,11 +39,12 @@ app.post("/",async (req, res) => {
     res.send({status : 0 , des : "登陆失败"});
 }})
 
-  app.post("/",async (req, res) => {
+  app.post("/auth",async (req, res) => {
     const token = req.headers.authorization.split(" ").pop();
     console.log(token);
     if (!token) {
-      res.send({ status : 0,msg: "无token" });
+      res.send({ status : 0,
+      msg: "无token" });
     }
     const { email } = jwt.verify(token, "uukn");
     const model = await user.User.findOne({ where: { email } });

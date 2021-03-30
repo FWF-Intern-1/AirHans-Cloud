@@ -14,13 +14,6 @@ let ws = null;
  *
  */
 
-//TODO  跳转到页面以后自动post这个cookie。cookie目录是templete理论上是可以的，但是好像接收也有点问题
-
-console.log("123",document.cookie)
-$.post("http://127.0.0.1:8082",document.cookie),(data, textStatus, jqXHR)=>{
-        console.log("connect post return :",data);
-}
-
 let newWs= (id) => {
     
 /**

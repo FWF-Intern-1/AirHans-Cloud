@@ -1,3 +1,4 @@
+import { saveToken } from "./save.js";
 //登录部分开始
 $(".loginForm").on("submit",(e) => {
     e.preventDefault();
@@ -13,8 +14,9 @@ $(".loginForm").on("submit",(e) => {
         function (data, textStatus, jqXHR) {
             console.log('service return :',data);
             if(data.status === 1){
-                let url = "./demo-chat.html"
-                window.location.replace(url)
+                // saveToken(data.token);
+                let url = "./demo-chat.html";
+                window.location.replace(url);
             }
             else{
                 location.reload();
