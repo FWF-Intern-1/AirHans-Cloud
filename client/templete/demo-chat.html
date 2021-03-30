@@ -9,18 +9,17 @@
         <title>demo-chat</title>
     </head>
 	<body class="h-100">
-        <div id="mainBox" class="p-2 d-flex h-100 ">
-            
-            <div class="border border-dark p-0 onlineList h-100">
+        <div id="mainBox" class="p-2 d-flex h-100">
+            <div class="p-0 onlineList h-100">
                 
-                    <div id="onlineList--me" class="d-flex align-items-center border-bottom border-dark">
-                        <div id="onlineList--me--avator" class="onlineList--me--avator">头像</div>
+                    <div id="onlineList--me" class="d-flex align-items-center">
+                        <div id="onlineList--me--avator" class="onlineList--me--avator"></div>
                         <div class="d-flex flex-column">
                             <div id="onlineList--me--id" class="onlineList--me--id">id</div>
                             <div id="onlineList--me--intro" class="onlineList--me--intro signature__fixed">这个人很懒惰</div>
                         </div>
                     </div>
-                    <div class="text--numbers">在线成员</div>
+                    <!-- <div class="text--numbers">在线成员</div> -->
             </div>
                     
                 
@@ -28,7 +27,7 @@
                     
                     
                     
-                    <div id="chatBox--output" class="m-0 border border-dark overflow-auto flex-column p-1 h-100 position-relative">
+                    <div id="chatBox--output" class="m-0 overflow-auto flex-column p-1 position-relative">
                         
                         <div class="row m-0 mb-1 align-items-center invisible" style="height:0">
                             <div class="chatBox--output--avator__normal">
@@ -52,10 +51,12 @@
                         </div>
         
                     </div>
+                    <div class="chatBox--divide"></div>
                     <div class="row m-0 chatBox--bottom position-absolute">
                         <!-- <div id="chatBox--input--menu" class="border">        
                             菜单
                         </div> -->
+
                         <textarea id="chatBox--input--typing" class="col"></textarea>
 
                         <button type="button" id="chatBox--input--button__send" class="btn btn-primary">Send</button>

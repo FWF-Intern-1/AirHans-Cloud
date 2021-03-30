@@ -3,7 +3,7 @@ $(".loginForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
     let tempForm = new FormData($(".loginForm")[0]);
-    let sendMsg = JSON.stringify({
+    let sendMsg = ({
         "email": tempForm.get("email"),
         "password": tempForm.get("password")
     });
@@ -33,7 +33,7 @@ $(".signUpForm").on("submit",(e) => {
         alert("密码不一致！");
         return;
     } else {
-        let sendMsg = JSON.stringify({
+        let sendMsg = ({
             "email": tempForm.get("email"),
             "captcha": tempForm.get("captcha"),
             "account": tempForm.get("account"),
@@ -59,7 +59,7 @@ $(".button--captcha").on("click",(e) => {
     e.preventDefault();
     
     
-    let sendMsg = JSON.stringify({
+    let sendMsg = ({
         "email": tempForm.get("email")
     });
     banCaptcha();
@@ -157,7 +157,6 @@ const banCaptcha = () => {
 selectWord();
 
 
-//TODO转场动画
 /* 
     屏幕正上方
     Welcome Hans   先后出场顺序

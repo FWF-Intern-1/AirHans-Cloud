@@ -1,6 +1,6 @@
 import { getDOM } from './getDOM.js'
 import { resizeBubble } from './resize.js';
-import { dataMy, getStorage } from './save.js';
+import { dataMy, dbAdd, dbRead } from './save.js';
 import { startTime } from './time.js';
 /**
  * 返回新的消息气泡对象
@@ -10,7 +10,7 @@ import { startTime } from './time.js';
 const TemplateHere = () => {
     return $(`<div class="d-flex flex-row-reverse align-items-center mb-1">
                     <div class="chatBox--output--avator__normal">
-                        right
+
                     </div>
                     <div class="chatBox--output--bubble">
                         <div class="card">
@@ -31,7 +31,7 @@ const TemplateHere = () => {
 const TemplateThere= () => {
     return $(`<div class="d-flex align-items-center mb-1">
                     <div class="chatBox--output--avator__normal">
-                        left
+
                     </div>
                     <div class="chatBox--output--bubble">
                         <div class="card">
@@ -59,6 +59,7 @@ const TemplateThere= () => {
  */
 const bubble = (data) => {
     let text = data.text;
+    let id = data.id;
     // let time = data.time;
 
     if (isThere(data.id)) {
@@ -71,6 +72,8 @@ const bubble = (data) => {
     bubbleTemp.find(".chatBox--output--message").text(text);
     bubbleTemp.find("#chatBox--output--id").text(id);
     bubbleTemp.find("#chatBOx--output--time").text(startTime());
+    //头像为ID首字母
+    bubbleTemp.find(".chatBox--output--avator__normal").text(id[0]);
     
     
     let tempWidth = bubbleTemp.find("#chatBox--outptu--bubble").width();
@@ -78,6 +81,7 @@ const bubble = (data) => {
     
     bubbleTemp.appendTo("#chatBox--output");
     resizeBubble();
+
     //TODO动画返回output底部
     $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
     
@@ -86,7 +90,7 @@ const bubble = (data) => {
     
 }
 
-const clearBuble = () => {
+const clearBubble = () => {
     let backup = $("#chatBox--output--template").parent().detach();
     $("#chatBox--output").empty().append(backup);
 }
@@ -99,4 +103,15 @@ const isThere = (id) => {
     }
 }
 
-export { bubble, clearBuble }
+const loadBubble = (data) => {
+    console.log(data);
+
+    for (const element of data) {
+    // for (let i = 0;i < data.length;i++) {
+        console.log(element);
+        bubble(element);
+    }
+    
+}
+
+export { bubble, clearBubble, loadBubble }

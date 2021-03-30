@@ -1,17 +1,25 @@
+import { bubble, loadBubble } from "./bubble.js";
 import { initKeyboard } from "./keyboard.js";
 import { initMouse } from "./mouse.js";
 import { online } from "./onlineList.js";
-import { panel } from "./panel.js";
+import { dataMy, dbAdd, dbOpen, dbRead } from "./save.js";
 
 
 /**
  * 界面的初始化
  * @author Hans
  */
-initKeyboard()
-initMouse();
 
+const init = () => {
 
-panel();//测试用
-online("123");
-online("123123");
+    initKeyboard()
+    initMouse();
+    
+
+    $("#onlineList--spec").click();
+
+};
+
+dbOpen();
+
+export { init }

@@ -1,6 +1,6 @@
 import { loadBoard } from "./board.js";
-import { clearBuble } from "./bubble.js";
-import { dataMy } from "./save.js";
+import { clearBubble, loadBubble } from "./bubble.js";
+import { dataMy, dbRead } from "./save.js";
 
 /**
  * 在线成员列表管理
@@ -8,7 +8,7 @@ import { dataMy } from "./save.js";
  */
 const TemplatePiece = () => {
     return $(`<div id="onlineList--they" class="d-flex align-items-center border-bottom onlineList--they">
-                        <div id="onlineList--they--avator" class="onlineList--they--avator">头像</div>
+                        <div id="onlineList--they--avator" class="onlineList--they--avator"></div>
                         <div class="d-flex flex-column">
                             <div id="onlineList--they--id" class="onlineList--they--id"></div>
                         </div>
@@ -18,12 +18,19 @@ const TemplatePiece = () => {
 
 const onlineMy = () => {
     $("#onlineList--me--id").text(dataMy.id);
+    
+    //头像ID首字母
+    $(".onlineList--me--avator").text(dataMy.id[0]);
 
+}
+// 头像暂且设置为ID首字母
+const setAvator = (tempPiece, id) => {
+    tempPiece.find(".onlineList--they--avator").text(id[0]);
 }
 
 const online = (id) => {
     
-    if (id == dataMy.id) return;
+    // if (id == dataMy.id) return;
     //当前用户不用出现在“在线成员”中
     
     let tempPiece = TemplatePiece();
@@ -32,7 +39,7 @@ const online = (id) => {
 
         e.stopPropagation();
 
-        clearBuble();
+        clearBubble();
 
     }).find(".onlineList--they--avator").on("click", (e) => {
         //在线成员点击头像弹出个人信息展示
@@ -50,16 +57,19 @@ const online = (id) => {
     });
     
 
-    
+    setAvator(tempPiece, id);
+
     tempPiece.appendTo(".onlineList").find("#onlineList--they--id").text(id);
     
     
     //对在线成员处的“聊天室”进行特殊处理
     if (id == "聊天室") {
         tempPiece
+        .attr("id","onlineList--spec")
         .on("click", (e) => {
             $(".board__show").removeClass("board__show");
-            //TODO 加载聊天室消息
+
+            dbRead();
             
         })
         .find(".onlineList--they--avator")
@@ -111,25 +121,5 @@ const listCheck = () => {
         listClose();
     }
 }
-
-// TODO打开新的会话框
-const newSession = (data) => {
-    switch (data.code) {
-        case 1:
-            //聊天室
-            
-            break;
-        case 2:
-            //单聊
-
-            break;
-
-    }
-    
-    
-}
-
-
-//TODO 头像暂且设置为ID首字母
 
 export { online, onlineMy, onlineClear, listTurn, listCheck }

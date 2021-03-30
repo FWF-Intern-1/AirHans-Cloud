@@ -187,7 +187,7 @@ const addMeg = (data) => {
     tempPiece.$(".board--output--piece--name").text(data.name);
 
 
-    // TODO 对data进行操作
+    // TODO 对获取到的留言板“集合”进行操作
 }
 
 

@@ -1,5 +1,4 @@
-import { panel } from "./panel.js";
-import { dataMy } from "./save.js";
+import { dataMy, dbAdd } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
@@ -36,11 +35,11 @@ let newWs= (id) => {
         var onlineid = {
             "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
             "text" : dataMy.id
+            //TODO 换成token
         }
         ws.send(JSON.stringify(onlineid));
         //connection information
         console.log("connected");
-        panel();//TODO 删除
         toast("系统","连接成功！");
         onlineMy();
     }
@@ -51,7 +50,6 @@ let newWs= (id) => {
         if (recmsg.id === "system_information_online_id"){
             toast("在线信息",recmsg.text+" 已上线");
         }
-        //TODO 删除
         else if(recmsg.id === "system_information_offline_id"){
             toast("在线信息",recmsg.text+" 已下线");
             //offline(recmsg.text);
@@ -69,6 +67,13 @@ let newWs= (id) => {
                 id: recmsg.id
                 //TODO email: resmsg.email 以后应用email作为唯一标识符
             });
+            
+            //将消息存进indexDB
+            dbAdd({
+                code: 1,
+                id: id,
+                text: text
+            })
 
         }
     }
@@ -85,7 +90,7 @@ let newWs= (id) => {
 
     ws.onclose = () => { 
         toast("系统","链接已经断开")
-        panel();//TODO 删除
+
     };
 
 }
