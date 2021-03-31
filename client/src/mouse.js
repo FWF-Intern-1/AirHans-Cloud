@@ -15,6 +15,8 @@ const initMouse = ()=> {
     $(document).on("click", (e) => {
 
         $(".board__show").removeClass("board__show");
+        $(".navBar__custo--button--back").addClass("invisible");
+
         //点击任意处关闭个人信息展示
 
         if (e.target == getDOM("send")) {
@@ -40,16 +42,20 @@ $(".navBar__custo--button--menu").on("click", () => {
     //button--list包含多个元素，在document检测target不合适
     listTurn();
 
+    if ($(".board__show")[0]) {
+        $(".board__show").removeClass("board__show");
+        $(".navBar__custo--button--back").addClass("invisible");
+    }
+
 });
 
 $(".navBar__custo--button--back").on("click", () => {
 
     if ($(".board__show")[0]) {
         $(".board__show").removeClass("board__show");
-    } else {
-        listTurn();
+        $(".navBar__custo--button--back").addClass("invisible");
     }
-    
+
 
 });
 

@@ -9,11 +9,12 @@ body {
     width: 100%;
     display: flex;
 }
-#chatBox {
+.chatBox {
     width: 100%;
     min-width: 300px;
     position: relative;
 }
+
 #chatBox--output {
     height: calc(100% - 5rem);
 }
@@ -296,12 +297,13 @@ body {
     right: 0.5rem;
     
 }
-.navBar__custo--button--back:hover {
+.navBar__custo--button--back:hover, .navBar__custo--button--menu:hover {
     transform: scale(1.2);
 }
-.navBar__custo--button--back:active {
+.navBar__custo--button--back:active, .navBar__custo--button--menu:active {
     animation: click--backgroundChange 0.2s forwards;
 }
+
 @media only screen and (max-width: 576px) {
     .navBar__custo {
         display: flex;

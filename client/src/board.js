@@ -49,6 +49,10 @@ const templateBoard = () => {
 
 const boardShow = (e, tempBoard) => {
     tempBoard.appendTo("body");
+    
+    $(".navBar__custo--button--back").removeClass("invisible");
+
+
     let judgement = judgeHeight(e, tempBoard);
     if (!judgement.value) {
         tempBoard.css({
@@ -87,7 +91,6 @@ const judgeHeight = (e, tempBoard) => {
 
 const setInfo = (e) => {
     // 发送id，请求图片url和username
-
 
     //console.log(e);
     let tempBoard = templateBoard().on("click", (e) => {

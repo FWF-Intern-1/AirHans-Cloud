@@ -38,7 +38,6 @@ const online = (id) => {
     tempPiece.on("click", (e) => {
 
         e.stopPropagation();
-
         clearBubble();
 
     }).find(".onlineList--they--avator").on("click", (e) => {
@@ -47,6 +46,9 @@ const online = (id) => {
 
         $(".board__show").removeClass("board__show");
         loadBoard(e);
+
+        $(".navBar__custo--button--back").removeClass("invisible");
+        //返回按钮显示
 
     }).parent().on("click", (e) => {
         //在已有个人信息展示弹出的情况下，打开另一个个人信息展示

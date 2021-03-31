@@ -1,4 +1,5 @@
 import { getDOM } from './getDOM.js'
+import { listTurn } from './onlineList.js';
 import { resizeBubble } from './resize.js';
 import { dataMy, dbAdd, dbRead } from './save.js';
 import { startTime } from './time.js';
@@ -104,8 +105,7 @@ const isThere = (id) => {
 }
 
 const loadBubble = (data) => {
-    console.log(data);
-
+    // console.log(data);
     for (const element of data) {
     // for (let i = 0;i < data.length;i++) {
         console.log(element);

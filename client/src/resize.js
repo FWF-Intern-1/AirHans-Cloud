@@ -4,6 +4,9 @@ const resizeWidth = () => {
     let widthAll = document.documentElement.clientWidth;
     if (widthAll > 576) {
         listCheck();
+
+        $(".navBar__custo--button--back").addClass("invisible");
+
     }
 
 }
