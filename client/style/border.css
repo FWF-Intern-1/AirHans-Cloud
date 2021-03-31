@@ -63,3 +63,23 @@ html {
 .signature {
     cursor: text;
 }
+@media only screen and (max-width: 576px) {
+    
+    .board {
+        left: 0 !important;
+        top: 0 !important;
+        border-radius: 0 !important;
+        height: 100%;
+        width: 100%;
+        z-index: 975;
+    }
+    .board--information--avator {
+        background-color: red;
+        height: calc(0.8 * 20rem);
+        width: 109%;
+    }
+    /* .board--input {
+        position: absolute;
+        bottom: 0;
+    } */
+}

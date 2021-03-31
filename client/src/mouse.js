@@ -35,10 +35,21 @@ const initMouse = ()=> {
 }
 
 
-$(getDOM("button--list")).on("click", () => {
+$(".navBar__custo--button--menu").on("click", () => {
 
     //button--list包含多个元素，在document检测target不合适
     listTurn();
+
+});
+
+$(".navBar__custo--button--back").on("click", () => {
+
+    if ($(".board__show")[0]) {
+        $(".board__show").removeClass("board__show");
+    } else {
+        listTurn();
+    }
+    
 
 });
 

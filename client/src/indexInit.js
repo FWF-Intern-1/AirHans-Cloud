@@ -156,6 +156,34 @@ const banCaptcha = () => {
 
 selectWord();
 
+//cookie测试
+document.cookie = encodeURIComponent("token") + "=" + encodeURIComponent("fortest123") + "; path=/";
+document.cookie = encodeURIComponent("name") + "=" + encodeURIComponent("Hans") + "; domain=127.0.0.1; path=/";
+
+/**
+ * 红皮书
+ * @param {String} name --cookieName 
+ * @returns value -- cookieValue
+ */
+const readCookie = (name) => {
+    let cookieName = `${encodeURIComponent(name)}=`,
+        cookieStart = document.cookie.indexOf(name),
+        cookieValue;
+    if (cookieStart > -1) {
+        //"name" 存在
+        let cookieEnd = document.cookie.indexOf(";", cookieStart);
+        if (cookieEnd == -1) {
+            //";"存在
+            cookieEnd = document.cookie.length;
+        }
+        cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+        //substring() 方法返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。
+    }
+
+    return cookieValue;
+}
+console.log(readCookie("token"));
+console.log(document.cookie);
 
 /* 
     屏幕正上方

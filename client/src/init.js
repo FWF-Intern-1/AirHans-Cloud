@@ -15,8 +15,10 @@ const init = () => {
     initKeyboard()
     initMouse();
     
+    online("Hans");
 
     $("#onlineList--spec").click();
+
 
 };
 
