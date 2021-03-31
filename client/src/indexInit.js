@@ -12,6 +12,8 @@ $(".loginForm").on("submit",(e) => {
     $.post("http://127.0.0.1:8081", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log(data);
+            console.log(textStatus);
+            window.location.replace("http://www.baidu.com")
         }
     );
 });
@@ -36,6 +38,7 @@ $(".signUpForm").on("submit",(e) => {
         $.post("http://127.0.0.1:5555", sendMsg,
             function (data, textStatus, jqXHR) {
                 console.log(data);
+                
             }
         );
     }
