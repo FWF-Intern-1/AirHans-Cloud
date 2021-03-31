@@ -40,6 +40,12 @@ const online = (id) => {
         e.stopPropagation();
         clearBubble();
 
+        //小屏幕下点击列表打开聊天界面
+        if (isOnlineList) {
+            
+            listTurn();
+
+        }
     }).find(".onlineList--they--avator").on("click", (e) => {
         //在线成员点击头像弹出个人信息展示
         e.stopPropagation();
