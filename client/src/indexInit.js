@@ -66,8 +66,8 @@ $(".button--captcha").on("click",(e) => {
     banCaptcha();
 
     console.log(sendMsg);
-    // $.post("http://127.0.0.1:7777", sendMsg,
-    $.post("http://tomzhang.com.cn:7777", sendMsg,
+    $.post("http://127.0.0.1:7777", sendMsg,
+    // $.post("http://tomzhang.com.cn:7777", sendMsg,
 
         function (data, textStatus, jqXHR) {
             console.log(data);

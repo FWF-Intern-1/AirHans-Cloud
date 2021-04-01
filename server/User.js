@@ -5,28 +5,26 @@ const sequelize = new Sequelize("user", "root", "mysql123", {
 });
 
 (async function () {
-  await sequelize.sync({ alter: true })
-//测试用
-//   .then(async () => {
-//   console.log("database synced");
-//   const user1 = await User.create({
-//     account: "Yun",
-//     email: "111@email.com",
-//     password: "123",
-//   })
-//   const user2 = await User.create({
-//     account: "Hans",
-//     email: "222@email.com",
-//     password: "123",
-//   })
-//   const comment = await Comment.create({
-//     account:"Yun",
-//     content:"123",
-//     receiver:"Hans"
-//   })
-//   console.log((await user.reload()).toJSON())
-//   console.log((await comment.reload()).toJSON())
-// })
+  await sequelize.sync({ alter: true }).then(async () => {
+  console.log("database synced");
+  const user1 = await User.create({
+    account: "Yun",
+    email: "111@email.com",
+    password: "123",
+  })
+  const user2 = await User.create({
+    account: "Hans",
+    email: "222@email.com",
+    password: "123",
+  })
+  const comment = await Comment.create({
+    account:"Yun",
+    content:"123",
+    receiver:"Hans"
+  })
+  // console.log((await user.reload()).toJSON())
+  // console.log((await comment.reload()).toJSON())
+})
 })();
 
 
