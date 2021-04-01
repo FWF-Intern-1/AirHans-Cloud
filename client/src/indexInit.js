@@ -16,7 +16,7 @@ $(".loginForm").on("submit",(e) => {
             console.log('service return :',data);
             if(data.status === 1){
                 toast("系统","登录成功！");
-                let url = './demo-chat.html';
+                let url = "./demo-chat.html?"+data.token;
                 window.localStorage.setItem("email",data.email);
                 window.localStorage.setItem("id",data.account);
 

@@ -154,6 +154,7 @@ function dbRead() {
             loadBubble(data);
 
         }
+
     };
 
 
