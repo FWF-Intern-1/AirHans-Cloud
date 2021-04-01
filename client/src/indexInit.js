@@ -46,6 +46,7 @@ $(".signUpForm").on("submit",(e) => {
         
             function (data, textStatus, jqXHR) {
                 console.log(data);
+                
             }
         );
     }

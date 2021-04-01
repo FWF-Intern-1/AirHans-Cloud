@@ -6,7 +6,7 @@
     "mysql2": "^2.2.5",
     "nodejs-websocket": "^1.7.2",
     "nodemailer": "^6.5.0",
-    "sequelize": "^6.5.1"
+    "sequelize": "^6.6.2"
   },
   "devDependencies": {
     "@types/jsonwebtoken": "^8.5.1"

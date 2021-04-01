@@ -8,8 +8,11 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());  
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extened: false }));
+app.listen(8081, function () {
+  console.log("loginjs server on 8081");
+});
 
-app.post("/",async (req, res) => {
+app.post("/", async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
   res.setHeader("Access-Control-Allow-Origin", "*");
@@ -22,7 +25,7 @@ app.post("/",async (req, res) => {
   const token = jwt.sign({ email }, "uukn");
   const model = await user.User.findOne({ where: { email } });
   if (!model) {
-    return res.send({ msg: "用户名不存在，请注册" });
+    res.send({ msg: "用户名不存在，请注册" });
   }
   const passwordValid = model.dataValues.password;
   if (password == passwordValid) {

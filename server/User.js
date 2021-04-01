@@ -1,8 +1,35 @@
-const { Sequelize, DataTypes } = require("sequelize");
-const sequelize = new Sequelize("test", "root", "ZHANGbo020329", {
+const { Sequelize, DataTypes ,Op} = require("sequelize");
+const sequelize = new Sequelize("user", "root", "mysql123", {
   host: "localhost",
   dialect: "mysql",
 });
+
+(async function () {
+  await sequelize.sync({ alter: true })
+//测试用
+//   .then(async () => {
+//   console.log("database synced");
+//   const user1 = await User.create({
+//     account: "Yun",
+//     email: "111@email.com",
+//     password: "123",
+//   })
+//   const user2 = await User.create({
+//     account: "Hans",
+//     email: "222@email.com",
+//     password: "123",
+//   })
+//   const comment = await Comment.create({
+//     account:"Yun",
+//     content:"123",
+//     receiver:"Hans"
+//   })
+//   console.log((await user.reload()).toJSON())
+//   console.log((await comment.reload()).toJSON())
+// })
+})();
+
+
 const User = sequelize.define(
   "User",
   {
@@ -13,11 +40,14 @@ const User = sequelize.define(
       autoIncrement: true,
     },
     account: {
+      type: DataTypes.STRING(16),
+      allowNull: false,
+      unique: "account",
+    },
+    email: {
       type: DataTypes.STRING,
       allowNull: false,
-    },
-    nick_name: {
-      type: DataTypes.STRING(25),
+      unique: "email",
     },
     password: {
       type: DataTypes.STRING(25),
@@ -29,20 +59,76 @@ const User = sequelize.define(
     profile: {
       type: DataTypes.STRING(300),
     },
-    power: {
-      type: DataTypes.INTEGER,
-    },
-    email: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
   },
   {
     sequelize,
     modelName: "User",
   }
 );
+
+console.log("User created!");
+
+const Comment = sequelize.define(
+  "Comment",
+  {
+    id: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      primaryKey: true,
+      autoIncrement: true,
+    },
+    account: {
+      type: DataTypes.STRING(16),
+      allowNull: false,
+      references: {
+        model: User,
+        as: "comments",
+      },
+    },
+    content: {
+      type: DataTypes.STRING(800),
+      allowNull: false,
+    },
+    receiver: {
+      type: DataTypes.STRING(16),
+      allowNull:false
+    },
+  },
+  {
+    sequelize,
+    modelName: "Comment",
+    updatedAt: false,
+  }
+);
+
+//一对多关联（外键在Comment）
+User.hasMany(Comment, {
+  foreignKey: "account",
+  sourceKey: "account",
+  as:'Sender'
+});
+Comment.belongsTo(User, {
+  foreignKey: "account",
+  targetKey: "account",
+  onUpdate: "CASCADE",
+  as:'Sender'
+});
+
+User.hasMany(Comment, {
+  foreignKey: "receiver",
+  sourceKey: "account",
+  as:'Receiver'
+});
+Comment.belongsTo(User, {
+  foreignKey: "receiver",
+  targetKey: "account",
+  onUpdate: "CASCADE",
+  as:'Receiver'
+});
+
+
+
 module.exports.User = User;
+module.exports.Comment = Comment;
 module.exports.sequelize = sequelize;
-User.sync({alter : true});
-console.log("created!");
+
