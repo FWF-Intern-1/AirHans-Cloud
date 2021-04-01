@@ -1,3 +1,4 @@
+import { loadBoard } from "./board.js";
 import { getDOM } from "./getDOM.js";
 import { listTurn } from "./onlineList.js";
 import { saveId, getId, isPanel, isPanelChange } from "./save.js";
@@ -14,26 +15,47 @@ import { sendMsg, newWs} from "./websocket.js";
 const initMouse = ()=> {
     $(document).on("click", (e) => {
 
+        $(".board__show").removeClass("board__show");
+        
+
         if (e.target == getDOM("send")) {
-            
-            sendMsg(getId(),getDOM("typing").value);
-            getDOM("typing").value="";
-
-        } 
-        else if (e.target == getDOM("button--idConfirm") && isPanel) {
-            isPanelChange();
-
-            let id = getDOM("userid").value;
-            saveId(id);
-        //空昵称重复输入
-            if (getDOM("userid").value === ""){
-                 location.reload();
+            e.stopPropagation();
+            if (getDOM("typing").value !== "") {
+                sendMsg(getId(),getDOM("typing").value);
+                getDOM("typing").value="";
+                
             }
-            newWs();
+
         }
     });
 }
 $(getDOM("button--list")).on("click", () => {
     listTurn();
 });
+
+$(".onlineList--me--avator").on("click", (e) => {
+    e.stopPropagation();
+    loadBoard(e);
+});
+
+
+$(".button--idConfirm").on("click", (e) => {
+    e.stopPropagation();
+    if (isPanel) {
+        let id = getDOM("userid").value;
+        
+        if (id) {
+            saveId(id);
+            newWs();
+            isPanelChange();
+        } else {
+            console.log("未输入id");
+        }
+
+    } 
+
+
+})
+
+
 export { initMouse }

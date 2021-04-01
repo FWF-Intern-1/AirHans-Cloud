@@ -1,5 +1,6 @@
 import { getDOM } from './getDOM.js'
 import { resizeBubble } from './resize.js';
+import { dataMy, getStorage } from './save.js';
 import { startTime } from './time.js';
 /**
  * 返回新的消息气泡对象
@@ -56,8 +57,12 @@ const TemplateThere= () => {
  * @param {boolean} isThere 
  * @author Hans
  */
-const bubble = (text,id,isThere) => {
-    if (isThere) {
+const bubble = (data) => {
+    let text = data.text;
+    let time = data.time;
+    // let name = getStorage(data.email).name;
+
+    if (isThere(data.email)) {
         var bubbleTemp = TemplateThere();
     } else {
         var bubbleTemp = TemplateHere();
@@ -82,4 +87,17 @@ const bubble = (text,id,isThere) => {
     
 }
 
-export { bubble }
+const clearBuble = () => {
+    let backup = $("#chatBox--output--template").parent().detach();
+    $("#chatBox--output").empty().append(backup);
+}
+
+const isThere = (email) => {
+    if (email == dataMy.email) {
+        return false;
+    } else {
+        return true;
+    }
+}
+
+export { bubble, clearBuble }

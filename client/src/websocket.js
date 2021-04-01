@@ -1,5 +1,5 @@
 import { panel } from "./panel.js";
-import { getId } from "./save.js";
+import { dataMy, getId } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
@@ -11,16 +11,17 @@ let ws = null;
  * 新建WebSocket对象
  * @param {string} id
  * @author Hans
+ *
  */
 
 let newWs= (id) => {
     
 /**
  * @author Air
- */
+ */     
     //建立转移到了mouse.js后，点击后再连接
-        // ws = new WebSocket("ws://127.0.0.1:9999");
-        ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        ws = new WebSocket("ws://127.0.0.1:9999");
+        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
@@ -55,7 +56,11 @@ let newWs= (id) => {
             }
         }
         else if( recmsg.id != getId() ) {
-            bubble(recmsg.text,recmsg.id,true);
+            bubble({
+                text: recmsg.text,
+                name: recmsg.id
+                //TODO email: resmsg.email 以后用email作为唯一标识符
+            });
             console.log("id="+getId());
             console.log("recid="+recmsg.id);
         }
@@ -91,7 +96,11 @@ function sendMsg(id,text){
     }
     //转化为字符串发送
     ws.send(JSON.stringify(msg));
-    bubble(text,getId(),0);
+    bubble({
+        text: text,
+        name: dataMy.name
+    });
+    // TODO 删上面的代码，bubble应当在接收到服务器消息时调用
     getDOM("typing").value="";
 }
 

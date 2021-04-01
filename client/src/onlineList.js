@@ -1,3 +1,5 @@
+import { loadBoard } from "./board.js";
+import { clearBuble } from "./bubble.js";
 import { getId } from "./save.js";
 
 /**
@@ -10,13 +12,9 @@ const TemplatePiece = () => {
                         <div class="d-flex flex-column">
                             <div id="onlineList--they--id" class="onlineList--they--id"></div>
                         </div>
-                    </div>`).on("click", (e) => {
-                        e.stopPropagation();
-                        $(".onlineList--they__highLight").removeClass("onlineList--they__highLight shadow");
-                        $(e.currentTarget).addClass("onlineList--they__highLight shadow");
-                        isPiece = true;
-                    });
-};
+                    </div>                   
+                `);
+}
 
 const onlineMy = () => {
     $("#onlineList--me--id").text(getId());
@@ -26,15 +24,48 @@ const onlineMy = () => {
 const online = (id) => {
 
     let tempPiece = TemplatePiece();
+
+    tempPiece.on("click", (e) => {
+
+        e.stopPropagation();
+
+        clearBuble();
+
+    }).find(".onlineList--they--avator").on("click", (e) => {
+        e.stopPropagation();
+
+        $(".board__show").removeClass("board__show");
+        loadBoard(e);
+
+    }).parent().on("click", (e) => {
+            e.stopPropagation();
+
+            $(".onlineList--they__highLight").removeClass("onlineList--they__highLight shadow");
+            $(e.currentTarget).addClass("onlineList--they__highLight shadow");
+        });
+    
+
+    
     tempPiece.appendTo(".onlineList").find("#onlineList--they--id").text(id);
+    
+    
+    
+    if (id == "聊天室") {
+        tempPiece.find(".onlineList--they--avator").off("click").css({
+            "cursor": "default"
+        });
+    }
 
     
 }
+online("聊天室");
 
 const onlineClear = (id) => {
     for (const element of $(".onlineList--they")) {
         $(element).remove();
     }
+    online("聊天室");
+
 }
 let isOnlineList = false;
 
@@ -65,4 +96,21 @@ const listCheck = () => {
         listClose();
     }
 }
-export { online, onlineMy, onlineClear, listTurn, listCheck,isPiece }
+
+// TODO打开新的会话框
+const newSession = (data) => {
+    switch (data.code) {
+        case 1:
+            //聊天室
+            
+            break;
+        case 2:
+            //单聊
+
+            break;
+
+    }
+    
+    
+}
+export { online, onlineMy, onlineClear, listTurn, listCheck }

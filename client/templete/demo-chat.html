@@ -5,10 +5,11 @@
         <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.6.0/css/bootstrap.min.css" integrity="sha512-P5MgMn1jBN01asBgU0z60Qk4QxiXo86+wlFahKrsQf37c9cro517WzVSPPV1tDKzhku2iJ2FVgL67wG03SGnNA==" crossorigin="anonymous" />
         <link rel="stylesheet" href="../style/demo-chat.css">
+        <link rel="stylesheet" href="../style/border.css">
         <title>demo-chat</title>
     </head>
 	<body class="h-100">
-        <div id="mainBox" class="p-2 d-flex h-100">
+        <div id="mainBox" class="p-2 d-flex h-100 ">
             
             <div class="border border-dark p-0 onlineList h-100">
                 
@@ -20,16 +21,14 @@
                         </div>
                     </div>
                     <div class="text--numbers">在线成员</div>
-                    
-                        
             </div>
                     
                 
-                <div id="chatBox" class="w-100 h-100">
+                <div id="chatBox" class="h-100">
                     
                     
                     
-                    <div id="chatBox--output" class="m-0 border border-dark overflow-auto flex-column p-1">
+                    <div id="chatBox--output" class="m-0 border border-dark overflow-auto flex-column p-1 h-100 position-relative">
                         
                         <div class="row m-0 mb-1 align-items-center invisible" style="height:0">
                             <div class="chatBox--output--avator__normal">
@@ -53,10 +52,10 @@
                         </div>
         
                     </div>
-                    <div class="row m-0 chatBox--bottom">
-                        <div id="chatBox--input--menu" class="border">        
+                    <div class="row m-0 chatBox--bottom position-absolute">
+                        <!-- <div id="chatBox--input--menu" class="border">        
                             菜单
-                        </div>
+                        </div> -->
                         <textarea id="chatBox--input--typing" class="col"></textarea>
 
                         <button type="button" id="chatBox--input--button__send" class="btn btn-primary">Send</button>
@@ -74,7 +73,7 @@
             <div class="input-group panel--input">
                 <input type="text" id="panel--id" class="form-control" placeholder="请输入你的ID" autofocus></input>
                 <div class="input-group-append">
-                    <button id="button--idConfirm" type="button" class="btn btn-primary">开始聊天</button>
+                    <button id="button--idConfirm" type="button" class="btn btn-primary button--idConfirm">开始聊天</button>
                 </div>
             </div>
 
@@ -92,4 +91,5 @@
         <script type="module" src="../src/init.js"></script>
 
     </body>
+    
 </html>

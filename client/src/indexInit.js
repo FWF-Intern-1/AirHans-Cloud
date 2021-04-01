@@ -9,11 +9,16 @@ $(".loginForm").on("submit",(e) => {
         "password": tempForm.get("password")
     };
     console.log(sendMsg);
-    $.post("http://127.0.0.1:8081", sendMsg,
+    $.post("http://localhost:8081", sendMsg,
         function (data, textStatus, jqXHR) {
-            console.log(data);
-            console.log(textStatus);
-            window.location.replace("http://www.baidu.com")
+            console.log('service return :',data);
+            if(data.status === 1){
+                let url = "./demo-chat.html?"+data.token;
+                window.location.replace(url)
+            }
+            else{
+                location.reload();
+            }
         }
     );
 });
@@ -36,6 +41,9 @@ $(".signUpForm").on("submit",(e) => {
         });
         console.log(sendMsg);
         $.post("http://127.0.0.1:5555", sendMsg,
+        // $.post("tomzhang.com.cn:8081:5555", sendMsg,
+
+        
             function (data, textStatus, jqXHR) {
                 console.log(data);
                 
@@ -52,14 +60,15 @@ $(".button--captcha").on("click",(e) => {
     e.preventDefault();
     
     
-    //TODO发送验证码冷却1min
-
-
-
     let sendMsg = JSON.stringify({
         "email": tempForm.get("email")
     });
-    $.post("http://127.0.0.1:7777", sendMsg,
+    banCaptcha();
+
+    console.log(sendMsg);
+    // $.post("http://127.0.0.1:7777", sendMsg,
+    $.post("http://tomzhang.com.cn:7777", sendMsg,
+
         function (data, textStatus, jqXHR) {
             console.log(data);
         }
@@ -128,7 +137,23 @@ const selectWord = () => {
         }
     }, 2000);
 }
+
+
+const banCaptcha = () => {
+    let i = 60;
+    $(".button--captcha").val(`${i--}稍后再试`);
+    let tempInterval = setInterval(() => {
+        $(".button--captcha").val(`${i--}稍后再试`);
+        if (i < 0) {
+            clearInterval(tempInterval);
+            $(".button--captcha").val(`发送验证码`);
+
+        }
+    }, 1000);
+}
 selectWord();
+
+
 //TODO转场动画
 /* 
     屏幕正上方
