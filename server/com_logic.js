@@ -59,11 +59,12 @@ app.post("/search", async (req, res) => {
        as: "Sender",
     },
   });
-  let w="";
+  let w = new Array();
   for(var i =0 ;i < model.Sender.length;i++){
-    w+=JSON.stringify(model.Sender[i].dataValues)
+    w[i] = (model.Sender[i].dataValues)
 
     console.log(model.Sender[i].dataValues)
   }
+  w = JSON.stringify(w);
   res.end(w);
 });

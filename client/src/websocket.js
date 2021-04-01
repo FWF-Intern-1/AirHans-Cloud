@@ -53,6 +53,7 @@ let newWs= (id) => {
             onlineClear();
             for (let i = 1;i < recmsg.length;i++ ) {
                 online(recmsg[i]);
+                //TODO online(resmsg[i],email);
             }
         }
         else if( recmsg.id != dataMy.id ) {

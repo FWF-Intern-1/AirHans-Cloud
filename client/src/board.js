@@ -22,19 +22,7 @@ const templateBoard = () => {
         </div>
         <div class="board--output overflow-auto border-bottom">
 
-                <div class="board--output--piece card rounded-0 border-right-0 border-left-0">
-                    <div class="card-header d-flex align-items-center">
-                        <div class="board--output--avator d-inline-block">
-                        </div>
-                        <div>模板</div>
-                    </div>
-                    <div class="card-body">
-                        <div>模板
-                        </div>
-
-                    </div>
-
-            </div>
+                
         </div>
         <div class="board--input d-flex justify-content-between align-items-center mt-2">            
             <div contenteditable="true" style="cursor: text;" class="border board--typing">这里是留言哦</div>
@@ -44,6 +32,22 @@ const templateBoard = () => {
                 </svg>
             </button>
         </div>`);
+}
+
+const templatePiece = () => {
+    return $(`<div class="board--output--piece card rounded-0 border-right-0 border-left-0">
+                    <div class="card-header d-flex align-items-center">
+                        <div class="board--output--avator d-inline-block">
+                        </div>
+                        <div class="board--output--piece--id">模板</div>
+                    </div>
+                    <div class="card-body">
+                        <div class="board--output--piece--text">模板
+                        </div>
+
+                    </div>
+
+            </div>`);
 }
 
 
@@ -97,14 +101,20 @@ const setInfo = (e) => {
     //console.log(e);
     let tempBoard = templateBoard().on("click", (e) => {
         e.stopPropagation();
+    })
+
+    tempBoard.find(".button--boardSend").on("click", () => {
+        sendCom(id);
     });
+    
+    let id = "";
     if (e.currentTarget == $(".onlineList--me--avator")[0]) {
-        let id = dataMy.id;
+        id = dataMy.id;
         tempBoard.find(".board--information--id").text(id);
     
     } else {
 
-        let id = $(e.currentTarget).next().find(".onlineList--they--id").text();
+        id = $(e.currentTarget).next().find(".onlineList--they--id").text();
         tempBoard.find(".board--information--id").text(id);
     
     }
@@ -116,10 +126,9 @@ const setInfo = (e) => {
             
             contenteditable: "true"
             
-        });
-        tempBoard.on("focusout", function (e) {
+        }).on("focusout", function (e) {
             // 保存用户编辑的签名
-            console.log("hi!");
+            console.log("即将保存签名");
             let sig = tempBoard.find(".signature").text();
 
             if (sig.length > 50) {
@@ -139,25 +148,58 @@ const setInfo = (e) => {
         });
     }
 
-    setComments(e);
+    getComments(e, tempBoard);
+    
+    // //测试用
+    // for (let i = 0;i < 3;i++) {
+    //     setComment(e,tempBoard, {});
 
-    boardShow(e, tempBoard); //测试用
+    // }
+    // setComment(e,tempBoard);
+
+    // boardShow(e, tempBoard); 
+
 
 }
 
-const setComments = (e) => {
-    // 发送id，请求该账户下对应的所有留言
+const setComment = (e,tempBoard,data) => {
+    let tempPiece = templatePiece();
+    // tempPiece.find(".board--output--piece--id").text(data.id);
+    // tempPiece.find(".board--output--piece--text").text(data.text);
+    tempPiece.find(".board--output--piece--id").text("test!");
+
+    tempPiece.find(".board--output--piece--text").text("test?");
+
+    tempPiece.appendTo(tempBoard.find(".board--output"));
+
+    boardShow(e, tempBoard);
+
+}
+
+const getComments = (e, tempBoard) => {
+    // 发送email，请求该账户下对应的所有留言
     console.log(JSON.stringify({
         email: $(e.currentTarget).parent().attr("email")
     }));
+
     $.post("http://127.0.0.1:8082/search", JSON.stringify({
-        email: $(e.currentTarget).parent().attr("email")
+        // email: $(e.currentTarget).parent().attr("email")
+        email : "111@email.com"
 
     }),
         function (data, textStatus, jqXHR) {
             console.log(data);
+            console.log("获取留言成功！");   
+            
+            let arrData = JSON.parse(data);
+            for (const element of arrData) {
+                setComment(tempBoard, element);
+            }
+            
         }
     );
+
+
     // axios({
     //     method: 'post',
     //     url: "http://127.0.0.1:8082/search",
@@ -177,51 +219,35 @@ const setComments = (e) => {
 }
 
 
-const templatePiece = () => {
-    return $(`<div class="board--output--piece card">
-                    <div class="card-header d-flex align-items-center">
-                        <div class="board--output--avator d-inline-block">
-                            头像
-                        </div>
-                        <span class="board--output--piece--id"></span>
-                    </div>
-                    <div class="card-body">
-                        <div class="board--output--piece--text">
-                        </div>
-
-                    </div>`);
-}
-
-const addMeg = (data) => {
-    let tempPiece = templatePiece();
-
-    tempPiece.$(".board--output--piece--text").text(data.text);
-    tempPiece.$(".board--output--piece--name").text(data.name);
-
-
-    // TODO 对获取到的留言板“集合”进行操作
-}
-
-$(".button--boardSend").on("click", (e) => {
-    console.log(this);
-});
 const sendCom = (receiver) => {
     let text = $(".board--typing").text();
-    axios({
-        method:'post',
-        url: "http://127.0.0.1:8082",
-        data: {
-            content : text,
-            email : dataMy.email,
-            receiver : reveicer
-        },
-    })
+    console.log("即将发送留言：“" + text + "”给" + receiver);
+    
+    $.post("http://127.0.0.1:8082", JSON.stringify({
+        email : dataMy.email,
+        content : text,
+        receiver : receiver
+
+    }),
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+            console.log("留言成功！");
+            $(".board--typing").text("");
+        }
+    );
+    
+    // axios({
+    //     method:'post',
+    //     url: "http://127.0.0.1:8082",
+    //     data: {
+    //         content : text,
+    //         email : dataMy.email,
+    //         receiver : reveicer
+    //     },
+    // })
 }
 
 
-const getCom = () => {
-
-}
 export {
     setInfo as loadBoard
 }
