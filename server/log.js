@@ -8,16 +8,13 @@ var cookieParser = require('cookie-parser');
 app.use(cookieParser());  
 app.use(bodyParser.urlencoded());
 app.use(bodyParser.json());
-
 app.post("/",async (req, res) => {
   console.log(req.body);
   const { email, password } = req.body;
-  res.setHeader("Access-Control-Allow-Origin", "*");
-  res.setHeader("Access-Control-Allow-Methods", "GET, POST");
-  res.setHeader(
-    "Access-Control-Allow-Headers",
-    "X-Requested-With,content-type, Authorization"
-  );
+  res.setHeader("Access-Control-Allow-Origin", "*");//必须设置成与请求一致的域名
+  res.setHeader("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+  res.setHeader("Access-Control-Allow-Methods", "POST, GET,OPTIONS, DELETE");
+  res.setHeader("Access-Control-Max-Age", "3600");
   res.setHeader("Content-Type", "application/json;charset=utf-8");
   const token = jwt.sign({ email }, "uukn");
   const model = await user.User.findOne({ where: { email } });
@@ -28,7 +25,6 @@ app.post("/",async (req, res) => {
   if (password == passwordValid) {
     console.log("登陆成功");
     //TODO 执行登录成功后的操作，跳转页面，返回token
-    // res.cookie("token",token,{maxAge: 900000, secure: false,path:'./'});
     res.send({
       status : 1,
       des : "登陆succeed",
@@ -37,6 +33,7 @@ app.post("/",async (req, res) => {
   } else {
     //TODO 返回登录失败的愿意，前端提示
     res.send({status : 0 , des : "登陆失败"});
+    res.end()
 }})
 
   app.post("/auth",async (req, res) => {

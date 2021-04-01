@@ -3,6 +3,9 @@ const jwt = require('jsonwebtoken');
 const express = require("express");
 const app = express();
 
+app.post('/', async (req, res) => {
+    
+})
 
 var connectionsnumber = 1;
 var connectionslist = ["connectionslist_msg"];
@@ -51,3 +54,6 @@ const server = ws.createServer(connection => {
 }).listen(9999,()=>{
     console.log('ws server on port 9999');
 });
+app.listen(8083,()=>{
+    console.log('listing 8083')
+})
