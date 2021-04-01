@@ -37,7 +37,7 @@ const templateBoard = () => {
             </div>
         </div>
         <div class="board--input d-flex justify-content-between align-items-center mt-2">            
-            <div contenteditable="true" style="cursor: text;" class="border">这里是留言哦</div>
+            <div contenteditable="true" style="cursor: text;" class="border board--typing">这里是留言哦</div>
             <button class="btn btn-primary button--boardSend d-flex align-items-center justify-content-center p-0 ml-1">
                 <svg xmlns="http://www.w3.org/2000/svg" width="2rem" height="2rem" fill="currentColor" class="bi bi-cursor" viewBox="0 0 16 16" >
                     <path d="M14.082 2.182a.5.5 0 0 1 .103.557L8.528 15.467a.5.5 0 0 1-.917-.007L5.57 10.694.803 8.652a.5.5 0 0 1-.006-.916l12.728-5.657a.5.5 0 0 1 .556.103zM2.25 8.184l3.897 1.67a.5.5 0 0 1 .262.263l1.67 3.897L12.743 3.52 2.25 8.184z"/>
@@ -65,6 +65,8 @@ const boardShow = (e, tempBoard) => {
             "left": judgement.x
         })
     }
+    
+    tempBoard.find()
 
     tempBoard.addClass("board__show").prev().removeClass("board__show");
     setTimeout(() => {
@@ -96,9 +98,20 @@ const setInfo = (e) => {
     let tempBoard = templateBoard().on("click", (e) => {
         e.stopPropagation();
     });
+    if (e.currentTarget == $(".onlineList--me--avator")[0]) {
+        let id = dataMy.id;
+        tempBoard.find(".board--information--id").text(id);
+    
+    } else {
+
+        let id = $(e.currentTarget).next().find(".onlineList--they--id").text();
+        tempBoard.find(".board--information--id").text(id);
+    
+    }
+
     if (e.target == $(".onlineList--me--avator")[0]) {
 
-        // 设置元素可编辑
+        // 设置当前用户签名可编辑
         tempBoard.find(".signature").attr({
             
             contenteditable: "true"
@@ -125,46 +138,42 @@ const setInfo = (e) => {
             
         });
     }
+
+    setComments(e);
+
     boardShow(e, tempBoard); //测试用
-
-
-    $(content).removeClass();
-    setTimeout(() => {
-        $(content).remove();
-    }, 1000);
-    axios({
-        method: 'post',
-        url: requestUrl,
-        data: {
-            id: requestUrl
-        }
-    }).then((res) => {
-        console.log(res);
-        //配置res
-        setComments();
-    }).catch((err) => {
-        console.log(error);
-    })
 
 }
 
-const setComments = (id) => {
+const setComments = (e) => {
     // 发送id，请求该账户下对应的所有留言
-    axios({
-        method: 'post',
-        url: requestUrl,
-        data: {
-            id: requestUrl
+    console.log(JSON.stringify({
+        email: $(e.currentTarget).parent().attr("email")
+    }));
+    $.post("http://127.0.0.1:8082/search", JSON.stringify({
+        email: $(e.currentTarget).parent().attr("email")
+
+    }),
+        function (data, textStatus, jqXHR) {
+            console.log(data);
         }
-    }).then((res) => {
-        console.log(res);
+    );
+    // axios({
+    //     method: 'post',
+    //     url: "http://127.0.0.1:8082/search",
+    //     data: {
+    //         email: $(e.currentTarget).parent().attr("email")
+    //     },
 
-        //配置res
-        boardShow();
-    }).catch((err) => {
-        console.log(error);
+    // }).then((res) => {
+    //     console.log(res);
+                
+    //     //配置res
+    //     boardShow();
+    // }).catch((err) => {
+    //     console.log(error);
 
-    })
+    // })
 }
 
 
@@ -193,7 +202,26 @@ const addMeg = (data) => {
     // TODO 对获取到的留言板“集合”进行操作
 }
 
+$(".button--boardSend").on("click", (e) => {
+    console.log(this);
+});
+const sendCom = (receiver) => {
+    let text = $(".board--typing").text();
+    axios({
+        method:'post',
+        url: "http://127.0.0.1:8082",
+        data: {
+            content : text,
+            email : dataMy.email,
+            receiver : reveicer
+        },
+    })
+}
 
+
+const getCom = () => {
+
+}
 export {
     setInfo as loadBoard
 }

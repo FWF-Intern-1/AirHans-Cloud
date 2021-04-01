@@ -19,6 +19,12 @@ const getAccountData = () => {
 }
 
 let dataMy = new Object();
+
+dataMy = {
+    email: window.localStorage.getItem("email"),
+    id: window.localStorage.getItem("id")
+}
+
 //dataMy作为对象保存当前用户的信息
 
 
