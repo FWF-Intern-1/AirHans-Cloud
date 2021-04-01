@@ -1,27 +1,12 @@
 import { listCheck } from "./onlineList.js";
 
-/**
- * 响应式高度
- * @author Hans
- */
-const resizeHeight = () => {
-    // let heightAll = document.documentElement.clientHeight;
-    // if (heightAll >= 400) {
-    //     $("body").height(heightAll);
-    //     let heightCal = 0.4 * heightAll -  100;
-    //     $("#chatBox--input--typing").height(
-            
-    //         heightCal
-        
-    //     );        
-    // }
-    
-}
-
 const resizeWidth = () => {
     let widthAll = document.documentElement.clientWidth;
     if (widthAll > 576) {
         listCheck();
+
+        $(".navBar__custo--button--back").addClass("invisible");
+
     }
 
 }
@@ -43,10 +28,9 @@ const resizeBubble = () => {
 
 window.onresize = () => {
       
-    resizeHeight();
     resizeBubble();
     resizeWidth();
 
 };
 
-export { resizeHeight, resizeBubble }
+export { resizeBubble }

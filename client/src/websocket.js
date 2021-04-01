@@ -1,5 +1,4 @@
-import { panel } from "./panel.js";
-import { dataMy, getId } from "./save.js";
+import { dataMy, dbAdd } from "./save.js";
 import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
@@ -28,12 +27,12 @@ let newWs= (id) => {
         //向服务器发送上线id
         var onlineid = {
             "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : getId()
+            "text" : dataMy.id
+            //TODO 换成token
         }
         ws.send(JSON.stringify(onlineid));
         //connection information
         console.log("connected");
-        panel();
         toast("系统","连接成功！");
         onlineMy();
     }
@@ -55,14 +54,20 @@ let newWs= (id) => {
                 online(recmsg[i]);
             }
         }
-        else if( recmsg.id != getId() ) {
+        else if( recmsg.id != dataMy.id ) {
             bubble({
                 text: recmsg.text,
-                name: recmsg.id
-                //TODO email: resmsg.email 以后用email作为唯一标识符
+                id: recmsg.id
+                //TODO email: resmsg.email 以后应用email作为唯一标识符
             });
-            console.log("id="+getId());
-            console.log("recid="+recmsg.id);
+            
+            //将消息存进indexDB
+            dbAdd({
+                code: 1,
+                id: id,
+                text: text
+            })
+
         }
     }
 
@@ -70,7 +75,7 @@ let newWs= (id) => {
     window.onbeforeunload = function () {
         var offlineid = {
             "id" : "system_information_offline_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : getId()
+            "text" : dataMy.id
         }
         ws.send(JSON.stringify(offlineid));
         ws.close();
@@ -78,7 +83,7 @@ let newWs= (id) => {
 
     ws.onclose = () => { 
         toast("系统","链接已经断开")
-        panel();
+
     };
 
 }
@@ -98,10 +103,9 @@ function sendMsg(id,text){
     ws.send(JSON.stringify(msg));
     bubble({
         text: text,
-        name: dataMy.name
+        id: dataMy.id
     });
-    // TODO 删上面的代码，bubble应当在接收到服务器消息时调用
-    getDOM("typing").value="";
+    // TODO bubble应当在接收到服务器消息时调用
 }
 
 

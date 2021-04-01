@@ -3,13 +3,13 @@ $(".loginForm").on("submit",(e) => {
     e.preventDefault();
     TemplateSpinner.addClass("spinner--inButton__show").prependTo($(e.target).find("[type='submit']"));
     let tempForm = new FormData($(".loginForm")[0]);
-
-    let sendMsg = {
+    let sendMsg = ({
         "email": tempForm.get("email"),
         "password": tempForm.get("password")
-    };
+    });
     console.log(sendMsg);
-    $.post("http://localhost:8081", sendMsg,
+    $.post("127.0.0.1:8081", sendMsg,
+    // $.post("tomzhang.com.cn:8081", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log('service return :',data);
             if(data.status === 1){
@@ -33,7 +33,7 @@ $(".signUpForm").on("submit",(e) => {
         alert("密码不一致！");
         return;
     } else {
-        let sendMsg = JSON.stringify({
+        let sendMsg = ({
             "email": tempForm.get("email"),
             "captcha": tempForm.get("captcha"),
             "account": tempForm.get("account"),
@@ -60,7 +60,7 @@ $(".button--captcha").on("click",(e) => {
     e.preventDefault();
     
     
-    let sendMsg = JSON.stringify({
+    let sendMsg = ({
         "email": tempForm.get("email")
     });
     banCaptcha();
@@ -127,6 +127,7 @@ const keyInWord = (word) => {
 }
 
 const selectWord = () => {
+    //标题键入动效
     let i = 0;
 
     setInterval(() => {
@@ -138,23 +139,53 @@ const selectWord = () => {
     }, 2000);
 }
 
-
+/**
+ * 验证码冷却1min
+ */
 const banCaptcha = () => {
     let i = 60;
-    $(".button--captcha").val(`${i--}稍后再试`);
+    $(".button--captcha").val(`${i--}稍后再试`).attr("disabled","true");
     let tempInterval = setInterval(() => {
         $(".button--captcha").val(`${i--}稍后再试`);
         if (i < 0) {
             clearInterval(tempInterval);
-            $(".button--captcha").val(`发送验证码`);
+            $(".button--captcha").val(`发送验证码`).removeAttr("disabled");
 
         }
     }, 1000);
 }
+
 selectWord();
 
+//cookie测试
+document.cookie = encodeURIComponent("token") + "=" + encodeURIComponent("fortest123") + "; path=/";
+document.cookie = encodeURIComponent("name") + "=" + encodeURIComponent("Hans") + "; domain=127.0.0.1; path=/";
 
-//TODO转场动画
+/**
+ * 红皮书
+ * @param {String} name --cookieName 
+ * @returns value -- cookieValue
+ */
+const readCookie = (name) => {
+    let cookieName = `${encodeURIComponent(name)}=`,
+        cookieStart = document.cookie.indexOf(name),
+        cookieValue;
+    if (cookieStart > -1) {
+        //"name" 存在
+        let cookieEnd = document.cookie.indexOf(";", cookieStart);
+        if (cookieEnd == -1) {
+            //";"存在
+            cookieEnd = document.cookie.length;
+        }
+        cookieValue = decodeURIComponent(document.cookie.substring(cookieStart + cookieName.length, cookieEnd));
+        //substring() 方法返回一个字符串在开始索引到结束索引之间的一个子集, 或从开始索引直到字符串的末尾的一个子集。
+    }
+
+    return cookieValue;
+}
+console.log(readCookie("token"));
+console.log(document.cookie);
+
 /* 
     屏幕正上方
     Welcome Hans   先后出场顺序

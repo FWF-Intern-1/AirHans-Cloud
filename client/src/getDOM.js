@@ -17,9 +17,6 @@ const getDOM = (target) => {
         case 'button--idConfirm' :
             return $("#button--idConfirm")[0];
             break;
-        case 'userid' :
-            return $("#panel--id")[0];
-            break;
         case 'send':
             return $("#chatBox--input--button__send")[0]
             break;
