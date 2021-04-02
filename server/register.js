@@ -1,6 +1,9 @@
 const http = require('http')
 const createpeople = require('./cre_obj.js')
 const incode = require('./mail.js')
+const user = require("./User")
+const bcrypt = require("bcryptjs")
+
 http.createServer((req,res)=>{
     let data = '';
     req.on('data', chunk => {
@@ -14,7 +17,12 @@ http.createServer((req,res)=>{
         console.log(`验证码是:${right_code}`)
         if(data.captcha == right_code){
             res.end("注册成功")
-            createpeople.createpeople(data.account,data.password,data.email)
+            const reg = user.User.create({
+                account:data.account,
+                email:data.email,
+                password:bcrypt.hashSync(data.password,5)
+            })
+            //createpeople.createpeople(data.account,data.password,data.email)
             // createpeople.createpeople('11211@qq.com','ss2s','33332')
         }
         else{

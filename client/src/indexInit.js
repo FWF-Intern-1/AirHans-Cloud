@@ -56,7 +56,7 @@ $(".signUpForm").on("submit",(e) => {
                 console.log(data);
                 toast("系统","注册成功！");
                 setTimeout(() => {
-                    let url = "./demo-chat.html";
+                    let url = "./index.html";
                     window.location.replace(url);
                 }, 3000);
                 

@@ -48,7 +48,7 @@ const User = sequelize.define(
       unique: "email",
     },
     password: {
-      type: DataTypes.STRING(25),
+      type: DataTypes.STRING(800),
       allowNull: false,
     },
     avatar_url: {

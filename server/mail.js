@@ -77,7 +77,7 @@ function sharecode(){
             
         })
     }).listen(7777,()=>{
-        console.log('mial.js listing 7777')
+        console.log('mail.js listing 7777')
     })
 
 module.exports = {
