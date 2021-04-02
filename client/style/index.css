@@ -93,6 +93,15 @@ a:hover {
     height: 2rem;
     animation: flash 0.5s infinite alternate;
 }
+#container--toast {
+    position: absolute;
+    z-index: 999;
+    top: 0;
+    left: 50%;
+    transform: translate(-50%,0);
+    min-width: 250px;
+    margin-top: 10px;
+}
 @keyframes flash {
     0% {
         opacity: 0;

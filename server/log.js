@@ -4,6 +4,7 @@ const bodyParser = require("body-parser");
 const app = express();
 const jwt = require("jsonwebtoken");
 var cookieParser = require('cookie-parser');  
+const bcrypt = require("bcryptjs")
 
 app.use(cookieParser());  
 app.use(bodyParser.urlencoded());
@@ -23,8 +24,9 @@ app.post("/", async (req, res) => {
   if (!model) {
     res.send({ msg: "用户名不存在，请注册" });
   }
-  const passwordValid = model.dataValues.password;
-  if (password == passwordValid) {
+  console.log(model.dataValues)
+  const passwordValid = bcrypt.compareSync(bcrypt.hashSync(password,5),model.dataValues.password);
+  if (!passwordValid) {
     console.log("登陆成功");
     //TODO 执行登录成功后的操作，跳转页面，返回token
     res.send({

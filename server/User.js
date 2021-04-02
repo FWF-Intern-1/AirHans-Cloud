@@ -7,28 +7,26 @@ const sequelize = new Sequelize("test", "root", "ZHANGbo020329", {
 //const sequelize = new Sequelize('mysql://root:ZHANGbo020329@8.131.49.251:22/User');
 
 (async function () {
-  await sequelize.sync({ alter: true })
-//测试用
-//   .then(async () => {
-//   console.log("database synced");
-//   const user1 = await User.create({
-//     account: "Yun",
-//     email: "111@email.com",
-//     password: "123",
-//   })
-//   const user2 = await User.create({
-//     account: "Hans",
-//     email: "222@email.com",
-//     password: "123",
-//   })
-//   const comment = await Comment.create({
-//     account:"Yun",
-//     content:"123",
-//     receiver:"Hans"
-//   })
-//   console.log((await user.reload()).toJSON())
-//   console.log((await comment.reload()).toJSON())
-// })
+  await sequelize.sync({ alter: true }).then(async () => {
+  console.log("database synced");
+  const user1 = await User.create({
+    account: "Yun",
+    email: "111@email.com",
+    password: "123",
+  })
+  const user2 = await User.create({
+    account: "Hans",
+    email: "222@email.com",
+    password: "123",
+  })
+  const comment = await Comment.create({
+    account:"Yun",
+    content:"123",
+    receiver:"Hans"
+  })
+  // console.log((await user.reload()).toJSON())
+  // console.log((await comment.reload()).toJSON())
+})
 })();
 
 
@@ -52,7 +50,7 @@ const User = sequelize.define(
       unique: "email",
     },
     password: {
-      type: DataTypes.STRING(25),
+      type: DataTypes.STRING(800),
       allowNull: false,
     },
     avatar_url: {
