@@ -1,8 +1,10 @@
 const { Sequelize, DataTypes ,Op} = require("sequelize");
-const sequelize = new Sequelize("user", "root", "mysql123", {
+const sequelize = new Sequelize("test", "root", "ZHANGbo020329", {
   host: "localhost",
+  //port:'22',
   dialect: "mysql",
 });
+//const sequelize = new Sequelize('mysql://root:ZHANGbo020329@8.131.49.251:22/User');
 
 (async function () {
   await sequelize.sync({ alter: true })
