@@ -28,7 +28,8 @@ let newWs= (id) => {
         //向服务器发送上线id
         var onlineid = {
             "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : dataMy.id
+            // "text" : dataMy.id
+            "text":localStorage.getItem("token")
             //TODO 换成token
         }
         ws.send(JSON.stringify(onlineid));
