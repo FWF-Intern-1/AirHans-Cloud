@@ -28,12 +28,12 @@ const setAvator = (tempPiece, id) => {
     tempPiece.find(".onlineList--they--avator").text(id[0]);
 }
 
-const online = (id) => {
+const online = (id,email) => {
     
     // if (id == dataMy.id) return;
     //当前用户不用出现在“在线成员”中
-    
-    let tempPiece = TemplatePiece();
+
+    let tempPiece = TemplatePiece().attr("email",email);
 
     tempPiece.on("click", (e) => {
 

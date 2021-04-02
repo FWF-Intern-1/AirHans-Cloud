@@ -3,6 +3,7 @@ import { initKeyboard } from "./keyboard.js";
 import { initMouse } from "./mouse.js";
 import { online } from "./onlineList.js";
 import { dataMy, dbAdd, dbOpen, dbRead } from "./save.js";
+import { newWs } from "./websocket.js";
 
 
 /**
@@ -15,7 +16,7 @@ const init = () => {
     initKeyboard()
     initMouse();
     
-    online("Hans");
+    newWs();
 
     $("#onlineList--spec").click();
 
