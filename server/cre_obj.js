@@ -1,12 +1,13 @@
-const { DataTypes, Sequelize, Op } = require("sequelize");
 const user = require("./User.js");
-console.log(user.User);
+const bcrypt = require("bcryptjs")
 //插入数据
-function createpeople(ac, pwd, email) {
-  user.User.create({
+async function createpeople (ac, pwd, email) {
+  let cp = await user.User.create({
     account: ac,
-    password: pwd,
+    password: bcrypt.hashSync(pwd,5),
     email: email,
   });
 }
-module.exports.createpeople = createpeople;
+module.exports = {
+  createpeople
+}

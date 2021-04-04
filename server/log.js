@@ -24,18 +24,17 @@ app.post("/", async (req, res) => {
   if (!model) {
     res.send({ msg: "用户名不存在，请注册" });
   }
-  console.log(model.dataValues)
   const passwordValid = bcrypt.compareSync(bcrypt.hashSync(password,5),model.dataValues.password);
   if (!passwordValid) {
     console.log("登陆成功");
-    //TODO 执行登录成功后的操作，跳转页面，返回token
     res.send({
       status : 1,
       des : "登陆succeed",
+      id :model.dataValues.account,
+      email :email,
       token : token
     })
   } else {
-    //TODO 返回登录失败的愿意，前端提示
     res.send({status : 0 , des : "登陆失败"});
     res.end()
 }})

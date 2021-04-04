@@ -1,6 +1,5 @@
 import { dataMy, dbAdd } from "./save.js";
 import { bubble } from './bubble.js'
-import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
 import { online, onlineClear, onlineMy } from "./onlineList.js";
 import { startTime } from "./time.js";
@@ -15,11 +14,10 @@ let ws = null;
  */
 
 let newWs= (id) => {
-    
+
 /**
  * @author Air
  */     
-    //建立转移到了mouse.js后，点击后再连接
         ws = new WebSocket("ws://127.0.0.1:9999");
         // ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
@@ -28,9 +26,9 @@ let newWs= (id) => {
         //向服务器发送上线id
         var onlineid = {
             "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
-            // "text" : dataMy.id
-            "text":localStorage.getItem("token")
-            //TODO 换成token
+            "text" : "system_information_online_id",
+            "token":localStorage.getItem("token"),
+            "user_id" : dataMy.id
         }
         ws.send(JSON.stringify(onlineid));
         //connection information
@@ -43,11 +41,10 @@ let newWs= (id) => {
     ws.onmessage = (evt) => {
         var recmsg = JSON.parse(evt.data);
         if (recmsg.id === "system_information_online_id"){
-            toast("在线信息",recmsg.text+" 已上线");
-        }
+            toast("在线信息",recmsg.user_id+"  已上线");
+        } 
         else if(recmsg.id === "system_information_offline_id"){
-            toast("在线信息",recmsg.text+" 已下线");
-            //offline(recmsg.text);
+            toast("在线信息",recmsg.user_id+"  已下线");
         }
         else if(recmsg[0] === "connectionslist_msg"){
             console.log(recmsg);
@@ -69,7 +66,7 @@ let newWs= (id) => {
             bubble({
                 text: recmsg.text,
                 id: recmsg.id,
-                //TODO email: resmsg.email 以后应用email作为唯一标识符
+                email: recmsg.email
             });
             
         }
@@ -79,12 +76,14 @@ let newWs= (id) => {
     window.onbeforeunload = function () {
         var offlineid = {
             "id" : "system_information_offline_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : dataMy.id
+            "text" : "system_information_offline_id",
+            "token":localStorage.getItem("token"),
+            "user_id" : dataMy.id
         }
         ws.send(JSON.stringify(offlineid));
         ws.close();
     }
-
+    //链接断开
     ws.onclose = () => { 
         toast("系统","链接已经断开")
 
@@ -113,8 +112,6 @@ function sendMsg(id,text){
     //转化为字符串发送
     ws.send(JSON.stringify(msg));
     bubble(data);
-    
-    // TODO bubble应当在接收到服务器消息时调用
 }
 
 

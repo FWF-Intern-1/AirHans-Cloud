@@ -17,6 +17,8 @@ $(".loginForm").on("submit",(e) => {
                 toast("系统","登录成功！");
                 let url = "./demo-chat.html";
                 window.localStorage.setItem("token",data.token);
+                window.localStorage.setItem("id",data.id);
+                window.localStorage.setItem("email",data.email);
                 window.location.replace(url);
             }
             else{
