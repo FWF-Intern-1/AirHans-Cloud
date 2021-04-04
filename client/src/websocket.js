@@ -3,6 +3,7 @@ import { bubble } from './bubble.js'
 import { getDOM } from './getDOM.js'
 import { toast } from "./toast.js";
 import { online, onlineClear, onlineMy } from "./onlineList.js";
+import { startTime } from "./time.js";
 
 let ws = null;
 
@@ -27,7 +28,8 @@ let newWs= (id) => {
         //向服务器发送上线id
         var onlineid = {
             "id" : "system_information_online_id",     //这么长的名字应该不会真的有人会用这个id吧
-            "text" : dataMy.id
+            // "text" : dataMy.id
+            "text":localStorage.getItem("token")
             //TODO 换成token
         }
         ws.send(JSON.stringify(onlineid));
@@ -52,22 +54,24 @@ let newWs= (id) => {
             onlineClear();
             for (let i = 1;i < recmsg.length;i++ ) {
                 online(recmsg[i]);
+                //TODO online(resmsg[i],email);
             }
         }
         else if( recmsg.id != dataMy.id ) {
-            bubble({
-                text: recmsg.text,
-                id: recmsg.id
-                //TODO email: resmsg.email 以后应用email作为唯一标识符
-            });
-            
             //将消息存进indexDB
             dbAdd({
                 code: 1,
-                id: id,
-                text: text
-            })
+                id: recmsg.id,
+                text: recmsg.text,
+                time: startTime()
+            });
 
+            bubble({
+                text: recmsg.text,
+                id: recmsg.id,
+                //TODO email: resmsg.email 以后应用email作为唯一标识符
+            });
+            
         }
     }
 
@@ -99,12 +103,17 @@ function sendMsg(id,text){
         "id" : id,
         "text" : text
     }
+    let data = {
+        code: 1,
+        id: id,
+        text: text,
+        time: startTime()
+    }
+    dbAdd(data);
     //转化为字符串发送
     ws.send(JSON.stringify(msg));
-    bubble({
-        text: text,
-        id: dataMy.id
-    });
+    bubble(data);
+    
     // TODO bubble应当在接收到服务器消息时调用
 }
 

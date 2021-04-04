@@ -61,7 +61,7 @@ const TemplateThere= () => {
 const bubble = (data) => {
     let text = data.text;
     let id = data.id;
-    // let time = data.time;
+    let time = data.time;
 
     if (isThere(data.id)) {
         var bubbleTemp = TemplateThere();
@@ -72,8 +72,8 @@ const bubble = (data) => {
 
     bubbleTemp.find(".chatBox--output--message").text(text);
     bubbleTemp.find("#chatBox--output--id").text(id);
-    bubbleTemp.find("#chatBOx--output--time").text(startTime());
-    //头像为ID首字母
+    bubbleTemp.find("#chatBOx--output--time").text(time);
+    //聊天界面里头像为ID首字母
     bubbleTemp.find(".chatBox--output--avator__normal").text(id[0]);
     
     
@@ -108,10 +108,11 @@ const loadBubble = (data) => {
     // console.log(data);
     for (const element of data) {
     // for (let i = 0;i < data.length;i++) {
-        console.log(element);
         bubble(element);
     }
     
 }
 
 export { bubble, clearBubble, loadBubble }
+
+//TODO 收到消息后，先保存，再bubble，

@@ -1,12 +1,13 @@
 const { Sequelize, DataTypes ,Op} = require("sequelize");
-const sequelize = new Sequelize("user", "root", "mysql123", {
+const sequelize = new Sequelize("User", "root", "ZHANGbo020329", {
   host: "localhost",
+  //port:'22',
   dialect: "mysql",
 });
+//const sequelize = new Sequelize('mysql://root:ZHANGbo020329@8.131.49.251:22/User');
 
 (async function () {
   await sequelize.sync({ alter: true })
-//测试用
 //   .then(async () => {
 //   console.log("database synced");
 //   const user1 = await User.create({
@@ -24,8 +25,8 @@ const sequelize = new Sequelize("user", "root", "mysql123", {
 //     content:"123",
 //     receiver:"Hans"
 //   })
-//   console.log((await user.reload()).toJSON())
-//   console.log((await comment.reload()).toJSON())
+//   // console.log((await user.reload()).toJSON())
+//   // console.log((await comment.reload()).toJSON())
 // })
 })();
 
@@ -50,7 +51,7 @@ const User = sequelize.define(
       unique: "email",
     },
     password: {
-      type: DataTypes.STRING(25),
+      type: DataTypes.STRING(800),
       allowNull: false,
     },
     avatar_url: {

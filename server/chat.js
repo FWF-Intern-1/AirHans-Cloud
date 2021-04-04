@@ -14,14 +14,12 @@ const server = ws.createServer(connection => {
 
     connection.on('text',conn=>{
         var msg =JSON.parse(conn);
-        console.log("id:"+msg.id)
-        console.log("text:"+msg.text)
         server.connections.forEach(connection => {
             connection.sendText(conn)
       })
-
       if(msg.id === "system_information_online_id"){
-        let id = msg.text.jwt.verify(token, "uukn").email;
+        let id = jwt.verify(msg.text,"uukn").email;
+        // TODO 把email换成account
         console.log('id:',id)
         connectionslist[connectionsnumber]=id;
         connectionsnumber++;
@@ -48,6 +46,9 @@ const server = ws.createServer(connection => {
         console.log(connectionslist_msg);
 
         console.log("connectionsnumber:"+connectionsnumber+"\n"+connectionslist);  
+      }
+      else{
+          
       }
     })
 

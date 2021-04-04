@@ -12,7 +12,7 @@ app.listen(8082, function () {
 
 app.post("/", async (req, res) => {
   console.log(req.body);
-  const { content, email, receiver } = req.body;
+  const { content, account, receiver } = req.body;
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
   res.setHeader(
@@ -23,7 +23,7 @@ app.post("/", async (req, res) => {
   const model = await user.User.findOne({
     attributes: { exclude: ["password"] },
     where: {
-      email,
+      account,
     },
     include: {
       model: user.Comment,
@@ -31,7 +31,7 @@ app.post("/", async (req, res) => {
     },
   });
   await model.createSender({ 
-    account:model.dataValues.account,
+    account:account,
     content:content,
     receiver:receiver
    });
@@ -41,7 +41,7 @@ app.post("/", async (req, res) => {
 //查找功能
 app.post("/search", async (req, res) => {
   console.log(req.body);
-  const { email } = req.body;
+  const { account } = req.body;
   res.setHeader("Access-Control-Allow-Origin", "*");
   res.setHeader("Access-Control-Allow-Methods", "GET, POST");
   res.setHeader(
@@ -52,18 +52,19 @@ app.post("/search", async (req, res) => {
   const model = await user.User.findOne({
     attributes: { exclude: ["password"] },
     where: {
-      email,
+      account,
     },
     include: {
       model: user.Comment,
        as: "Sender",
     },
   });
-  let w="";
+  let w = new Array();
   for(var i =0 ;i < model.Sender.length;i++){
-    w+=JSON.stringify(model.Sender[i].dataValues)
+    w[i] = (model.Sender[i].dataValues)
 
     console.log(model.Sender[i].dataValues)
   }
+  w = JSON.stringify(w);
   res.end(w);
 });
