@@ -1,15 +1,36 @@
 # AirHans-Cloud
 简介：*聊聊天*    
-  
-0.0.1  
-做了简单的websocket协议收发text实验在lab文件夹下 [lab](https://github.com/AirboZH/AirHans-Cloud/tree/Air/lab)  
-需要安装nodejs-websocket
-`
-cnpm install nodejs-websocket --save
-`  
+## 准备工作
+### 环境
+* node v14.15.4
+* mysql-community-release-el7-5.noarch
+### 用到的npm包
+```json  
 
-0.0.2  
-可以自己和自己聊天了  
+	  "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.5",
+    "express": "^4.17.1",
+    "jsonwebtoken": "^8.5.1",
+    "mysql2": "^2.2.5",
+    "nodejs-websocket": "^1.7.2",
+    "nodemailer": "^6.5.0",
+    "sequelize": "^6.6.2"
+```  
+
+## 实现的功能
+* 留言板
+* 用户登录
+* 在线聊天
+* 在线列表
+* 上/下线提示
+* 邮箱验证注册
+* 消息发送时间
+* 个人信息页面
+* 本地聊天记录的保存
+* token加密保证登录状态
+* 默认以用户ID首字符为头像
+* 当下最热门的气泡方式展示聊天内容
+* 哈希加密储存密码，保证您的密码安全  
   
-0.1.0  
-合到一起了
+## 运行地址
+http://tomzhang.com.cn
