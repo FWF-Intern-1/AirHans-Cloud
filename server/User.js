@@ -1,5 +1,6 @@
 const { Sequelize, DataTypes ,Op} = require("sequelize");
-const sequelize = new Sequelize("User", "root", "ZHANGbo020329", {
+// const sequelize = new Sequelize("User", "debian-sys-maint", "72oeYiyceSTCNxIu", {
+  const sequelize = new Sequelize("User", "root", "ZHANGbo020329", {
   host: "localhost",
   //port:'22',
   dialect: "mysql",

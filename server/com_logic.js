@@ -9,7 +9,7 @@ app.use(bodyParser.urlencoded({ extened: false }));
 app.listen(8082, function () {
   console.log("com_logic server on 8082");
 });
-
+//插入留言
 app.post("/", async (req, res) => {
   console.log(req.body);
   const { content, account, receiver } = req.body;
@@ -56,15 +56,20 @@ app.post("/search", async (req, res) => {
     },
     include: {
       model: user.Comment,
-       as: "Sender",
+       as: "Receiver",
     },
   });
-  let w = new Array();
-  for(var i =0 ;i < model.Sender.length;i++){
-    w[i] = (model.Sender[i].dataValues)
 
-    console.log(model.Sender[i].dataValues)
+  if(model.Receiver[0]==null){
+    res.send({msg:0})
+    console.log("====================ababa")
+  }else{
+      let w = new Array();
+      console.log("------------------------------",model);
+      for(var i =0 ;i < model.Receiver.length;i++){
+        w[i] = (model.Receiver[i].dataValues)
+        console.log(model.Receiver[i].dataValues)
   }
   w = JSON.stringify(w);
-  res.end(w);
+  res.end(w);}
 });

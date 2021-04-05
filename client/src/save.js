@@ -13,10 +13,6 @@ const isPanelChange = () => {
  */
 let arrOnline = null;
 
-const getAccountData = () => {
-    //TODO 接收后端传来的在线成员后，进行保存
-
-}
 
 let dataMy = new Object();
 
@@ -131,7 +127,6 @@ function dbAdd(data) {
 
 
 function dbRead() {
-    console.log(db.transaction('message'));
     var objectStore = db.transaction('message', 'readonly').objectStore('message');
     let data = new Array();
     let i = 0;

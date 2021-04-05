@@ -1,5 +1,4 @@
 const http = require('http')
-const createpeople = require('./cre_obj.js')
 const incode = require('./mail.js')
 const user = require("./User")
 const bcrypt = require("bcryptjs")
@@ -9,21 +8,20 @@ http.createServer((req,res)=>{
     req.on('data', chunk => {
         data += chunk;
     })
-    req.on('end', () => {
+    req.on('end',async () => {
         data=JSON.parse(data)
         console.log(data)
         res.writeHead(200, {'Content-Type': 'text/html; charset=utf8',"Access-Control-Allow-Origin": "*","Access-Control-Allow-Methods": "POST"});
         var right_code = incode.sharecode().yzcode;
         console.log(`验证码是:${right_code}`)
         if(data.captcha == right_code){
-            res.end("注册成功")
-            const reg = user.User.create({
+                await user.User.create({
                 account:data.account,
                 email:data.email,
+                avatar_url:"../img/img_"+Math.ceil(Math.random()*10)+".jpg", 
                 password:bcrypt.hashSync(data.password,5)
             })
-            //createpeople.createpeople(data.account,data.password,data.email)
-            // createpeople.createpeople('11211@qq.com','ss2s','33332')
+            res.end("注册成功")
         }
         else{
             res.end("user_code is wrong, please write again")
