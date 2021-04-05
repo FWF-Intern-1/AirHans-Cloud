@@ -98,26 +98,31 @@ const judgeHeight = (e, tempBoard) => {
 const setInfo = (e) => {
     // 发送id，请求图片url和username
 
-    //console.log(e);
     let tempBoard = templateBoard().on("click", (e) => {
         e.stopPropagation();
     })
 
-    tempBoard.find(".button--boardSend").on("click", () => {
-        sendCom(id);
-    });
-    
-    let id = "";
     if (e.currentTarget == $(".onlineList--me--avator")[0]) {
-        id = dataMy.id;
+        let id = dataMy.id;
         tempBoard.find(".board--information--id").text(id);
     
     } else {
 
-        id = $(e.currentTarget).next().find(".onlineList--they--id").text();
+        let id = $(e.currentTarget).next().find(".onlineList--they--id").text();
         tempBoard.find(".board--information--id").text(id);
     
     }
+
+    tempBoard.find(".button--boardSend").on("click", () => {
+        let receiver = tempBoard.find(".board--information--id").text();
+        sendCom(receiver);
+        //receiver暂时是是接受者的id
+    });
+
+    tempBoard.find(".board--typing").on("click",(e) => {
+        $(e.target).text("");
+    })
+
 
     if (e.target == $(".onlineList--me--avator")[0]) {
 
@@ -135,7 +140,7 @@ const setInfo = (e) => {
                 tempBoard.find(".signature").focus();
                 toast("不可用","签名长度超出50个字符");
             } else {
-                //TODO POST请求
+                //更改当前用户签名请求
                 // axios({
                 //     method:'post',
                 //     url: requestUrl,
@@ -148,43 +153,46 @@ const setInfo = (e) => {
         });
     }
 
+
+    // 测试用
+    // let tempArr = new Array({
+    //     id: "留言者1",
+    //     text: "我喜欢你呀！"
+    // })
+    // setComments(e, tempBoard, tempArr);
+
+
     getComments(e, tempBoard);
     
-    // //测试用
-    // for (let i = 0;i < 3;i++) {
-    //     setComment(e,tempBoard, {});
-
-    // }
-    // setComment(e,tempBoard);
-
-    // boardShow(e, tempBoard); 
-
+    
 
 }
 
-const setComment = (e,tempBoard,data) => {
-    let tempPiece = templatePiece();
-    // tempPiece.find(".board--output--piece--id").text(data.id);
-    // tempPiece.find(".board--output--piece--text").text(data.text);
-    tempPiece.find(".board--output--piece--id").text("test!");
+const setComments = (e, tempBoard, arrData) => {
 
-    tempPiece.find(".board--output--piece--text").text("test?");
+    for (const element of arrData) {
+        let tempPiece = templatePiece();
+        tempPiece.find(".board--output--piece--id").text(element.id);
+        tempPiece.find(".board--output--piece--text").text(element.text);
+    
+    
+        tempPiece.appendTo(tempBoard.find(".board--output"));
+    }
 
-    tempPiece.appendTo(tempBoard.find(".board--output"));
 
     boardShow(e, tempBoard);
 
 }
 
 const getComments = (e, tempBoard) => {
-    // 发送email，请求该账户下对应的所有留言
-    console.log(JSON.stringify({
-        email: $(e.currentTarget).parent().attr("email")
+    // 暂时发送id(account)，请求该账户下对应的所有留言
+
+    console.log("即将发送获取留言请求:", JSON.stringify({
+        account: $(e.target).parent().find(".onlineList--they--id").text()
     }));
 
     $.post("http://127.0.0.1:8082/search", JSON.stringify({
-        // email: $(e.currentTarget).parent().attr("email")
-        email : "111@email.com"
+        account: $(e.target).parent().find(".onlineList--they--id").text()
 
     }),
         function (data, textStatus, jqXHR) {
@@ -192,9 +200,7 @@ const getComments = (e, tempBoard) => {
             console.log("获取留言成功！");   
             
             let arrData = JSON.parse(data);
-            for (const element of arrData) {
-                setComment(tempBoard, element);
-            }
+            setComments(tempBoard, arrData);
             
         }
     );
@@ -224,7 +230,7 @@ const sendCom = (receiver) => {
     console.log("即将发送留言：“" + text + "”给" + receiver);
     
     $.post("http://127.0.0.1:8082", JSON.stringify({
-        email : dataMy.email,
+        account : dataMy.id,
         content : text,
         receiver : receiver
 

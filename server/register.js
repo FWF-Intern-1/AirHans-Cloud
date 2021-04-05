@@ -22,10 +22,25 @@ http.createServer((req,res)=>{
             //     password:bcrypt.hashSync(data.password,5)
             // })
             createpeople.createpeople(data.account,data.password,data.email)
-            res.end("注册成功")
+            // res.end("注册成功")
+            res.send({
+
+                status: 1,
+                des: "注册成功",
+                id: data.account,
+                email: data.email
+
+            });
+            res.end();
         }
         else{
-            res.end("user_code is wrong, please write again")
+            // res.end("user_code is wrong, please write again")
+            res.send({
+
+                status: 2,
+                des: "验证码错误"
+            })
+            res.end();
         }
     })
     

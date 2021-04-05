@@ -1,8 +1,8 @@
 
 html {
     height: 100%;
-    min-height: 500px;
-    min-width: 1000px;
+    min-height: 40rem;
+    min-width: 50rem;
 }
 body {
     background-image: linear-gradient(-225deg, #5D9FFF 0%, #B8DCFF 48%, #6BBBFF 100%);
@@ -26,7 +26,7 @@ body {
     display: none !important;
 }
 .loginBox__basis {
-    width: 400px;
+    width: 30rem;
     background-color: rgb(255,255,255);
     /* transform: translate(-50%,-50%); */
     transition: all 0.5s;
@@ -54,17 +54,17 @@ body {
 }
 
 .bar--y {
-    width: 10px;
+    width: 0.5rem;
     background-color: #131124;
-    height: 100px;
+    height: 8rem;
     border-radius: 75px;
 }
 .bar--x {
-    width: 100px;
-    height: 10px;
+    width: 8rem;
+    height: 0.5rem;
     background-color: #131124;
     border-radius: 75px;
-    transform: translate(-10px,0);
+    transform: translate(-0.5rem,0);
 }
 a:hover {
     text-decoration: none;
@@ -99,8 +99,8 @@ a:hover {
     top: 0;
     left: 50%;
     transform: translate(-50%,0);
-    min-width: 250px;
-    margin-top: 10px;
+    min-width: 16rem;
+    margin-top: 0.5rem;
 }
 @keyframes flash {
     0% {
@@ -167,7 +167,7 @@ a:hover {
     } */
 }
 
-@media only screen and (min-width: 2560px) {
+@media only screen and (min-width: 1921px) {
     html {
         font-size: 20px;
     }

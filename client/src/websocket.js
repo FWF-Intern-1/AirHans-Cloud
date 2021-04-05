@@ -51,22 +51,24 @@ let newWs= (id) => {
             onlineClear();
             for (let i = 1;i < recmsg.length;i++ ) {
                 online(recmsg[i]);
-                //TODO online(resmsg[i],email);
+                //online(resmsg[i],email);
             }
         }
         else if( recmsg.id != dataMy.id ) {
             //将消息存进indexDB
+            let time = startTime();
             dbAdd({
                 code: 1,
                 id: recmsg.id,
                 text: recmsg.text,
-                time: startTime()
+                time: time
             });
 
             bubble({
                 text: recmsg.text,
                 id: recmsg.id,
-                email: recmsg.email
+                email: recmsg.email,
+                time: time
             });
             
         }
