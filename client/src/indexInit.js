@@ -14,7 +14,7 @@ $(".loginForm").on("submit",(e) => {
         function (data, textStatus, jqXHR) {
             console.log('service return :',data);
             if(data.status === 1){
-                toast("系统",data.des);
+                toast("系统","登录成功！");
                 let url = "./demo-chat.html";
                 window.localStorage.setItem("token",data.token);
                 window.localStorage.setItem("id",data.id);
@@ -22,7 +22,7 @@ $(".loginForm").on("submit",(e) => {
                 window.location.replace(url);
             }
             else{
-                toast("系统", data.des);
+                toast("系统", "登录失败");
                 TemplateSpinner.remove();
             }
         }
@@ -45,34 +45,18 @@ $(".signUpForm").on("submit",(e) => {
             "account": tempForm.get("account"),
             "password": tempForm.get("password")
         });
-        // console.log(sendMsg);
+        console.log(sendMsg);
         $.post("http://127.0.0.1:5555", sendMsg,
 
         
-            function (data, textStatus, jqXHR) {
-                console.log("注册响应：" + data);
-
-                switch (data.status) {
-                    case 1:
-                        toast("系统", data.des);
-                        setTimeout(() => {
-                            // window.localStorage.setItem("token",data.token);
-                            window.localStorage.setItem("id",data.id);
-                            window.localStorage.setItem("email",data.email);
-                            location.reload()
-                        }, 2500);
-                        break;
-                    case 2:
-                        toast("系统", data.des);
-                        break;
-                    default:
-                        console.log("未知响应");
-                        
-
-                }
-                
-                
-            }
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+            toast("系统","注册成功！");
+            setTimeout(() => {
+                location.reload()
+            }, 3000);
+            
+        }
         );
     }
     
