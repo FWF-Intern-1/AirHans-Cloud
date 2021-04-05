@@ -18,8 +18,8 @@ let newWs= (id) => {
 /**
  * @author Air
  */     
-        // ws = new WebSocket("ws://127.0.0.1:9999");
-        ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        ws = new WebSocket("ws://127.0.0.1:9999");
+        // ws = new WebSocket("ws://demo.tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{
@@ -51,7 +51,7 @@ let newWs= (id) => {
             onlineClear();
             for (let i = 1;i < recmsg.length;i++ ) {
                 online(recmsg[i]);
-                //online(resmsg[i],email);
+                //online(resmsg[i]); resmsg是对象数组
             }
         }
         else if( recmsg.id != dataMy.id ) {

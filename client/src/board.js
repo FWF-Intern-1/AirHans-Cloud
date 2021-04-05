@@ -170,10 +170,11 @@ const setInfo = (e) => {
 
 const setComments = (e, tempBoard, arrData) => {
 
-    for (const element of arrData) {
+    // for (const element of arrData) {
+    for (let i = 0;i < arrData.length;i++) {
         let tempPiece = templatePiece();
-        tempPiece.find(".board--output--piece--id").text(element.id);
-        tempPiece.find(".board--output--piece--text").text(element.text);
+        tempPiece.find(".board--output--piece--id").text(arrData[i].account);
+        tempPiece.find(".board--output--piece--text").text(arrData[i].content);
     
     
         tempPiece.appendTo(tempBoard.find(".board--output"));
@@ -187,20 +188,26 @@ const setComments = (e, tempBoard, arrData) => {
 const getComments = (e, tempBoard) => {
     // 暂时发送id(account)，请求该账户下对应的所有留言
 
-    console.log("即将发送获取留言请求:", JSON.stringify({
+    console.log("即将发送获取留言请求:", ({
         account: $(e.target).parent().find(".onlineList--they--id").text()
     }));
 
-    $.post("http://127.0.0.1:8082/search", JSON.stringify({
+    $.post("http://127.0.0.1:8082/search", ({
         account: $(e.target).parent().find(".onlineList--they--id").text()
 
-    }),
-        function (data, textStatus, jqXHR) {
+    }),function (data, textStatus, jqXHR) {
             console.log(data);
             console.log("获取留言成功！");   
             
-            let arrData = JSON.parse(data);
-            setComments(tempBoard, arrData);
+            let arrData = data;
+            if (data.msg == 0) {
+                console.log("该账户下无留言！");
+                boardShow(e, tempBoard);
+                
+            } else {
+
+                setComments(e, tempBoard, arrData);
+            }
             
         }
     );
@@ -229,12 +236,11 @@ const sendCom = (receiver) => {
     let text = $(".board--typing").text();
     console.log("即将发送留言：“" + text + "”给" + receiver);
     
-    $.post("http://127.0.0.1:8082", JSON.stringify({
+    $.post("http://127.0.0.1:8082", {
         account : dataMy.id,
         content : text,
         receiver : receiver
-
-    }),
+    },
         function (data, textStatus, jqXHR) {
             console.log(data);
             console.log("留言成功！");

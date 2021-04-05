@@ -33,7 +33,13 @@ const online = (id,email) => {
     // if (id == dataMy.id) return;
     //当前用户不用出现在“在线成员”中
 
+    // let id = data.id;
+    // let email = data.email;
+    // let url = data.url;
+
     let tempPiece = TemplatePiece().attr("email",email);
+    
+
 
     tempPiece.on("click", (e) => {
 

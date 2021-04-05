@@ -15,9 +15,10 @@ http.createServer((req,res)=>{
         var right_code = incode.sharecode().yzcode;
         console.log(`验证码是:${right_code}`)
         if(data.captcha == right_code){
-            const model = await user.User.create({
+                await user.User.create({
                 account:data.account,
                 email:data.email,
+                avatar_url:"../img/img_"+Math.ceil(Math.random()*10)+".jpg", 
                 password:bcrypt.hashSync(data.password,5)
             })
             res.end("注册成功")

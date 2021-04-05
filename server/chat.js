@@ -17,7 +17,6 @@ async function findAccount(email){
         return model.dataValues.account;
 }
 
-
 const server = ws.createServer(connection => {
 
     connection.on('text',async (conn)=>{
