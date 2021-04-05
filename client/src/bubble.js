@@ -62,6 +62,7 @@ const bubble = (data) => {
     let text = data.text;
     let id = data.id;
     let time = data.time;
+    // TODO 判断日期，消息之间增加分割线
 
     if (isThere(data.id)) {
         var bubbleTemp = TemplateThere();
@@ -86,8 +87,6 @@ const bubble = (data) => {
     //TODO动画返回output底部
     $("#chatBox--output").scrollTop(getDOM("output").scrollHeight);
     
-    //TODO 存储当前bubble
-    //console.log("bubble()执行完毕");
     
 }
 
@@ -114,5 +113,3 @@ const loadBubble = (data) => {
 }
 
 export { bubble, clearBubble, loadBubble }
-
-//TODO 收到消息后，先保存，再bubble，

@@ -1,7 +1,7 @@
 import { bubble, loadBubble } from "./bubble.js";
 import { initKeyboard } from "./keyboard.js";
 import { initMouse } from "./mouse.js";
-import { online } from "./onlineList.js";
+import { online, onlineMy } from "./onlineList.js";
 import { dataMy, dbAdd, dbOpen, dbRead } from "./save.js";
 import { newWs } from "./websocket.js";
 
@@ -20,7 +20,7 @@ const init = () => {
 
     $("#onlineList--spec").click();
 
-
+    onlineMy();
 };
 
 dbOpen();

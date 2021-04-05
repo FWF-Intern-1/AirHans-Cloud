@@ -51,14 +51,14 @@ $(".signUpForm").on("submit",(e) => {
         $.post("http://tomzhang.com.cn:5555", sendMsg,
 
         
-            function (data, textStatus, jqXHR) {
-                console.log(data);
-                toast("系统","注册成功！");
-                setTimeout(() => {
-                    location.reload()
-                }, 3000);
-                
-            }
+        function (data, textStatus, jqXHR) {
+            console.log(data);
+            toast("系统","注册成功！");
+            setTimeout(() => {
+                location.reload()
+            }, 3000);
+            
+        }
         );
     }
     
