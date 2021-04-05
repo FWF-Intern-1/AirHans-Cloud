@@ -10,7 +10,8 @@ $(".loginForm").on("submit",(e) => {
         "password": tempForm.get("password")
     });
     console.log(sendMsg);
-    $.post("http://127.0.0.1:8081", sendMsg,
+    // $.post("http://127.0.0.1:8081", sendMsg,
+    $.post("http://tomzhang.com.cn:8081", sendMsg,
         function (data, textStatus, jqXHR) {
             console.log('service return :',data);
             if(data.status === 1){
@@ -46,7 +47,8 @@ $(".signUpForm").on("submit",(e) => {
             "password": tempForm.get("password")
         });
         console.log(sendMsg);
-        $.post("http://127.0.0.1:5555", sendMsg,
+        // $.post("http://127.0.0.1:5555", sendMsg,
+        $.post("http://tomzhang.com.cn:5555", sendMsg,
 
         
             function (data, textStatus, jqXHR) {
@@ -75,7 +77,8 @@ $(".button--captcha").on("click",(e) => {
     banCaptcha();
 
     console.log(sendMsg);
-    $.post("http://127.0.0.1:7777", sendMsg,
+    // $.post("http://127.0.0.1:7777", sendMsg,
+    $.post("http://tomzhang.com.cn:7777", sendMsg,
 
         function (data, textStatus, jqXHR) {
             console.log(data);

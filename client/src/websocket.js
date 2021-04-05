@@ -18,8 +18,8 @@ let newWs= (id) => {
 /**
  * @author Air
  */     
-        ws = new WebSocket("ws://127.0.0.1:9999");
-        // ws = new WebSocket("ws://tomzhang.com.cn:9999");
+        // ws = new WebSocket("ws://127.0.0.1:9999");
+        ws = new WebSocket("ws://tomzhang.com.cn:9999");
 
     //连接成功
     ws.onopen=()=>{

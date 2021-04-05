@@ -30,7 +30,7 @@ app.post("/", async (req, res) => {
     res.send({
       status : 1,
       des : "登陆succeed",
-      id :model.dataValues.account,
+      id :model.dataValues.account,   
       email :email,
       token : token
     })
