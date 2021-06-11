@@ -32,5 +32,9 @@
 * 当下最热门的气泡方式展示聊天内容
 * 哈希加密储存密码，保证您的密码安全  
   
-## 运行地址
-http://tomzhang.com.cn
+## 一起写代码的小伙伴
+<a href="https://github.com/FWF-Intern-1/AirHans-Cloud/graphs/contributors">
+  <img src="https://contrib.rocks/image?repo=FWF-Intern-1/AirHans-Cloud" />
+</a>
+
+Made with [contributors-img](https://contrib.rocks).
